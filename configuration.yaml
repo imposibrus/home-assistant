@@ -3,7 +3,7 @@
 default_config:
 
 yandex_station:
-  username: pva911
+  username: !secret yandex_username
   password: !secret yandex_password
 
 lovelace:
