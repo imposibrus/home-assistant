@@ -1,0 +1,33 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+yandex_station:
+  username: pva911
+  password: !secret yandex_password
+
+lovelace:
+  resources:
+    - url: /hacsfiles/ha-yandex-icons/yandex-icons.js
+      type: module
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js?v=1.11.0
+      type: module
+
+#entity: media_player.yandex_station
+#artwork: full-cover
+#sound_mode: icon
+#hide:
+#  sound_mode: false
+#  runtime: false
+#tts:
+#  platform: yandex_station
+#type: 'custom:mini-media-player'
+
+# Text to speech
+#tts:
+#  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml

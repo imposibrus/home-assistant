@@ -1,0 +1,15 @@
+{
+  "domain": "yandex_station",
+  "name": "Yandex.Station",
+  "config_flow": true,
+  "documentation": "https://github.com/AlexxIT/YandexStation",
+  "dependencies": [
+    "tts",
+    "zeroconf"
+  ],
+  "codeowners": [
+    "@AlexxIT"
+  ],
+  "requirements": [],
+  "version": "3.3.0"
+}
