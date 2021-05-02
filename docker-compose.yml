@@ -1,0 +1,14 @@
+version: '3'
+services:
+  home-assistant:
+    image: 'homeassistant/home-assistant:2021.4.6'
+    init: true
+    restart: always
+    container_name: 'home-assistant'
+    ports:
+      - 8123:8123
+    volumes:
+      - ./:/config
+    environment:
+      - 'TZ=Europe/Moscow'
+
