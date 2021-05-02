@@ -5,3 +5,4 @@ home-assistant_v2.db
 .storage
 __pycache__
 www/**/*.gz
+.google_fit.token

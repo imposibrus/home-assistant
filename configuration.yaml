@@ -13,6 +13,12 @@ lovelace:
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js?v=1.11.0
       type: module
 
+sensor:
+  - platform: google_fit
+    name: imposibrus
+    client_id: !secret google_fit_client_id
+    client_secret: !secret google_fit_client_secret
+
 #entity: media_player.yandex_station
 #artwork: full-cover
 #sound_mode: icon
