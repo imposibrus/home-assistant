@@ -61,19 +61,42 @@ sensor:
     client_id: !secret google_fit_client_id
     client_secret: !secret google_fit_client_secret
 
-#entity: media_player.yandex_station
-#artwork: full-cover
-#sound_mode: icon
-#hide:
-#  sound_mode: false
-#  runtime: false
-#tts:
-#  platform: yandex_station
-#type: 'custom:mini-media-player'
+  - platform: template
+    sensors:
+      cleargrass_air_co2:
+        friendly_name: 'CO2'
+        value_template: "{{ state_attr('air_quality.cgllc_airmonitor_s1', 'carbon_dioxide') }}"
+        icon_template: mdi:molecule-co2
+        unique_id: 'cleargrass_air_co2'
+        unit_of_measurement: 'ppm'
 
-# Text to speech
-#tts:
-#  - platform: google_translate
+      cleargrass_air_tvoc:
+        friendly_name: 'tVOC'
+        value_template: "{{ ((state_attr('air_quality.cgllc_airmonitor_s1', 'total_volatile_organic_compounds') | float * 4.5) / 1000) | round(3) }}"
+        icon_template: mdi:alpha-t
+        unique_id: 'cleargrass_air_tvoc'
+        unit_of_measurement: 'mg/m³'
+
+      cleargrass_air_pm25:
+        friendly_name: 'PM2.5'
+        value_template: "{{ state_attr('air_quality.cgllc_airmonitor_s1', 'particulate_matter_2_5') }}"
+        icon_template: mdi:alpha-p
+        unique_id: 'cleargrass_air_pm25'
+        unit_of_measurement: 'μg/m³'
+
+      cleargrass_air_temperature:
+        friendly_name: 'Temperature'
+        value_template: "{{ state_attr('air_quality.cgllc_airmonitor_s1', 'temperature') }}"
+        icon_template: mdi:temperature-celsius
+        unique_id: 'cleargrass_air_temperature'
+        unit_of_measurement: '°C'
+
+      cleargrass_air_humidity:
+        friendly_name: 'Humidity'
+        value_template: "{{ state_attr('air_quality.cgllc_airmonitor_s1', 'humidity') }}"
+        icon_template: mdi:water-percent
+        unique_id: 'cleargrass_air_humidity'
+        unit_of_measurement: '%'
 
 group: !include groups.yaml
 automation: !include automations.yaml
