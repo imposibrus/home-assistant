@@ -139,6 +139,9 @@ light:
     payload_on: 1
     payload_off: 0
 
+webostv:
+  host: !secret webostv_host
+
 
 group: !include groups.yaml
 automation: !include automations.yaml
