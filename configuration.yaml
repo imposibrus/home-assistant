@@ -2,6 +2,13 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+logbook:
+  exclude:
+    domains:
+      - air_quality
+    entity_globs:
+      - binary_sensor.oneplus_a5010*
+
 yandex_station:
   username: !secret yandex_username
   password: !secret yandex_password
