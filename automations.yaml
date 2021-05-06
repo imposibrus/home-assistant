@@ -17,3 +17,73 @@
       updater: binary_sensor.updater
       notify_device: 1ada3fdc6976622bd0226b539a5ccf25
       is_ios: false
+- id: '1620159708446'
+  alias: Обед закончился!
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.dinner_end
+  condition: []
+  action:
+  - service: notify.lg_webos_smart_tv
+    data:
+      message: Обед заканчивается!
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - service: notify.lg_webos_smart_tv
+    data:
+      message: Обед закончился!
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      media_content_id: Обед закончился!
+      media_content_type: text
+  mode: single
+- id: '1620208571379'
+  alias: Обед!
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Обед
+  condition: []
+  action:
+  - service: media_player.turn_on
+    data: {}
+    target:
+      entity_id: media_player.televizor
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - service: timer.start
+    data:
+      duration: '0'
+    target:
+      entity_id: timer.dinner_end
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.lg_webos_smart_tv
+    data:
+      source: YouTube
+  mode: single
+- id: '1620222769842'
+  alias: Алиса, Синхронизируй список покупок
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Синхронизируй список покупок
+  condition: []
+  action:
+  - service: script.1620222407435
+  mode: single

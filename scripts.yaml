@@ -1,0 +1,88 @@
+dinner_end:
+  alias: Обед закончился!
+  sequence:
+  - service: script.say_by_alice
+    data:
+      message: Обед закончился!
+      volume_level: 0.7
+  mode: single
+  icon: mdi:food-variant-off
+'1620219628613':
+  alias: Звонок на станцию
+  sequence:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0
+    entity_id: media_player.yandex_station_442078968308181c0410
+  - delay: 00:00:05
+  - service: media_player.play_media
+    data:
+      media_content_id: Алло
+      media_content_type: command
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+  - delay: 00:00:01
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.4
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+  mode: single
+  icon: mdi:phone-classic
+'1620222407435':
+  alias: Синхронизируй список покупок
+  sequence:
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      volume_level: 0
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: media_player.play_media
+    entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      media_content_id: update
+      media_content_type: shopping_list
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      volume_level: 0.4
+  mode: single
+say_by_alice:
+  alias: Сказать Алисой
+  sequence:
+  - service: media_player.play_media
+    entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      media_content_id: '{{ message }}'
+      media_content_type: text
+      extra:
+        volume_level: '{{ volume_level }}'
+  mode: single
+  icon: mdi:speaker-wireless
+  fields:
+    message:
+      description: Отправляемое сообщение
+      example: Внимание! Важное сообщение...
+      selector:
+        text:
+    volume_level:
+      description: Громкость
+      example: 0.8
+      default: 0.8
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.1
+          mode: slider

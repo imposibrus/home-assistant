@@ -1,0 +1,10 @@
+- id: dinner
+  name: Обед
+  icon: mdi:food-variant
+  entities:
+    media_player.lg_webos_smart_tv:
+      source: YouTube
+      sound_output: tv_speaker
+      state: 'on'
+    timer.dinner_end:
+      state: active

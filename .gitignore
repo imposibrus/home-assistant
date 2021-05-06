@@ -6,3 +6,5 @@ home-assistant_v2.db
 __pycache__
 www/**/*.gz
 .google_fit.token
+.shopping_list.json
+webostv.conf

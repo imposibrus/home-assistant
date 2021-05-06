@@ -5,6 +5,48 @@ default_config:
 yandex_station:
   username: !secret yandex_username
   password: !secret yandex_password
+  recognition_lang: ru-RU
+  devices:
+    442078968308181c0410:
+      host: !secret yandex_station_ip
+  intents:
+    Обед:
+    Синхронизируй список покупок:
+  include:
+    - Телевизор
+    - Кондиционер
+
+conversation:
+  intents:
+    media_player.yandex_station_442078968308181c0410: [.+]
+
+yandex_smart_home:
+  notifier:
+    oauth_token: !secret yandex_oauth_token
+    skill_id: !secret yandex_skill_id
+    user_id: !secret yandex_user_id
+  settings:
+    pressure_unit: mmHg
+  filter:
+    include_entities:
+      - sensor.cgllc_airmonitor_s1
+    exclude_entities:
+      - media_player.yandex_station_442078968308181c0410
+      - media_player.televizor
+      - media_player.televizor_2
+      - media_player.lg_webos_smart_tv
+      - sensor.oneplus_a5010_battery_temperature
+    exclude_domains:
+      - scene
+      - script
+  entity_config:
+    sensor.cgllc_airmonitor_s1:
+      type: devices.types.sensor
+      properties:
+        - type: temperature
+          entity: sensor.cleargrass_air_temperature
+        - type: humidity
+          entity: sensor.cleargrass_air_humidity
 
 lovelace:
   resources:
