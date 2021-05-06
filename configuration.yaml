@@ -142,6 +142,10 @@ light:
 webostv:
   host: !secret webostv_host
 
+timer:
+  dinner_end:
+    duration: '00:50:00'
+
 
 group: !include groups.yaml
 automation: !include automations.yaml
