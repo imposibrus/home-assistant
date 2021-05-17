@@ -9,3 +9,4 @@ www/**/*.gz
 .shopping_list.json
 webostv.conf
 .idea
+/image
