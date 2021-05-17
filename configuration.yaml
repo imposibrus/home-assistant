@@ -109,18 +109,39 @@ sensor:
         unique_id: 'cleargrass_air_humidity'
         unit_of_measurement: '%'
 
+  - platform: mqtt
+    name: 'Температура большой подсветки'
+    state_topic: "/devices/wb-m1w2_224/controls/External Sensor 2"
+    device_class: temperature
+    icon: mdi:temperature-celsius
+    unique_id: 'wb-m1w2_224/External Sensor 2'
+    unit_of_measurement: '°C'
+
+
 light:
   - platform: mqtt
     unique_id: 'wb-mr6c_42/K3'
+    state_topic: '/devices/wb-mr6c_42/controls/K3'
     command_topic: '/devices/wb-mr6c_42/controls/K3/on'
     payload_on: 1
     payload_off: 0
+    name: 'Люстра гостинной'
 
   - platform: mqtt
     unique_id: 'wb-mr6c_138/K1'
+    state_topic: '/devices/wb-mr6c_138/controls/K1'
     command_topic: '/devices/wb-mr6c_138/controls/K1/on'
     payload_on: 1
     payload_off: 0
+    name: 'Люстра кухни'
+
+  - platform: mqtt
+    unique_id: 'wb-mr6c_138/K2'
+    state_topic: '/devices/wb-mr6c_138/controls/K2'
+    command_topic: '/devices/wb-mr6c_138/controls/K2/on'
+    payload_on: 1
+    payload_off: 0
+    name: 'Просто что-то'
 
   - platform: mqtt
     unique_id: 'wb-mdm3_104/K1'
@@ -131,6 +152,7 @@ light:
     brightness_scale: 100
     payload_on: 1
     payload_off: 0
+    name: 'Подсветка гостинной'
 
   - platform: mqtt
     unique_id: 'wb-mrgbw-d_153/White 3-G'
@@ -140,6 +162,7 @@ light:
     brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/on'
     payload_on: 1
     payload_off: 0
+    name: 'Подсветка большая'
 
   - platform: mqtt
     unique_id: 'wb-mrgbw-d_153/White 4-W'
@@ -149,6 +172,7 @@ light:
     brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/on'
     payload_on: 1
     payload_off: 0
+    name: 'Подсветка маленькая'
 
 webostv:
   host: !secret webostv_host
@@ -157,10 +181,16 @@ timer:
   dinner_end:
     duration: '00:50:00'
 
-mqtt_statestream:
-  base_topic: homeassistant
-  publish_attributes: true
-  publish_timestamps: true
+mqtt:
+  discovery: false
+
+#mqtt_statestream:
+#  base_topic: homeassistant
+#  publish_attributes: true
+#  publish_timestamps: true
+#  exclude:
+#    entities:
+#      - binary_sensor.updater
 
 #climate:
 #  - platform: tasmota_irhvac

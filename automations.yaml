@@ -87,3 +87,21 @@
   action:
   - service: script.1620222407435
   mode: single
+- id: '1620741392513'
+  alias: Управление перегревом большой подсветки
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.temperatura_bolshoi_podsvetki.state | float
+      > 40 }}'
+  - platform: state
+    entity_id: input_boolean.upravlenie_peregrevom
+  condition:
+  - condition: state
+    entity_id: input_boolean.upravlenie_peregrevom
+    state: 'on'
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.mqtt_lightentity_4
+  mode: single
