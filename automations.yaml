@@ -105,3 +105,36 @@
     target:
       entity_id: light.mqtt_lightentity_4
   mode: single
+- id: '1621261422491'
+  alias: Выключить музыку во время звонка телефона
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.oneplus_a5010_sostoianie_telefona
+    to: ringing
+  - platform: state
+    entity_id: sensor.oneplus_a5010_sostoianie_telefona
+    to: offhook
+  condition:
+  - condition: template
+    value_template: '{{is_state(''person.imposibrus'', ''home'')}}'
+  - condition: state
+    entity_id: media_player.yandex_station_442078968308181c0410
+    state: playing
+  action:
+  - service: scene.create
+    data:
+      scene_id: yandex_station_before
+      snapshot_entities:
+      - media_player.yandex_station_442078968308181c0410
+  - service: media_player.volume_mute
+    entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      is_volume_muted: true
+  - wait_for_trigger:
+    - platform: state
+      entity_id: sensor.oneplus_a5010_sostoianie_telefona
+      to: idle
+    timeout: '300'
+  - scene: scene.yandex_station_before
+  mode: single
