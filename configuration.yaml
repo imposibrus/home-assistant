@@ -43,6 +43,10 @@ yandex_smart_home:
       - media_player.televizor_2
       - media_player.lg_webos_smart_tv
       - sensor.oneplus_a5010_battery_temperature
+      - sensor.oneplus_a5010_datchik_osveshchionnosti
+      - sensor.oneplus_a5010_uroven_zariada_akkumuliatora
+      - climate.hisense_irhvac
+      - sensor.iphone_aliia_battery_level
     exclude_domains:
       - scene
       - script
