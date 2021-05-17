@@ -86,3 +86,27 @@ say_by_alice:
           max: 1
           step: 0.1
           mode: slider
+conditioner_turn_off:
+  alias: Кондиционер выключить
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/tasmota_31E9B1/irhvac
+      payload: '{"Vendor":"WHIRLPOOL_AC","Model":2,"Mode":"fan_only","Power":"off","Celsius":"On","Temp":24,"FanSpeed":"Maximum","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Beep":"Off","Sleep":-1}'
+  mode: single
+conditioner_fan:
+  alias: Кондиционер проветривание
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/tasmota_31E9B1/irhvac
+      payload: '{"Vendor":"WHIRLPOOL_AC","Model":1,"Mode":"fan_only","Power":"On","Celsius":"On","Temp":24,"FanSpeed":"Min","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Beep":"Off","Sleep":-1}'
+  mode: single
+tv_toggle:
+  alias: Телевизор вкл/выкл
+  sequence:
+  - service: mqtt.publish
+    data:
+      payload: '{"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","DataLSB":"0x4FB08F7","Repeat":0}'
+      topic: cmnd/tasmota_31E9B1/IRSend
+  mode: single
