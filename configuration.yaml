@@ -115,7 +115,7 @@ sensor:
         unit_of_measurement: '%'
 
   - platform: mqtt
-    name: 'Температура большой подсветки'
+    name: 'Температура подсветки ТВ'
     state_topic: "/devices/wb-m1w2_224/controls/External Sensor 2"
     device_class: temperature
     icon: mdi:temperature-celsius
@@ -167,7 +167,7 @@ light:
     brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/on'
     payload_on: 1
     payload_off: 0
-    name: 'Подсветка большая'
+    name: 'Подсветка ТВ'
 
   - platform: mqtt
     unique_id: 'wb-mrgbw-d_153/White 4-W'
@@ -277,7 +277,7 @@ switch:
 #          - service: input_boolean.turn_off
 #            target:
 #              entity_id: input_boolean.konditsioner
-
+        
 
 
 #var:
