@@ -2,7 +2,7 @@ secrets.yaml
 .yandex_station.json
 home-assistant.log
 home-assistant_v2.db
-home-assistant_v2.db-*
+home-assistant_v2.db*
 .storage
 __pycache__
 www/**/*.gz
