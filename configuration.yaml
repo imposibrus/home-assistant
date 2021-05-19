@@ -280,11 +280,11 @@ switch:
         
 
 
-#var:
-#  yandex_station_volume:
-#    friendly_name: 'Громкость Я.Станции'
-#    initial_value: 0
-#    icon: mdi:bug
+var:
+  yandex_station_volume:
+    friendly_name: 'Громкость Я.Станции'
+    initial_value: 0.4
+    icon: mdi:volume-high
 
 
 

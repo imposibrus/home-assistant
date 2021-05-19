@@ -119,11 +119,11 @@
     entity_id: media_player.yandex_station_442078968308181c0410
     state: playing
   action:
-  - service: scene.create
+  - service: var.set
     data:
-      scene_id: yandex_station_before
-      snapshot_entities:
-      - media_player.yandex_station_442078968308181c0410
+      entity_id: var.yandex_station_volume
+      value: '{{ state_attr(''media_player.yandex_station_442078968308181c0410'',
+        ''volume_level'') }}'
   - service: media_player.volume_mute
     entity_id: media_player.yandex_station_442078968308181c0410
     data:
@@ -133,5 +133,9 @@
       entity_id: sensor.oneplus_a5010_sostoianie_telefona
       to: idle
     timeout: '300'
-  - scene: scene.yandex_station_before
+  - service: media_player.volume_set
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      volume_level: '{{ states(''var.yandex_station_volume'') }}'
   mode: single
