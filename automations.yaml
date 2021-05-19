@@ -55,14 +55,11 @@
       text: Обед
   condition: []
   action:
-  - service: media_player.turn_on
-    data: {}
-    target:
-      entity_id: media_player.televizor
+  - service: script.tv_toggle
   - delay:
       hours: 0
       minutes: 0
-      seconds: 10
+      seconds: 13
       milliseconds: 0
   - service: timer.start
     data:
