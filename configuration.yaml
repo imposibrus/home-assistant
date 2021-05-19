@@ -197,43 +197,94 @@ mqtt:
 #    entities:
 #      - binary_sensor.updater
 
-#climate:
-#  - platform: tasmota_irhvac
-#    name: Hisense IRHvac
-#    command_topic: "cmnd/tasmota_31E9B1/irhvac"
-#    state_topic: "tele/tasmota_31E9B1/RESULT"
-#    temperature_sensor: sensor.cleargrass_air_temperature #optional this sensor is used to display current temp on the AC card
-#    protocol: "WHIRLPOOL_AC"
-#    min_temp: 16 #optional - default 16 int value
-#    max_temp: 30 #optional - default 32 int value
-#    target_temp: 25 #optional - default 26 int value
-#    initial_operation_mode: "off" # optional - default "off" string value
-#    away_temp: 24 #optional - default 24 int value
-#    precision: 1.0 #optional - default 1.0 float value
-#    supported_modes:
-#      - heat
-#      - cool
-#      - dry
-#      - fan_only
-#      - auto
-#      - "off" #Turns the AC off - Should be quoted and should be always included here
-#    supported_fan_speeds:
-#      #- low
-#      - max
-#      - medium
-#      # - high
-#      #- middle
-#      #- focus
-#      #- diffuse
-#      - min
-#      - auto
-#    supported_swing_list:
-#      - "off"
-#      - vertical #up to down
-#      - horizontal # Left to right - remove if your AC does not support it
-#      - both # remove if your AC does not support horizontal
-#    hvac_model: "2" # string value
-#    celsius_mode: "On" #optional - default "On" string value - you can remove it if you use celsius
+climate:
+  - platform: tasmota_irhvac
+    name: Hisense IRHvac
+    command_topic: "cmnd/tasmota_31E9B1/irhvac"
+    state_topic: "tele/tasmota_31E9B1/RESULT"
+    temperature_sensor: sensor.cleargrass_air_temperature #optional this sensor is used to display current temp on the AC card
+    protocol: "WHIRLPOOL_AC"
+    min_temp: 16 #optional - default 16 int value
+    max_temp: 30 #optional - default 32 int value
+    target_temp: 25 #optional - default 26 int value
+    initial_operation_mode: "off" # optional - default "off" string value
+    away_temp: 24 #optional - default 24 int value
+    precision: 1.0 #optional - default 1.0 float value
+    supported_modes:
+      - heat
+      - cool
+      - dry
+      - fan_only
+      - auto
+      - "off" #Turns the AC off - Should be quoted and should be always included here
+    supported_fan_speeds:
+      #- low
+      - max
+      - medium
+      # - high
+      #- middle
+      #- focus
+      #- diffuse
+      - min
+      - auto
+    supported_swing_list:
+      - "off"
+      - vertical #up to down
+      - horizontal # Left to right - remove if your AC does not support it
+      - both # remove if your AC does not support horizontal
+    hvac_model: "2" # string value
+    hvac_model_on: "1" # string value
+    celsius_mode: "On" #optional - default "On" string value - you can remove it if you use celsius
+
+
+switch:
+  - platform: template
+    switches:
+      lg_tv:
+        value_template: "{{ is_state('media_player.lg_webos_smart_tv', 'on') }}"
+        friendly_name: 'Телевизор'
+        unique_id: lg_tv
+        icon_template: mdi:television
+        turn_on:
+          service: script.turn_on
+          target:
+            entity_id: script.tv_toggle
+        turn_off:
+          service: script.turn_on
+          target:
+            entity_id: script.tv_toggle
+
+#      ac_hisense:
+#        value_template: "{{ is_state('input_boolean.konditsioner', 'on') }}"
+#        friendly_name: 'Кондиционер'
+#        unique_id: ac_hisense
+#        icon_template: mdi:air-conditioner
+#        turn_on:
+#          - service: mqtt.publish
+#            data:
+#              topic: cmnd/tasmota_31E9B1/irhvac
+#              payload: >-
+#                {"Vendor":"WHIRLPOOL_AC","Model":1,"Mode":"Cool","Power":"On","Celsius":"On","Temp":27,"FanSpeed":"Min","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Filter":"Off","Clean":"Off","Beep":"Off","Sleep":-1}
+#          - service: input_boolean.turn_on
+#            target:
+#              entity_id: input_boolean.konditsioner
+#        turn_off:
+#          - service: mqtt.publish
+#            data:
+#              topic: cmnd/tasmota_31E9B1/irhvac
+#              payload: >-
+#                {"Vendor":"WHIRLPOOL_AC","Model":2,"Mode":"Cool","Power":"Off","Celsius":"On","Temp":27,"FanSpeed":"Min","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Filter":"Off","Clean":"Off","Beep":"Off","Sleep":-1}
+#          - service: input_boolean.turn_off
+#            target:
+#              entity_id: input_boolean.konditsioner
+
+
+
+#var:
+#  yandex_station_volume:
+#    friendly_name: 'Громкость Я.Станции'
+#    initial_value: 0
+#    icon: mdi:bug
 
 
 
