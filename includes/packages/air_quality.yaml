@@ -1,0 +1,158 @@
+air_quality:
+  sensor:
+    - platform: template
+      sensors:
+        cleargrass_air_co2:
+          friendly_name: 'CO2'
+          value_template: "{{ states('input_number.cleargrass_air_co2') }}"
+          icon_template: mdi:molecule-co2
+          unique_id: 'cleargrass_air_co2'
+          unit_of_measurement: 'ppm'
+
+        cleargrass_air_tvoc:
+          friendly_name: 'tVOC'
+          value_template: "{{ states('input_number.cleargrass_air_tvoc') }}"
+          icon_template: mdi:alpha-t
+          unique_id: 'cleargrass_air_tvoc'
+          unit_of_measurement: 'mg/m³'
+
+        cleargrass_air_pm25:
+          friendly_name: 'PM2.5'
+          value_template: "{{ states('input_number.cleargrass_air_pm25') }}"
+          icon_template: mdi:alpha-p
+          unique_id: 'cleargrass_air_pm25'
+          unit_of_measurement: 'μg/m³'
+
+        cleargrass_air_temperature:
+          friendly_name: 'Temperature'
+          value_template: "{{ states('input_number.cleargrass_air_temperature') }}"
+          icon_template: mdi:temperature-celsius
+          unique_id: 'cleargrass_air_temperature'
+          unit_of_measurement: '°C'
+
+        cleargrass_air_humidity:
+          friendly_name: 'Humidity'
+          value_template: "{{ states('input_number.cleargrass_air_humidity') }}"
+          icon_template: mdi:water-percent
+          unique_id: 'cleargrass_air_humidity'
+          unit_of_measurement: '%'
+
+  input_number:
+    cleargrass_air_temperature:
+      name: 'Last known temperature'
+      min: -100
+      max: 100
+      unit_of_measurement: '°C'
+      mode: 'box'
+    cleargrass_air_pm25:
+      name: 'Last known PM2.5'
+      min: 0
+      max: 1000
+      unit_of_measurement: 'μg/m³'
+      mode: 'box'
+    cleargrass_air_tvoc:
+      name: 'Last known tVOC'
+      min: 0
+      max: 1000
+      unit_of_measurement: 'mg/m³'
+      mode: 'box'
+    cleargrass_air_co2:
+      name: 'Last known CO2'
+      min: 0
+      max: 2000
+      unit_of_measurement: 'ppm'
+      mode: 'box'
+    cleargrass_air_humidity:
+      name: 'Last known humidity'
+      min: 0
+      max: 100
+      unit_of_measurement: '%'
+      mode: 'box'
+
+  automation:
+    - alias: 'Сохранение последней температуры'
+      id: 'last_known_temp_save'
+      mode: queued
+      max: 10
+      trigger:
+        - platform: state
+          entity_id: air_quality.cgllc_airmonitor_s1
+      condition:
+        condition: template
+        value_template: >-
+          {{ trigger.from_state and trigger.to_state.attributes.temperature not in [trigger.from_state.attributes.temperature, 'unavailable', None, null] }}
+      action:
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_temperature
+          data_template:
+            value: "{{ trigger.to_state.attributes.temperature }}"
+
+    - alias: 'Сохранение последней PM2.5'
+      id: 'last_known_pm25_save'
+      mode: queued
+      max: 10
+      trigger:
+        - platform: state
+          entity_id: air_quality.cgllc_airmonitor_s1
+      condition:
+        condition: template
+        value_template: >-
+          {{ trigger.from_state and trigger.to_state.attributes.particulate_matter_2_5 not in [trigger.from_state.attributes.particulate_matter_2_5, 'unavailable', None, null] }}
+      action:
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_pm25
+          data_template:
+            value: "{{ trigger.to_state.attributes.particulate_matter_2_5 }}"
+
+    - alias: 'Сохранение последней tVOC'
+      id: 'last_known_tVOC_save'
+      mode: queued
+      max: 10
+      trigger:
+        - platform: state
+          entity_id: air_quality.cgllc_airmonitor_s1
+      condition:
+        condition: template
+        value_template: >-
+          {{ trigger.from_state and trigger.to_state.attributes.total_volatile_organic_compounds not in [trigger.from_state.attributes.total_volatile_organic_compounds, 'unavailable', None, null] }}
+      action:
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_tvoc
+          data_template:
+            value: "{{ ((trigger.to_state.attributes.total_volatile_organic_compounds | float * 4.5) / 1000) | round(3) }}"
+
+    - alias: 'Сохранение последней CO2'
+      id: 'last_known_CO2_save'
+      mode: queued
+      max: 10
+      trigger:
+        - platform: state
+          entity_id: air_quality.cgllc_airmonitor_s1
+      condition:
+        condition: template
+        value_template: >-
+          {{ trigger.from_state and trigger.to_state.attributes.carbon_dioxide not in [trigger.from_state.attributes.carbon_dioxide, 'unavailable', None, null] }}
+      action:
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_co2
+          data_template:
+            value: "{{ trigger.to_state.attributes.carbon_dioxide }}"
+
+    - alias: 'Сохранение последней humidity'
+      id: 'last_known_humidity_save'
+      mode: queued
+      max: 10
+      trigger:
+        - platform: state
+          entity_id: air_quality.cgllc_airmonitor_s1
+      condition:
+        condition: template
+        value_template: >-
+          {{ trigger.from_state and trigger.to_state.attributes.humidity not in [trigger.from_state.attributes.humidity, 'unavailable', None, null] }}
+      action:
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_humidity
+          data_template:
+            value: "{{ trigger.to_state.attributes.humidity }}"
+
+
