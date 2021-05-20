@@ -1,0 +1,40 @@
+climate:
+  climate:
+    - platform: tasmota_irhvac
+      name: Hisense IRHvac
+      command_topic: "cmnd/tasmota_31E9B1/irhvac"
+      state_topic: "tele/tasmota_31E9B1/RESULT"
+      temperature_sensor: sensor.cleargrass_air_temperature #optional this sensor is used to display current temp on the AC card
+      protocol: "WHIRLPOOL_AC"
+      min_temp: 16 #optional - default 16 int value
+      max_temp: 30 #optional - default 32 int value
+      target_temp: 25 #optional - default 26 int value
+      initial_operation_mode: "off" # optional - default "off" string value
+      away_temp: 24 #optional - default 24 int value
+      precision: 1.0 #optional - default 1.0 float value
+      supported_modes:
+        - heat
+        - cool
+        - dry
+        - fan_only
+        - auto
+        - "off" #Turns the AC off - Should be quoted and should be always included here
+      supported_fan_speeds:
+        #- low
+        - max
+        - medium
+        # - high
+        #- middle
+        #- focus
+        #- diffuse
+        - min
+        - auto
+      supported_swing_list:
+        - "off"
+        - vertical #up to down
+        - horizontal # Left to right - remove if your AC does not support it
+        - both # remove if your AC does not support horizontal
+      hvac_model: "2" # string value
+      hvac_model_on: "1" # string value
+      celsius_mode: "On" #optional - default "On" string value - you can remove it if you use celsius
+  

@@ -1,0 +1,63 @@
+yandex:
+  yandex_station:
+    username: !secret yandex_username
+    password: !secret yandex_password
+    recognition_lang: ru-RU
+    devices:
+      442078968308181c0410:
+        host: !secret yandex_station_ip
+    intents:
+      Обед:
+      Синхронизируй список покупок:
+  #  include:
+  #    - Телевизор
+  #    - Кондиционер
+  
+  conversation:
+    intents:
+      media_player.yandex_station_442078968308181c0410: [.+]
+  
+  yandex_smart_home:
+    notifier:
+      oauth_token: !secret yandex_oauth_token
+      skill_id: !secret yandex_skill_id
+      user_id: !secret yandex_user_id
+    settings:
+      pressure_unit: mmHg
+    filter:
+      include_entities:
+        - sensor.cgllc_airmonitor_s1
+      exclude_entities:
+        - media_player.yandex_station_442078968308181c0410
+        - media_player.televizor
+        - media_player.televizor_2
+        - media_player.lg_webos_smart_tv
+        - sensor.oneplus_a5010_battery_temperature
+        - sensor.oneplus_a5010_datchik_osveshchionnosti
+        - sensor.oneplus_a5010_uroven_zariada_akkumuliatora
+  #      - climate.hisense_irhvac
+        - sensor.iphone_aliia_battery_level
+        - light.ir_remote
+        - switch.televizor
+        - input_boolean.konditsioner
+        - switch.ac_hisense
+      exclude_domains:
+        - scene
+        - script
+        - input_boolean
+    entity_config:
+      sensor.cgllc_airmonitor_s1:
+        type: devices.types.sensor
+        properties:
+          - type: temperature
+            entity: sensor.cleargrass_air_temperature
+          - type: humidity
+            entity: sensor.cleargrass_air_humidity
+ 
+  var:
+    yandex_station_volume:
+      friendly_name: 'Громкость Я.Станции'
+      initial_value: 0.4
+      icon: mdi:volume-high
+  
+ 

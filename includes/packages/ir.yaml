@@ -1,0 +1,42 @@
+ir:
+  switch:
+    - platform: template
+      switches:
+        lg_tv:
+          value_template: "{{ is_state('media_player.lg_webos_smart_tv', 'on') }}"
+          friendly_name: 'Телевизор'
+          unique_id: lg_tv
+          icon_template: mdi:television
+          turn_on:
+            service: script.turn_on
+            target:
+              entity_id: script.tv_toggle
+          turn_off:
+            service: script.turn_on
+            target:
+              entity_id: script.tv_toggle
+  
+  #      ac_hisense:
+  #        value_template: "{{ is_state('input_boolean.konditsioner', 'on') }}"
+  #        friendly_name: 'Кондиционер'
+  #        unique_id: ac_hisense
+  #        icon_template: mdi:air-conditioner
+  #        turn_on:
+  #          - service: mqtt.publish
+  #            data:
+  #              topic: cmnd/tasmota_31E9B1/irhvac
+  #              payload: >-
+  #                {"Vendor":"WHIRLPOOL_AC","Model":1,"Mode":"Cool","Power":"On","Celsius":"On","Temp":27,"FanSpeed":"Min","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Filter":"Off","Clean":"Off","Beep":"Off","Sleep":-1}
+  #          - service: input_boolean.turn_on
+  #            target:
+  #              entity_id: input_boolean.konditsioner
+  #        turn_off:
+  #          - service: mqtt.publish
+  #            data:
+  #              topic: cmnd/tasmota_31E9B1/irhvac
+  #              payload: >-
+  #                {"Vendor":"WHIRLPOOL_AC","Model":2,"Mode":"Cool","Power":"Off","Celsius":"On","Temp":27,"FanSpeed":"Min","SwingV":"Off","SwingH":"Off","Quiet":"Off","Turbo":"Off","Econo":"Off","Light":"On","Filter":"Off","Clean":"Off","Beep":"Off","Sleep":-1}
+  #          - service: input_boolean.turn_off
+  #            target:
+  #              entity_id: input_boolean.konditsioner
+  

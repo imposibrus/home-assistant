@@ -1,0 +1,67 @@
+wirenboard:
+  sensor:
+    - platform: mqtt
+      name: 'Температура подсветки ТВ'
+      state_topic: "/devices/wb-m1w2_224/controls/External Sensor 2"
+      device_class: temperature
+      icon: mdi:temperature-celsius
+      unique_id: 'wb-m1w2_224/External Sensor 2'
+      unit_of_measurement: '°C'
+
+  light:
+    - platform: mqtt
+      unique_id: 'wb-mr6c_42/K3'
+      state_topic: '/devices/wb-mr6c_42/controls/K3'
+      command_topic: '/devices/wb-mr6c_42/controls/K3/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Люстра гостинной'
+  
+    - platform: mqtt
+      unique_id: 'wb-mr6c_138/K1'
+      state_topic: '/devices/wb-mr6c_138/controls/K1'
+      command_topic: '/devices/wb-mr6c_138/controls/K1/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Люстра кухни'
+  
+    - platform: mqtt
+      unique_id: 'wb-mr6c_138/K2'
+      state_topic: '/devices/wb-mr6c_138/controls/K2'
+      command_topic: '/devices/wb-mr6c_138/controls/K2/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Просто что-то'
+  
+    - platform: mqtt
+      unique_id: 'wb-mdm3_104/K1'
+      state_topic: '/devices/wb-mdm3_104/controls/K1'
+      command_topic: '/devices/wb-mdm3_104/controls/K1/on'
+      brightness_state_topic: '/devices/wb-mdm3_104/controls/Channel 1'
+      brightness_command_topic: '/devices/wb-mdm3_104/controls/Channel 1/on'
+      brightness_scale: 100
+      payload_on: 1
+      payload_off: 0
+      name: 'Подсветка гостинной'
+  
+    - platform: mqtt
+      unique_id: 'wb-mrgbw-d_153/White 3-G'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Подсветка ТВ'
+  
+    - platform: mqtt
+      unique_id: 'wb-mrgbw-d_153/White 4-W'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Подсветка маленькая'
+
+

@@ -1,0 +1,7 @@
+google_fit:
+  sensor:
+  #  - platform: google_fit
+  #    name: imposibrus
+  #    client_id: !secret google_fit_client_id
+  #    client_secret: !secret google_fit_client_secret
+

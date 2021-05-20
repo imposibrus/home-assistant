@@ -1,0 +1,8 @@
+exclude:
+  domains:
+    - air_quality
+  entity_globs:
+    - binary_sensor.oneplus_a5010*
+    - sensor.ir_remote*
+    - sensor.macbook_pro
+

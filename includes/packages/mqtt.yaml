@@ -1,0 +1,12 @@
+mqtt:
+  mqtt:
+    discovery: false
+  
+  #mqtt_statestream:
+  #  base_topic: homeassistant
+  #  publish_attributes: true
+  #  publish_timestamps: true
+  #  exclude:
+  #    entities:
+  #      - binary_sensor.updater
+  
