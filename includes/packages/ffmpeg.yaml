@@ -1,0 +1,4 @@
+ffmpeg:
+  ffmpeg:
+    ffmpeg_bin: /usr/bin/ffmpeg
+
