@@ -5,4 +5,6 @@ exclude:
     - binary_sensor.oneplus_a5010*
     - sensor.ir_remote*
     - sensor.macbook_pro
+    - input_number.cleargrass_air*
+    - automation.sokhranenie_poslednei_*
 
