@@ -45,6 +45,12 @@ webostv:
     target:
       entity_id: switch.lg_tv
 
+browser_mod:
+  prefix: "browser_"
+  devices:
+    68f87c9e-0545f5a0:
+      name: 'Chrome Macbook'
+
 logbook: !include includes/logbook.yaml
 
 group: !include groups.yaml
