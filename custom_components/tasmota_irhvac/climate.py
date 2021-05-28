@@ -848,6 +848,9 @@ class TasmotaIrhvac(ClimateEntity, RestoreEntity, ABC):
         """Turn thermostat on."""
         self.power_mode = STATE_ON
         self._turning_on = True
+        # crutch for Alice and Hisense
+        if self._hvac_mode == STATE_OFF:
+            self._hvac_mode = HVAC_MODE_FAN_ONLY
         await self.async_send_cmd(False)
 
     async def async_turn_off(self):
