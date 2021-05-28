@@ -55,7 +55,16 @@
       text: Обед
   condition: []
   action:
-  - service: script.tv_toggle
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.lg_webos_smart_tv
+        state: 'off'
+      sequence:
+      - service: media_player.turn_on
+        target:
+          entity_id: media_player.lg_webos_smart_tv
+    default: []
   - delay:
       hours: 0
       minutes: 0
