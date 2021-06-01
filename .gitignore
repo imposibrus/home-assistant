@@ -11,3 +11,4 @@ www/**/*.gz
 webostv.conf
 .idea
 /image
+*.DS_Store
