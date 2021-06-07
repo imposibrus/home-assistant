@@ -67,7 +67,7 @@ say_by_alice:
       media_content_id: '{{ message }}'
       media_content_type: text
       extra:
-        volume_level: '{{ volume_level }}'
+        volume_level: '{{ volume_level | float }}'
   mode: single
   icon: mdi:speaker-wireless
   fields:

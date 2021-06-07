@@ -38,12 +38,9 @@
   - service: notify.lg_webos_smart_tv
     data:
       message: Обед закончился!
-  - service: media_player.play_media
-    target:
-      entity_id: media_player.yandex_station_442078968308181c0410
+  - service: script.say_by_alice
     data:
-      media_content_id: Обед закончился!
-      media_content_type: text
+      message: Обед закончился!
   mode: single
 - id: '1620208571379'
   alias: Обед!
