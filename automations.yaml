@@ -145,3 +145,15 @@
     data:
       volume_level: '{{ states(''var.yandex_station_volume'') }}'
   mode: single
+- id: '1623060310948'
+  alias: Работа!
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Работа
+  condition: []
+  action:
+  - scene: scene.rabota
+  mode: single
