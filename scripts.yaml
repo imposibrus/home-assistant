@@ -67,7 +67,8 @@ say_by_alice:
       media_content_id: '{{ message }}'
       media_content_type: text
       extra:
-        volume_level: '{{ volume_level | float }}'
+        volume_level: '{{ (volume_level | default(state_attr(''media_player.yandex_station_442078968308181c0410'',
+          ''volume_level''))) | float }}'
   mode: single
   icon: mdi:speaker-wireless
   fields:
@@ -109,4 +110,74 @@ tv_toggle:
     data:
       payload: '{"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","DataLSB":"0x4FB08F7","Repeat":0}'
       topic: cmnd/tasmota_31E9B1/IRSend
+  mode: single
+tv_youtube_video:
+  alias: TV Youtube video
+  variables:
+    tv_entity: media_player.lg_webos_smart_tv
+  fields:
+    videoId:
+      name: Video ID
+      description: ID of the Youtube's video
+      required: true
+      example: Ftm2uv7-Ybw
+      selector:
+        text:
+  sequence:
+  - service: webostv.command
+    data:
+      entity_id: '{{ tv_entity }}'
+      command: system.launcher/launch
+      payload:
+        id: youtube.leanback.v4
+        params:
+          contentTarget: https://www.youtube.com/tv?v={{ videoId }}
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 7
+      milliseconds: 0
+  - service: webostv.button
+    data:
+      entity_id: media_player.lg_webos_smart_tv
+      button: ENTER
+  mode: single
+  icon: mdi:youtube-tv
+kamin_mode:
+  alias: Камин
+  sequence:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.yandex_station_442078968308181c0410
+    data:
+      media_content_id: Зажигаю огонь, сейчас потеплеет.
+      media_content_type: text
+  - service: light.turn_on
+    target:
+      entity_id: light.mqtt_lightentity_4
+    data:
+      brightness_pct: 40
+  - service: script.tv_on
+  - service: script.tv_youtube_video
+    data:
+      videoId: Ftm2uv7-Ybw
+  mode: single
+tv_on:
+  alias: TV on
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.lg_webos_smart_tv
+        state: 'off'
+      sequence:
+      - service: media_player.turn_on
+        target:
+          entity_id: media_player.lg_webos_smart_tv
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 13
+          milliseconds: 0
+    default: []
   mode: single
