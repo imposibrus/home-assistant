@@ -29,23 +29,31 @@ yandex:
     filter:
       include_entities:
         - sensor.cgllc_airmonitor_s1
-      exclude_entities:
-        - media_player.yandex_station_442078968308181c0410
-#        - media_player.lg_webos_smart_tv
-        - sensor.oneplus_a5010_battery_temperature
-        - sensor.oneplus_a5010_datchik_osveshchionnosti
-        - sensor.oneplus_a5010_uroven_zariada_akkumuliatora
-        - sensor.macbook_pro_internal_battery_level
-  #      - climate.hisense_irhvac
-        - sensor.iphone_aliia_battery_level
-        - light.ir_remote
-        - switch.televizor
-        - switch.ac_hisense
-        - switch.pi_hole
+        - sensor.temperatura_bolshoi_podsvetki
+
+        - light.mqtt_lightentity
+        - light.mqtt_lightentity_2
+        - light.mqtt_lightentity_3
+        - light.mqtt_lightentity_4
+        - light.mqtt_lightentity_5
+        - light.prosto_chto_to
+
+        - climate.hisense_irhvac
+
+        - media_player.lg_webos_smart_tv
+        - media_player.yandex_intents
+
+        - input_boolean.upravlenie_peregrevom
+        - input_boolean.kamin
+      exclude_entities: []
       exclude_domains:
         - scene
         - script
         - input_boolean
+        - media_player
+        - sensor
+        - light
+        - switch
     entity_config:
       sensor.cgllc_airmonitor_s1:
         type: devices.types.sensor

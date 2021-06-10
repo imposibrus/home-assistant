@@ -132,13 +132,16 @@ class YandexNotifier:
                 old_entity = YandexEntity(self.hass, self.hass.data[DOMAIN][DATA_CONFIG], old_state)
                 if old_entity.query_serialize() == device: # нет изменений
                     continue
-            if device['capabilities'] or device['properties']:
-                devices.append(device)
-                entity_text = entity
-                if entity != event_entity_id:
-                    entity_text = entity_text + " => " + event_entity_id
-                _LOGGER.debug("Notify Yandex about new state " + entity_text + ": " + new_state.state)
-        
+            try:
+                if device['capabilities'] or device['properties']:
+                    devices.append(device)
+                    entity_text = entity
+                    if entity != event_entity_id:
+                        entity_text = entity_text + " => " + event_entity_id
+                    _LOGGER.debug("Notify Yandex about new state " + entity_text + ": " + new_state.state)
+            except KeyError:
+                _LOGGER.error("Error getting device capabilities %s", device)
+    
         if devices:
             await self.async_notify_skill(devices)
                     
