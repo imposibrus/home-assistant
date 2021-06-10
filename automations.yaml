@@ -156,4 +156,32 @@
   condition: []
   action:
   - scene: scene.rabota
+  - service: script.say_by_alice
+    data:
+      message: Удачной охоты!
+  mode: single
+- id: '1623185538029'
+  alias: Камин
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.kamin
+    to: 'on'
+  condition: []
+  action:
+  - service: script.kamin_mode
+  mode: single
+- id: '1623185896372'
+  alias: Алиса - камин
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Камин
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.kamin
   mode: single
