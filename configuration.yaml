@@ -30,6 +30,7 @@ zone:
 
 homeassistant:
   packages: !include_dir_merge_named includes/packages/
+  customize: !include customize.yaml
 
 lovelace:
   resources:

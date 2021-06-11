@@ -1,0 +1,3 @@
+sensor.router_cpu_load:
+  friendly_name: CPU load Mikrotik
+  icon: mdi:chip

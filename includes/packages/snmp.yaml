@@ -1,0 +1,113 @@
+snmp:
+  sensor:
+    - platform: snmp
+      name: "pppoe-out1 bytes-in"
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.31.1.1.1.6.9
+      unit_of_measurement: bytes
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: "pppoe-out1 bytes-out"
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.31.1.1.1.10.9
+      unit_of_measurement: bytes
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_ram_used
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.2.3.1.6.65536
+      unit_of_measurement: kbytes
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_ram_total
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.2.3.1.5.65536
+      unit_of_measurement: kbytes
+      version: 2c
+      scan_interval: 3600
+    - platform: snmp
+      name: router_disk_used
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.2.3.1.6.131072
+      unit_of_measurement: kbytes
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_disk_total
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.2.3.1.5.131072
+      unit_of_measurement: kbytes
+      version: 2c
+      scan_interval: 3600
+    - platform: snmp
+      name: router_cpu_load_1
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.3.3.1.2.1
+      unit_of_measurement: '%'
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_cpu_load_2
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.3.3.1.2.2
+      unit_of_measurement: '%'
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_cpu_load_3
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.3.3.1.2.3
+      unit_of_measurement: '%'
+      version: 2c
+      scan_interval: 10
+    - platform: snmp
+      name: router_cpu_load_4
+      host: 192.168.88.1
+      baseoid: .1.3.6.1.2.1.25.3.3.1.2.4
+      unit_of_measurement: '%'
+      version: 2c
+      scan_interval: 10
+
+    - platform: statistics
+      name: 'pppoe_out1_bytes_in_stats'
+      entity_id: sensor.pppoe_out1_bytes_in
+      sampling_size: 4
+      max_age:
+        hours: 24
+    - platform: statistics
+      name: 'pppoe_out1_bytes_out_stats'
+      entity_id: sensor.pppoe_out1_bytes_out
+      sampling_size: 4
+      max_age:
+        hours: 24
+
+    - platform: min_max
+      type: mean
+      round_digits: 2
+      name: router_cpu_load
+      entity_ids:
+        - sensor.router_cpu_load_1
+        - sensor.router_cpu_load_2
+        - sensor.router_cpu_load_3
+        - sensor.router_cpu_load_4
+
+  template:
+    sensor:
+      - unique_id: internet_in_mbps
+        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_in_stats', 'change_rate') | float) * 8 * (state_attr('sensor.pppoe_out1_bytes_in_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        unit_of_measurement: 'MBps'
+      - unique_id: internet_out_mbps
+        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_out_stats', 'change_rate') | float) * 8 * (state_attr('sensor.pppoe_out1_bytes_out_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        unit_of_measurement: 'MBps'
+      - unique_id: router_ram_usage
+        state: "{{ ((states('sensor.router_ram_used') | int / states('sensor.router_ram_total') | int) * 100) | round(2) }}"
+        unit_of_measurement: '%'
+        icon: mdi:memory
+      - unique_id: router_disk_usage
+        state: "{{ ((states('sensor.router_disk_used') | int / states('sensor.router_disk_total') | int) * 100) | round(2) }}"
+        unit_of_measurement: '%'
+        icon: mdi:harddisk
+
