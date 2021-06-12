@@ -185,3 +185,66 @@
     target:
       entity_id: input_boolean.kamin
   mode: single
+- id: '1623522776112'
+  alias: На улице достаточно холодно. Выключим кондиционер?
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: climate.hisense_irhvac
+    attribute: hvac_action
+    to: cooling
+  - platform: numeric_state
+    entity_id: sensor.gismeteo_temperature
+    below: '20'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: climate.hisense_irhvac
+      attribute: hvac_action
+      state: cooling
+    - condition: numeric_state
+      entity_id: sensor.gismeteo_temperature
+      below: '20'
+  action:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      title: На улице меньше 20℃
+      message: Пора выключить кондиционер
+      data:
+        actions:
+        - action: AC_TURN_OFF
+          title: Выключить
+        - action: AC_VENTILATION
+          title: Вентиляция
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: AC_TURN_OFF
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: AC_VENTILATION
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == ''AC_TURN_OFF'' }}'
+      sequence:
+      - service: climate.turn_off
+        target:
+          entity_id: climate.hisense_irhvac
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == ''AC_VENTILATION'' }}'
+      sequence:
+      - service: climate.set_hvac_mode
+        target:
+          entity_id: climate.hisense_irhvac
+        data:
+          hvac_mode: fan_only
+    default: []
+  mode: single
+  variables:
+    action_turn_off: '{{ ''AC_TURN_OFF_'' ~ context.id }}'
+    action_ventilation: '{{ ''AC_VENTILATION_'' ~ context.id }}'
