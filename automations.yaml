@@ -209,14 +209,14 @@
   action:
   - service: notify.mobile_app_oneplus_a5010
     data:
-      title: На улице меньше 20℃
-      message: Пора выключить кондиционер
+      title: Пора выключить кондиционер
       data:
         actions:
         - action: AC_TURN_OFF
           title: Выключить
         - action: AC_VENTILATION
           title: Вентиляция
+      message: На улице меньше 20℃
   - wait_for_trigger:
     - platform: event
       event_type: mobile_app_notification_action
@@ -248,3 +248,29 @@
   variables:
     action_turn_off: '{{ ''AC_TURN_OFF_'' ~ context.id }}'
     action_ventilation: '{{ ''AC_VENTILATION_'' ~ context.id }}'
+- id: '1623528326770'
+  alias: Включить кондиционер, когда кто-то приходит домой
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.template_anyone_home
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: state
+    entity_id: climate.hisense_irhvac
+    state: 'off'
+  - condition: numeric_state
+    entity_id: sensor.cleargrass_air_temperature
+    above: '26'
+  action:
+  - service: climate.set_hvac_mode
+    target:
+      entity_id: climate.hisense_irhvac
+    data:
+      hvac_mode: cool
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      title: Включаю кондиционер на охлаждение
+      message: Кто-то пришел домой, когда было жарко
+  mode: single
