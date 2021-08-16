@@ -31,8 +31,51 @@ cameras:
 
   camera:
     - platform: generic
-      still_image_url: https://ha.imposibrus.space/api/image/serve/a075679a0c03620805140cb742ad1eb2/512x512
-#      stream_source: rtsp://192.168.88.104:8554/mystream
+      still_image_url: https://nr.imposibrus.space/cam/5475023/JPG
+      stream_source: !secret cam_5475023_stream
+      name: 1k_2p_near_enter
+      username: !secret cam_user
+      password: !secret cam_pass
     - platform: generic
-      still_image_url: https://ha.imposibrus.space/api/image/serve/6dcb56f9db60b3eb33a22109170549e2/512x512
+      still_image_url: https://nr.imposibrus.space/cam/5475039/JPG
+      stream_source: !secret cam_5475039_stream
+      name: 4k_playground
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5320163/JPG
+      stream_source: !secret cam_5320163_stream
+      name: 1k_4p_near_enter
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5320209/JPG
+      stream_source: !secret cam_5320209_stream
+      name: 1k_enter
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5475075/JPG
+      stream_source: !secret cam_5475075_stream
+      name: 1k_1p_external_side
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5475099/JPG
+      stream_source: !secret cam_5475099_stream
+      name: 1k_jk_enter
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5475119/JPG
+      stream_source: !secret cam_5475119_stream
+      name: 1k_4p_elevator
+      username: !secret cam_user
+      password: !secret cam_pass
+    - platform: generic
+      still_image_url: https://nr.imposibrus.space/cam/5475271/JPG
+      stream_source: !secret cam_5475271_stream
+      name: 1k_1p_legenda_side
+      username: !secret cam_user
+      password: !secret cam_pass
 
