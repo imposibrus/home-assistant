@@ -6,6 +6,7 @@ home-assistant_v2.db*
 .storage
 __pycache__
 www/**/*.gz
+www/community
 .google_fit.token
 .shopping_list.json
 webostv.conf
