@@ -1,0 +1,14 @@
+telegram:
+  telegram_bot:
+    - platform: polling
+      api_key: !secret tg_bot_api_key
+      allowed_chat_ids: !secret tg_bot_chat_ids
+
+  notify:
+    - platform: telegram
+      name: tg_imposibrus
+      chat_id: !secret tg_bot_notify_chat_id
+    - platform: telegram
+      name: tg_home
+      chat_id: !secret tg_bot_notify_home_chat_id
+
