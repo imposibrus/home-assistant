@@ -56,6 +56,12 @@ air_quality:
       max: 1000
       unit_of_measurement: 'mg/m³'
       mode: 'box'
+    cleargrass_air_tvoc_micro:
+      name: 'Last known tVOC in μg/m³'
+      min: 0
+      max: 10000
+      unit_of_measurement: 'μg/m³'
+      mode: 'box'
     cleargrass_air_co2:
       name: 'Last known CO2'
       min: 0
@@ -120,6 +126,10 @@ air_quality:
           entity_id: input_number.cleargrass_air_tvoc
           data_template:
             value: "{{ ((trigger.to_state.attributes.total_volatile_organic_compounds | float * 4.5) / 1000) | round(3) }}"
+        - service: input_number.set_value
+          entity_id: input_number.cleargrass_air_tvoc_micro
+          data_template:
+            value: "{{ (trigger.to_state.attributes.total_volatile_organic_compounds | float * 4.5) | round(3) }}"
 
     - alias: 'Сохранение последней CO2'
       id: 'last_known_CO2_save'

@@ -1,11 +1,13 @@
 yandex:
   yandex_station:
-    username: !secret yandex_username
-    password: !secret yandex_password
+#    username: !secret yandex_username
+#    password: !secret yandex_password
     recognition_lang: ru-RU
     devices:
       442078968308181c0410:
         host: !secret yandex_station_ip
+      lp00000000000005131900001aedca28:
+        host: !secret yandex_station_lite_ip
     intents:
       Обед:
       Синхронизируй список покупок:
@@ -45,6 +47,8 @@ yandex:
 
         - input_boolean.upravlenie_peregrevom
         - input_boolean.kamin
+
+        - switch.0x158d00025863b3_switch
       exclude_entities: []
       exclude_domains:
         - scene
@@ -54,6 +58,7 @@ yandex:
         - sensor
         - light
         - switch
+        - air_quality
     entity_config:
       sensor.cgllc_airmonitor_s1:
         type: devices.types.sensor
@@ -64,6 +69,18 @@ yandex:
             entity: sensor.cleargrass_air_humidity
           - type: co2_level
             entity: sensor.cleargrass_air_co2
+          - type: pm2.5_density
+            entity: sensor.cleargrass_air_pm25
+          - type: tvoc
+            entity: input_number.cleargrass_air_tvoc_micro
+      media_player.lg_webos_smart_tv:
+        modes:
+          input_source:
+            one: ["YouTube"]
+            fowl: ["Веб-браузер"]
+            two: ["КиноПоиск HD"]
+            three: ["Веб-браузер"]
+            four: ["Яндекс Станция"]
  
   var:
     yandex_station_volume:
