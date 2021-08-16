@@ -1,3 +1,7 @@
 sensor.router_cpu_load:
   friendly_name: CPU load Mikrotik
   icon: mdi:chip
+input_number.climate_temp_max:
+  friendly_name: Охлаждение до
+input_number.climate_temp_weather_ac_min:
+  friendly_name: Охлаждение от (улица)

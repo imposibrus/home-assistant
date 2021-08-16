@@ -186,70 +186,41 @@
       entity_id: input_boolean.kamin
   mode: single
 - id: '1623522776112'
-  alias: На улице достаточно холодно. Выключим кондиционер?
+  alias: '[AC] На улице достаточно холодно, выключить кондиционер'
   description: ''
   trigger:
   - platform: state
     entity_id: climate.hisense_irhvac
     attribute: hvac_action
     to: cooling
-  - platform: numeric_state
-    entity_id: sensor.gismeteo_temperature
-    below: '20'
+  - platform: template
+    value_template: '{{ (states(''sensor.gismeteo_temperature'') | float) < (states(''input_number.climate_temp_weather_ac_min'')
+      | float) }}'
   condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: climate.hisense_irhvac
-      attribute: hvac_action
-      state: cooling
-    - condition: numeric_state
-      entity_id: sensor.gismeteo_temperature
-      below: '20'
+  - condition: state
+    entity_id: climate.hisense_irhvac
+    attribute: hvac_action
+    state: cooling
+  - condition: template
+    value_template: '{{ (states(''sensor.gismeteo_temperature'') | float) < (states(''input_number.climate_temp_weather_ac_min'')
+      | float) }}'
   action:
-  - service: notify.mobile_app_oneplus_a5010
+  - service: climate.set_hvac_mode
+    target:
+      entity_id: climate.hisense_irhvac
     data:
-      title: Пора выключить кондиционер
+      hvac_mode: fan_only
+  - service: notify.tg_home
+    data:
+      title: Кондиционер на проветривание
+      message: На улице меньше {{ states('input_number.climate_temp_weather_ac_min')
+        }}℃
       data:
-        actions:
-        - action: AC_TURN_OFF
-          title: Выключить
-        - action: AC_VENTILATION
-          title: Вентиляция
-      message: На улице меньше 20℃
-  - wait_for_trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: AC_TURN_OFF
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: AC_VENTILATION
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: '{{ wait.trigger.event.data.action == ''AC_TURN_OFF'' }}'
-      sequence:
-      - service: climate.turn_off
-        target:
-          entity_id: climate.hisense_irhvac
-    - conditions:
-      - condition: template
-        value_template: '{{ wait.trigger.event.data.action == ''AC_VENTILATION'' }}'
-      sequence:
-      - service: climate.set_hvac_mode
-        target:
-          entity_id: climate.hisense_irhvac
-        data:
-          hvac_mode: fan_only
-    default: []
+        inline_keyboard:
+        - Выключить:/AC_OFF, Охлаждение:/AC_COOL, Ок:/do_nothing
   mode: single
-  variables:
-    action_turn_off: '{{ ''AC_TURN_OFF_'' ~ context.id }}'
-    action_ventilation: '{{ ''AC_VENTILATION_'' ~ context.id }}'
 - id: '1623528326770'
-  alias: Включить кондиционер, когда кто-то приходит домой
+  alias: '[AC] Включить кондиционер, когда кто-то приходит домой'
   description: ''
   trigger:
   - platform: state
@@ -269,8 +240,156 @@
       entity_id: climate.hisense_irhvac
     data:
       hvac_mode: cool
-  - service: notify.mobile_app_oneplus_a5010
+  - service: notify.tg_home
     data:
       title: Включаю кондиционер на охлаждение
       message: Кто-то пришел домой, когда было жарко
+  mode: single
+- id: '1624472919161'
+  alias: '[AC] Включить кондиционер, когда жарко'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: climate.hisense_irhvac
+    attribute: hvac_action
+  - platform: template
+    value_template: '{{ (states(''sensor.cleargrass_air_temperature'') | float) >
+      (states(''input_number.climate_temp_max'') | float) }}'
+  condition:
+  - condition: template
+    value_template: '{{ state_attr(''climate.hisense_irhvac'', ''hvac_action'') !=
+      ''cooling'' }}'
+  - condition: template
+    value_template: '{{ (states(''sensor.cleargrass_air_temperature'') | float) >
+      (states(''input_number.climate_temp_max'') | float) }}'
+  - condition: state
+    entity_id: binary_sensor.template_anyone_home
+    state: 'on'
+  action:
+  - service: climate.set_hvac_mode
+    target:
+      entity_id: climate.hisense_irhvac
+    data:
+      hvac_mode: cool
+  - service: notify.tg_home
+    data:
+      title: Включаю кондиционер на охлаждение
+      message: Дома больше {{ states('input_number.climate_temp_max') }}℃
+      data:
+        inline_keyboard:
+        - Выключи:/AC_OFF, На проветривание:/AC_VENTILATION, Ок:/do_nothing
+  mode: single
+- id: '1624479537110'
+  alias: '[TG] Команда /do_nothing'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /do_nothing
+  condition: []
+  action:
+  - service: telegram_bot.answer_callback_query
+    data:
+      message: Ок, игнор
+      callback_query_id: '{{ trigger.event.data.id }}'
+  - service: telegram_bot.delete_message
+    data:
+      message_id: '{{ trigger.event.data.message.message_id }}'
+      chat_id: '{{ trigger.event.data.chat_id }}'
+  mode: single
+- id: '1626280661780'
+  alias: Вадим идет домой
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: person.imposibrus
+    from: Офис
+    to: not_home
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    after: '18:30'
+  action:
+  - service: notify.tg_home
+    data:
+      title: Вадим вышел из офиса
+      message: Ни дня не может без своей любимой😘
+  mode: single
+- id: '1627055594058'
+  alias: '[TG] Команды кондиционера'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /AC_OFF
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /AC_VENTILATION
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /AC_COOL
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.command == ''/AC_VENTILATION'' }}'
+      sequence:
+      - service: climate.set_hvac_mode
+        target:
+          entity_id: climate.hisense_irhvac
+        data:
+          hvac_mode: fan_only
+      - service: telegram_bot.answer_callback_query
+        data:
+          message: Кондиционер на проветривании!
+          callback_query_id: '{{ trigger.event.data.id }}'
+      - service: telegram_bot.delete_message
+        data:
+          chat_id: '{{ trigger.event.data.chat_id }}'
+          message_id: '{{ trigger.event.data.message.message_id }}'
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.command == ''/AC_OFF'' }}'
+      sequence:
+      - service: climate.set_hvac_mode
+        target:
+          entity_id: climate.hisense_irhvac
+        data:
+          hvac_mode: 'off'
+      - service: telegram_bot.answer_callback_query
+        data:
+          message: Кондиционер выключен!
+          callback_query_id: '{{ trigger.event.data.id }}'
+      - service: telegram_bot.delete_message
+        data:
+          chat_id: '{{ trigger.event.data.chat_id }}'
+          message_id: '{{ trigger.event.data.message.message_id }}'
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.event.data.command == ''/AC_COOL'' }}'
+      sequence:
+      - service: climate.set_hvac_mode
+        target:
+          entity_id: climate.hisense_irhvac
+        data:
+          hvac_mode: cool
+      - service: telegram_bot.answer_callback_query
+        data:
+          message: Кондиционер на охлаждение!
+          callback_query_id: '{{ trigger.event.data.id }}'
+      - service: telegram_bot.delete_message
+        data:
+          chat_id: '{{ trigger.event.data.chat_id }}'
+          message_id: '{{ trigger.event.data.message.message_id }}'
+    default: []
   mode: single
