@@ -1,7 +1,7 @@
 version: '3'
 services:
   home-assistant:
-    image: 'homeassistant/home-assistant:2021.6.6'
+    image: 'homeassistant/home-assistant:2021.8.8'
     init: true
     restart: always
     container_name: 'home-assistant'
@@ -9,9 +9,9 @@ services:
 #    network_mode: host
     ports:
       - 8123:8123
-    devices:
-     - "/dev/ttyAMA0:/dev/ttyAMA0"
-     - "/dev/vcio:/dev/vcio"
+#    devices:
+#     - "/dev/ttyAMA0:/dev/ttyAMA0"
+#     - "/dev/vcio:/dev/vcio"
     volumes:
       - ./:/config
     environment:
