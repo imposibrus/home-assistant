@@ -1,6 +1,9 @@
 import re
 from typing import Optional
 
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.typing import HomeAssistantType
+
 # https://github.com/Koenkk/zigbee-herdsman-converters/blob/master/devices.js#L390
 # https://slsys.io/action/devicelists.html
 # All lumi models:
@@ -40,14 +43,14 @@ DEVICES = [{
     # 'lumi.plug.maeu01': ["Aqara", "Plug EU", "SP-EUC01"],
     'lumi_spec': [
         ['0.12.85', 'load_power', 'power', 'sensor'],
-        ['0.13.85', None, 'consumption', 'sensor'],
+        ['0.13.85', None, 'energy', 'sensor'],
         ['4.1.85', 'neutral_0', 'switch', 'switch'],  # or channel_0?
     ]
 }, {
     'lumi.ctrl_86plug.aq1': ["Aqara", "Socket", "QBCZ11LM"],
     'lumi_spec': [
         ['0.12.85', 'load_power', 'power', 'sensor'],
-        ['0.13.85', None, 'consumption', 'sensor'],
+        ['0.13.85', None, 'energy', 'sensor'],
         ['4.1.85', 'channel_0', 'switch', 'switch'],  # @to4ko
     ]
 }, {
@@ -56,25 +59,36 @@ DEVICES = [{
     'lumi.switch.b1nacn02': ["Aqara", "Single Wall Switch D1", "QBKG23LM"],
     'lumi_spec': [
         ['0.12.85', 'load_power', 'power', 'sensor'],
-        ['0.13.85', None, 'consumption', 'sensor'],
+        ['0.13.85', None, 'energy', 'sensor'],
         ['4.1.85', 'neutral_0', 'switch', 'switch'],  # or channel_0?
         ['13.1.85', None, 'button', None],
         [None, None, 'action', 'sensor'],
     ]
 }, {
     # dual channel on/off, power measurement
-    'lumi.relay.c2acn01': ["Aqara", "Relay", "LLKZMK11LM"],  # tested
     'lumi.ctrl_ln2': ["Aqara", "Double Wall Switch", "QBKG12LM"],
     'lumi.ctrl_ln2.aq1': ["Aqara", "Double Wall Switch", "QBKG12LM"],
     'lumi.switch.b2nacn02': ["Aqara", "Double Wall Switch D1", "QBKG24LM"],
     'lumi_spec': [
-        # ['0.11.85', 'load_voltage', 'power', 'sensor'],  # 0
         ['0.12.85', 'load_power', 'power', 'sensor'],
-        ['0.13.85', None, 'consumption', 'sensor'],
-        # ['0.14.85', None, '?', 'sensor'],  # 5.01, 6.13
+        ['0.13.85', None, 'energy', 'sensor'],
         ['4.1.85', 'channel_0', 'channel 1', 'switch'],
         ['4.2.85', 'channel_1', 'channel 2', 'switch'],
-        # [?, 'enable_motor_mode', 'interlock', None]
+        ['13.1.85', None, 'button_1', None],
+        ['13.2.85', None, 'button_2', None],
+        ['13.5.85', None, 'button_both', None],
+        [None, None, 'action', 'sensor'],
+    ]
+}, {
+    'lumi.relay.c2acn01': ["Aqara", "Relay", "LLKZMK11LM"],  # tested
+    'lumi_spec': [
+        ['0.11.85', 'load_voltage', 'voltage', 'sensor'],
+        ['0.12.85', 'load_power', 'power', 'sensor'],
+        ['0.13.85', None, 'energy', 'sensor'],
+        ['0.14.85', None, 'current', 'sensor'],
+        ['4.1.85', 'channel_0', 'channel 1', 'switch'],
+        ['4.2.85', 'channel_1', 'channel 2', 'switch'],
+        # ['4.9.85', 'enable_motor_mode', 'interlock', None]
         ['13.1.85', None, 'button_1', None],
         ['13.2.85', None, 'button_2', None],
         ['13.5.85', None, 'button_both', None],
@@ -136,7 +150,7 @@ DEVICES = [{
     'lumi.switch.n3acn3': ["Aqara", "Triple Wall Switch D1", "QBKG26LM"],
     'lumi_spec': [
         ['0.12.85', 'load_power', 'power', 'sensor'],
-        ['0.13.85', None, 'consumption', 'sensor'],
+        ['0.13.85', None, 'energy', 'sensor'],
         ['4.1.85', 'channel_0', 'channel 1', 'switch'],
         ['4.2.85', 'channel_1', 'channel 2', 'switch'],
         ['4.3.85', 'channel_2', 'channel 3', 'switch'],
@@ -147,16 +161,6 @@ DEVICES = [{
         ['13.6.85', None, 'button_both_13', None],
         ['13.7.85', None, 'button_both_23', None],
         [None, None, 'action', 'sensor'],
-    ]
-}, {
-    # cube action, no retain
-    'lumi.sensor_cube': ["Aqara", "Cube", "MFKZQ01LM"],
-    'lumi.sensor_cube.aqgl01': ["Aqara", "Cube", "MFKZQ01LM"],  # tested
-    'lumi_spec': [
-        ['0.2.85', None, 'duration', None],
-        ['0.3.85', None, 'angle', None],
-        ['13.1.85', None, 'action', 'sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
     ]
 }, {
     # light with brightness and color temp
@@ -185,21 +189,21 @@ DEVICES = [{
     # button action, no retain
     'lumi.sensor_switch': ["Xiaomi", "Button", "WXKG01LM"],
     'lumi.sensor_switch.aq2': ["Aqara", "Button", "WXKG11LM"],
-    'lumi.remote.b1acn01': ["Aqara", "Button", "WXKG11LM"],
     'lumi.sensor_switch.aq3': ["Aqara", "Shake Button", "WXKG12LM"],
-    'lumi.sensor_86sw1': ["Aqara", "Single Wall Button", "WXKG03LM"],
+    'lumi.remote.b1acn01': ["Aqara", "Button", "WXKG11LM"],
     'lumi.remote.b186acn01': ["Aqara", "Single Wall Button", "WXKG03LM"],
     'lumi.remote.b186acn02': ["Aqara", "Single Wall Button D1", "WXKG06LM"],
+    'lumi.sensor_86sw1': ["Aqara", "Single Wall Button", "WXKG03LM"],
     'lumi_spec': [
         ['13.1.85', None, 'button', None],
         [None, None, 'action', 'sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # multi button action, no retain
     'lumi.sensor_86sw2': ["Aqara", "Double Wall Button", "WXKG02LM"],
-    'lumi.remote.b286acn01': ["Aqara", "Double Wall Button", "WXKG02LM"],
     'lumi.sensor_86sw2.es1': ["Aqara", "Double Wall Button", "WXKG02LM"],
+    'lumi.remote.b286acn01': ["Aqara", "Double Wall Button", "WXKG02LM"],
     'lumi.remote.b286acn02': ["Aqara", "Double Wall Button D1", "WXKG07LM"],
     'lumi.remote.b286opcn01': ["Aqara", "Opple Two Button", "WXCJKG11LM"],
     'lumi.remote.b486opcn01': ["Aqara", "Opple Four Button", "WXCJKG12LM"],
@@ -213,7 +217,7 @@ DEVICES = [{
         ['13.7.85', None, 'button_6', None],
         ['13.5.85', None, 'button_both', None],
         [None, None, 'action', 'sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # temperature and humidity sensor
@@ -221,7 +225,7 @@ DEVICES = [{
     'lumi_spec': [
         ['0.1.85', 'temperature', 'temperature', 'sensor'],
         ['0.2.85', 'humidity', 'humidity', 'sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # temperature, humidity and pressure sensor
@@ -231,7 +235,7 @@ DEVICES = [{
         ['0.1.85', 'temperature', 'temperature', 'sensor'],
         ['0.2.85', 'humidity', 'humidity', 'sensor'],
         ['0.3.85', 'pressure', 'pressure', 'sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # door window sensor
@@ -239,14 +243,14 @@ DEVICES = [{
     'lumi.sensor_magnet.aq2': ["Aqara", "Door Sensor", "MCCGQ11LM"],
     'lumi_spec': [
         ['3.1.85', 'status', 'contact', 'binary_sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # motion sensor
     'lumi.sensor_motion': ["Xiaomi", "Motion Sensor", "RTCGQ01LM"],
     'lumi_spec': [
         ['3.1.85', None, 'motion', 'binary_sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # motion sensor with illuminance
@@ -255,14 +259,14 @@ DEVICES = [{
         ['0.3.85', 'lux', 'illuminance_lux', None],
         ['0.4.85', 'illumination', 'illuminance', 'sensor'],
         ['3.1.85', None, 'motion', 'binary_sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # water leak sensor
     'lumi.sensor_wleak.aq1': ["Aqara", "Water Leak Sensor", "SJCGQ11LM"],
     'lumi_spec': [
         ['3.1.85', 'alarm', 'moisture', 'binary_sensor'],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     # vibration sensor
@@ -273,14 +277,18 @@ DEVICES = [{
         ['0.3.85', None, 'vibrate_intensity', None],
         ['13.1.85', None, 'vibration', None],
         ['14.1.85', None, 'vibration_level', None],
-        ['8.0.2001', 'battery', 'battery', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
         [None, None, 'action', 'sensor']
     ]
 }, {
-    'lumi.sen_ill.mgl01': ["Xiaomi", "Light Sensor", "GZCGQ01LM"],
-    'miot_spec': [
-        ['2.1', '2.1', 'illuminance', 'sensor'],
-        ['3.1', '3.1', 'battery', 'sensor'],
+    # cube action, no retain
+    'lumi.sensor_cube': ["Aqara", "Cube", "MFKZQ01LM"],
+    'lumi.sensor_cube.aqgl01': ["Aqara", "Cube", "MFKZQ01LM"],  # tested
+    'lumi_spec': [
+        ['0.2.85', None, 'duration', None],
+        ['0.3.85', None, 'angle', None],
+        ['13.1.85', None, 'action', 'sensor'],
+        ['8.0.2008', 'voltage', 'battery', 'sensor'],
     ]
 }, {
     'lumi.sensor_smoke': ["Honeywell", "Smoke Sensor", "JTYJ-GD-01LM/BW"],
@@ -288,6 +296,12 @@ DEVICES = [{
         ['0.1.85', 'density', 'smoke density', 'sensor'],
         ['13.1.85', 'alarm', 'smoke', 'binary_sensor'],
         ['8.0.2001', 'battery', 'battery', 'sensor'],
+    ]
+}, {
+    'lumi.sen_ill.mgl01': ["Xiaomi", "Light Sensor", "GZCGQ01LM"],
+    'miot_spec': [
+        ['2.1', '2.1', 'illuminance', 'sensor'],
+        ['3.1', '3.1', 'battery', 'sensor'],
     ]
 }, {
     'lumi.sensor_natgas': ["Honeywell", "Gas Sensor", "JTQJ-BF-01LM/BW"],
@@ -316,11 +330,21 @@ DEVICES = [{
 }, {
     'lumi.lock.aq1': ["Aqara", "Door Lock S1", "ZNMS11LM"],
     'lumi.lock.acn02': ["Aqara", "Door Lock S2", "ZNMS12LM"],
-    'lumi.lock.acn03': ["Aqara", "Door Lock S2 Pro", "ZNMS12LM"],
     'lumi_spec': [
         ['13.1.85', None, 'key_id', 'sensor'],
         ['13.20.85', 'lock_state', 'lock', 'binary_sensor'],
         ['8.0.2001', 'battery', 'battery', 'sensor'],
+    ]
+}, {
+    'lumi.lock.acn03': ["Aqara", "Door Lock S2 Pro", "ZNMS12LM"],
+    'lumi_spec': [
+        ['3.1.85', 'reverse_lock_state', 'lock', 'binary_sensor'],
+        ['13.26.85', 'door_state', 'door', 'binary_sensor'],
+        ['8.0.2001', 'bat_percent', 'battery', 'sensor'],
+        ['13.1.85', None, 'key_id', None],
+        ['13.25.85', None, 'lock_control', None],
+        ['13.28.85', None, 'lock_state', None],
+        [None, None, 'action', 'sensor'],
     ]
 }, {
     # https://github.com/AlexxIT/XiaomiGateway3/issues/101
@@ -347,10 +371,12 @@ DEVICES = [{
 }, {
     # with N, https://www.aqara.com/en/single_switch_T1_with-neutral.html
     'lumi.switch.n0agl1': ["Aqara", "Relay T1", "SSM-U01"],
+    # https://miot-spec.org/miot-spec-v2/instance?type=urn:miot-spec-v2:device:switch:0000A003:lumi-n0acn2:1
+    'lumi.switch.n0acn2': ["Aqara", "Relay T1", "DLKZMK11LM"],
     'lumi.plug.maeu01': ["Aqara", "Plug", "SP-EUC01"],
     'miot_spec': [
         ['2.1', '2.1', 'switch', 'switch'],
-        ['3.1', '3.1', 'consumption', 'sensor'],
+        ['3.1', '3.1', 'energy', 'sensor'],
         ['3.2', '3.2', 'power', 'sensor'],
         # ['5.7', '5.7', 'voltage', 'sensor'],
     ]
@@ -394,6 +420,8 @@ DEVICES = [{
 }, {
     # with neutral wire
     'lumi.switch.b1nc01': ["Aqara", "Single Wall Switch E1", "QBKG40LM"],
+    # without neutral wire
+    'lumi.switch.l1aeu1': ["Aqara", "Single Wall Switch H1", "WS-EUK01"],
     'miot_spec': [
         ['2.1', '2.1', 'switch', 'switch'],
         ['7.1', None, 'button: 1', None],
@@ -403,6 +431,8 @@ DEVICES = [{
 }, {
     # with neutral wire
     'lumi.switch.b2nc01': ["Aqara", "Double Wall Switch E1", "QBKG41LM"],
+    # without neutral wire
+    'lumi.switch.l2aeu1': ["Aqara", "Double Wall Switch H1", "WS-EUK02"],
     'miot_spec': [
         ['2.1', '2.1', 'channel 1', 'switch'],
         ['3.1', '3.1', 'channel 2', 'switch'],
@@ -419,7 +449,7 @@ DEVICES = [{
     'miot_spec': [
         ['2.1', '2.1', 'channel 1', 'switch'],
         ['3.1', '3.1', 'channel 2', 'switch'],
-        ['4.1', None, 'consumption', None],
+        ['4.1', None, 'energy', None],
         ['4.2', 'load_power', 'power', 'sensor'],
         ['7.1', None, 'button_1: 1', None],
         ['7.2', None, 'button_1: 2', None],
@@ -427,6 +457,39 @@ DEVICES = [{
         ['8.2', None, 'button_2: 2', None],
         ['9.1', None, 'button_both: 4', None],
         [None, None, 'action', 'sensor'],
+    ]
+}, {
+    'lumi.remote.acn003': ["Aqara", "Single Wall Button E1", "WXKG16LM"],
+    'miot_spec': [
+        ['2.1', None, 'button: 1', None],  # single
+        ['2.2', None, 'button: 2', None],  # double
+        ['2.3', None, 'button: 16', None],  # long
+        ['3.2', '3.2', 'battery', 'sensor'],
+        [None, None, 'action', 'sensor'],
+    ]
+}, {
+    'lumi.remote.acn004': ["Aqara", "Double Wall Button E1", "WXKG17LM"],
+    'miot_spec': [
+        ['2.1', None, 'button_1: 1', None],  # single
+        ['2.2', None, 'button_1: 2', None],  # double
+        ['2.3', None, 'button_1: 16', None],  # long
+        ['7.1', None, 'button_2: 1', None],  # single
+        ['7.2', None, 'button_2: 2', None],  # double
+        ['7.3', None, 'button_2: 16', None],  # long
+        ['8.1', None, 'button_both: 4', None],  # single
+        ['3.2', '3.2', 'battery', 'sensor'],
+        [None, None, 'action', 'sensor'],
+    ]
+}, {
+    # https://miot-spec.org/miot-spec-v2/instance?type=urn:miot-spec-v2:device:curtain:0000A00C:lumi-acn002:1
+    'lumi.curtain.acn002': ["Aqara", "Roller Shade E1", "ZNJLBL01LM"],
+    'miot_spec': [
+        # ['2.1', '2.1', 'fault', None],
+        ['2.2', None, 'motor', 'cover'],
+        ['2.4', '2.4', 'target_position', None],
+        ['2.5', '2.5', 'position', None],
+        ['2.6', '2.6', 'run_state', None],
+        ['3.4', '3.4', 'battery', 'sensor'],
     ]
 }]
 
@@ -438,7 +501,7 @@ GLOBAL_PROP = {
     '8.0.2005': 'send_retry_cnt',
     '8.0.2006': 'chip_temperature',
     '8.0.2007': 'lqi',
-    '8.0.2008': 'voltage',
+    '8.0.2008': 'battery_voltage',
     '8.0.2009': 'pv_state',
     '8.0.2010': 'cur_state',
     '8.0.2011': 'pre_state',
@@ -456,6 +519,7 @@ GLOBAL_PROP = {
     '8.0.2041': 'model',
     '8.0.2042': 'max_power',
     '8.0.2044': 'plug_detection',
+    '8.0.2091': 'ota_progress',
     '8.0.2101': 'nl_invert',  # ctrl_86plug
     '8.0.2102': 'alive',
     '8.0.2157': 'network_pan_id',
@@ -523,8 +587,8 @@ def fix_xiaomi_props(model, params) -> dict:
             params[k] = 1
         elif v in ('off', 'close'):
             params[k] = 0
-        elif k == 'battery' and v and v > 1000:
-            params[k] = round((min(v, 3200) - 2500) / 7)
+        elif k == 'battery' and v:
+            params[k] = fix_xiaomi_battery(v)
         elif k == 'run_state':
             # https://github.com/AlexxIT/XiaomiGateway3/issues/139
             if v == 'offing':
@@ -537,6 +601,17 @@ def fix_xiaomi_props(model, params) -> dict:
     return params
 
 
+def fix_xiaomi_battery(value: int) -> int:
+    """Convert battery voltage to battery percent."""
+    if value <= 100:
+        return value
+    if value <= 2700:
+        return 0
+    if value >= 3200:
+        return 100
+    return int((value - 2700) / 5)
+
+
 def get_buttons(model: str):
     model, _ = model.split(' ', 1)
     for device in DEVICES:
@@ -545,4 +620,43 @@ def get_buttons(model: str):
                 param[2] for param in device['lumi_spec']
                 if param[2].startswith('button')
             ]
+    return None
+
+
+def get_fw_ver(device: dict) -> int:
+    """Support int (30) and str (1.0.0_0034) versions."""
+    version = device.get('fw_ver', 0)
+    if isinstance(version, int):
+        return version
+    try:
+        return int(version.rsplit('_', 1)[1])
+    except:
+        return 0
+
+
+async def get_ota_link(hass: HomeAssistantType, device: dict) -> Optional[str]:
+    model = device['model']
+    if RE_ZIGBEE_MODEL_TAIL.search(model):
+        model = model[:-3]
+
+    url = "https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/"
+
+    # Xiaomi Plug should be updated to fw 30 before updating to latest fw
+    if model == 'lumi.plug' and get_fw_ver(device) < 30:
+        # waiting pull request https://github.com/Koenkk/zigbee-OTA/pull/49
+        return url.replace('Koenkk', 'AlexxIT') + \
+               'images/Xiaomi/LM15_SP_mi_V1.3.30_20170929_v30_withCRC.20180514181348.ota'
+
+    r = await async_get_clientsession(hass).get(url + "index.json")
+    items = await r.json(content_type=None)
+    for item in items:
+        if item.get('modelId') == model:
+            return url + item['path']
+
+    # z2m project desided to remove Aqara Relay OTA, but gw3 users have no
+    # problem with this firmware
+    # https://github.com/Koenkk/zigbee2mqtt/issues/7112
+    if model == 'lumi.relay.c2acn01':
+        return url + 'images/Xiaomi/20201218113852_lumi.relay.c2acn01_0.0.0_0046_20201216_6BB0FD.ota'
+
     return None

@@ -37,7 +37,11 @@ def parse_govee(self, data, source_mac, rssi):
         batt = int(data[9])
         result.update({"temperature": temp, "humidity": humi, "battery": batt})
     elif msg_length == 11 and device_id == 0xEC88:
-        device_type = "H5051/H5074"
+        device_type = "H5074"
+        (temp, humi, batt) = unpack("<hHB", data[5:10])
+        result.update({"temperature": temp / 100, "humidity": humi / 100, "battery": batt})
+    elif msg_length == 13 and device_id == 0xEC88:
+        device_type = "H5051"
         (temp, humi, batt) = unpack("<hHB", data[5:10])
         result.update({"temperature": temp / 100, "humidity": humi / 100, "battery": batt})
     elif msg_length == 13 and device_id == 0x0001:
@@ -83,7 +87,7 @@ def parse_govee(self, data, source_mac, rssi):
         return None
 
     # check for MAC presence in sensor whitelist, if needed
-    if self.discovery is False and govee_mac.lower() not in self.sensor_whitelist:
+    if self.discovery is False and govee_mac not in self.sensor_whitelist:
         _LOGGER.debug("Discovery is disabled. MAC: %s is not whitelisted!", to_mac(govee_mac))
         return None
 

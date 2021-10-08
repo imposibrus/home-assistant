@@ -42,6 +42,7 @@ MD5_BT = {
     '1.4.7_0115': 'be4724fbc5223fcde60aff7f58ffea28',
     '1.4.7_0160': '9290241cd9f1892d2ba84074f07391d4',
     '1.5.0_0026': '9290241cd9f1892d2ba84074f07391d4',
+    '1.5.0_0102': '9290241cd9f1892d2ba84074f07391d4',
 }
 MD5_BUSYBOX = '099137899ece96f311ac5ab554ea6fec'
 # MD5_GW3 = 'c81b91816d4b9ad9bb271a5567e36ce9'  # alpha
@@ -100,8 +101,9 @@ class TelnetShell(Telnet):
         self.exec("daemon_app.sh &")
 
     def stop_lumi_zigbee(self):
+        # Z3 starts with tail on old fw and without it on new fw from 1.4.7
         self.exec("killall daemon_app.sh")
-        self.exec("killall Lumi_Z3GatewayHost_MQTT")
+        self.exec("killall tail Lumi_Z3GatewayHost_MQTT")
 
     def check_firmware_lock(self) -> bool:
         """Check if firmware update locked. And create empty file if needed."""
@@ -156,16 +158,14 @@ class TelnetShell(Telnet):
 
     def redirect_miio2mqtt(self, pattern: str):
         self.exec("killall daemon_miio.sh")
-        self.exec("miio_client; pkill -f log/miio")
+        self.exec("killall miio_client; pkill -f log/miio")
         time.sleep(.5)
         cmd = MIIO_147 if self.ver >= '1.4.7_0063' else MIIO_146
         self.exec(cmd + MIIO2MQTT % pattern)
         self.exec("daemon_miio.sh &")
 
     def run_public_zb_console(self):
-        # Z3 starts with tail on old fw and without it on new fw from 1.4.7
-        self.exec("killall daemon_app.sh")
-        self.exec("tail Lumi_Z3GatewayHost_MQTT")
+        self.stop_lumi_zigbee()
 
         # run Gateway with open console port (`-v` param)
         arg = " -r 'c'" if self.ver >= '1.4.7_0063' else ''
@@ -180,15 +180,18 @@ class TelnetShell(Telnet):
             "mosquitto_pub -t log/z3 -l &"
         )
 
-        self.exec("daemon_app.sh &")
+        self.run_lumi_zigbee()
 
     def read_file(self, filename: str, as_base64=False):
         if as_base64:
             self.write(f"cat {filename} | base64\n".encode())
             self.read_until(b"\r\n", timeout=3)  # skip command
             raw = self.read_until(b"# ", timeout=10)
-            # b"cat: can't open ..."
-            return base64.b64decode(raw)
+            try:
+                # b"cat: can't open ..."
+                return base64.b64decode(raw)
+            except:
+                return None
         else:
             self.write(f"cat {filename}\n".encode())
             self.read_until(b"\r\n", timeout=3)  # skip command
@@ -204,7 +207,8 @@ class TelnetShell(Telnet):
         self.exec("kill $(ps | grep dummy:basic_gw | awk '{print $1}')")
 
     def stop_buzzer(self):
-        self.exec("killall daemon_miio.sh; killall -9 basic_gw")
+        self.exec("killall daemon_miio.sh")
+        self.exec("killall -9 basic_gw")
         # run dummy process with same str in it
         self.exec("sh -c 'sleep 999d' dummy:basic_gw &")
         self.exec("daemon_miio.sh &")
