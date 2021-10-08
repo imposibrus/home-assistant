@@ -68,7 +68,7 @@ say_by_alice:
       media_content_type: text
       extra:
         volume_level: '{{ (volume_level | default(state_attr(''media_player.yandex_station_442078968308181c0410'',
-          ''volume_level''))) | float }}'
+          ''volume_level''))) | float(default=0) }}'
   mode: single
   icon: mdi:speaker-wireless
   fields:

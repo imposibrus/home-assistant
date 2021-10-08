@@ -184,10 +184,10 @@ snmp:
   template:
     sensor:
       - unique_id: internet_in_mbps
-        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_in_stats', 'change_rate') | float) * 8 * (state_attr('sensor.pppoe_out1_bytes_in_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_in_stats', 'change_rate') | float(default=0)) * 8 * (state_attr('sensor.pppoe_out1_bytes_in_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
         unit_of_measurement: 'MBps'
       - unique_id: internet_out_mbps
-        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_out_stats', 'change_rate') | float) * 8 * (state_attr('sensor.pppoe_out1_bytes_out_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_out_stats', 'change_rate') | float(default=0)) * 8 * (state_attr('sensor.pppoe_out1_bytes_out_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
         unit_of_measurement: 'MBps'
       - unique_id: router_ram_usage
         state: "{{ ((states('sensor.router_ram_used') | int / states('sensor.router_ram_total') | int) * 100) | round(2) }}"

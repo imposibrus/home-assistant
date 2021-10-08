@@ -125,11 +125,11 @@ air_quality:
         - service: input_number.set_value
           entity_id: input_number.cleargrass_air_tvoc
           data_template:
-            value: "{{ ((trigger.to_state.attributes.total_volatile_organic_compounds | float * 4.5) / 1000) | round(3) }}"
+            value: "{{ ((trigger.to_state.attributes.total_volatile_organic_compounds | float(default=0) * 4.5) / 1000) | round(3) }}"
         - service: input_number.set_value
           entity_id: input_number.cleargrass_air_tvoc_micro
           data_template:
-            value: "{{ (trigger.to_state.attributes.total_volatile_organic_compounds | float * 4.5) | round(3) }}"
+            value: "{{ (trigger.to_state.attributes.total_volatile_organic_compounds | float(default=0) * 4.5) | round(3) }}"
 
     - alias: 'Сохранение последней CO2'
       id: 'last_known_CO2_save'

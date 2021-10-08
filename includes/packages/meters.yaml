@@ -15,12 +15,12 @@ meters:
     sensor:
       - name: energy_cost_ac_daily
         unique_id: energy_cost_ac_daily
-        state: "{{ ((states('sensor.energy_ac_daily_daily') | float) / 1000) * (states('input_number.energy_price') | float) }}"
+        state: "{{ ((states('sensor.energy_ac_daily_daily') | float(default=0)) / 1000) * (states('input_number.energy_price') | float(default=0)) }}"
         unit_of_measurement: '₽'
         icon: mdi:currency-rub
       - name: energy_cost_ac_monthly
         unique_id: energy_cost_ac_monthly
-        state: "{{ ((states('sensor.energy_ac_monthly_daily') | float) / 1000) * (states('input_number.energy_price') | float) }}"
+        state: "{{ ((states('sensor.energy_ac_monthly_daily') | float(default=0)) / 1000) * (states('input_number.energy_price') | float(default=0)) }}"
         unit_of_measurement: '₽'
         icon: mdi:currency-rub
 
