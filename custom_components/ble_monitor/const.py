@@ -288,7 +288,7 @@ SENSOR_TYPES: tuple[BLEMonitorSensorEntityDescription, ...] = (
         sensor_class="MeasuringSensor",
         name="ble conductivity",
         unique_id="c_",
-        icon="mdi:flash-circle",
+        icon="mdi:lightning-bolt-circle",
         native_unit_of_measurement=CONDUCTIVITY,
         device_class=None,
         state_class=STATE_CLASS_MEASUREMENT,
@@ -310,6 +310,16 @@ SENSOR_TYPES: tuple[BLEMonitorSensorEntityDescription, ...] = (
         icon="mdi:chemical-weapon",
         native_unit_of_measurement=CONCENTRATION_MILLIGRAMS_PER_CUBIC_METER,
         device_class=None,
+        state_class=STATE_CLASS_MEASUREMENT,
+    ),
+    BLEMonitorSensorEntityDescription(
+        key="dewpoint",
+        sensor_class="MeasuringSensor",
+        name="ble dewpoint",
+        unique_id="d_",
+        icon="mdi:water",
+        native_unit_of_measurement=TEMP_CELSIUS,
+        device_class=DEVICE_CLASS_TEMPERATURE,
         state_class=STATE_CLASS_MEASUREMENT,
     ),
     BLEMonitorSensorEntityDescription(
@@ -619,6 +629,8 @@ MEASUREMENT_DICT = {
     'HTP.xw'                  : [["temperature", "humidity", "pressure", "rssi"], [], []],
     'HT.w'                    : [["temperature", "humidity", "pressure", "rssi"], [], []],
     'Moat S2'                 : [["temperature", "humidity", "battery", "rssi"], [], []],
+    'Tempo Disc THD'          : [["temperature", "humidity", "dewpoint", "battery", "rssi"], [], []],
+    'Tempo Disc THPD'         : [["temperature", "humidity", "pressure", "battery", "rssi"], [], []],
 }
 
 KETTLES = ('YM-K1501', 'YM-K1501EU', 'V-SK152')
@@ -687,6 +699,8 @@ MANUFACTURER_DICT = {
     'HTP.xw'                  : 'SensorPush',
     'HT.w'                    : 'SensorPush',
     'Moat S2'                 : 'Moat',
+    'Tempo Disc THD'          : 'BlueMaestro',
+    'Tempo Disc THPD'         : 'BlueMaestro',
 }
 
 # Renamed model dictionary
