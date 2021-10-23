@@ -7,6 +7,13 @@ health:
       unique_id: 'imposibrus_heartrate'
       unit_of_measurement: 'bpm'
 
+    - platform: mqtt
+      name: "imposibrus steps"
+      state_topic: 'miband/steps'
+      icon: mdi:walk
+      unique_id: 'imposibrus_steps'
+      unit_of_measurement: 'steps'
+
     # TODO: move out from health package
     - platform: mqtt
       name: "imposibrus miband battery level"
