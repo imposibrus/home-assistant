@@ -46,20 +46,20 @@ wirenboard:
   
     - platform: mqtt
       unique_id: 'wb-mrgbw-d_153/White 3-G'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 3-G/on'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/on'
       payload_on: 1
       payload_off: 0
       name: 'Подсветка ТВ'
   
     - platform: mqtt
       unique_id: 'wb-mrgbw-d_153/White 4-W'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/White 4-W/on'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel W'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/on'
       payload_on: 1
       payload_off: 0
       name: 'Подсветка маленькая'
