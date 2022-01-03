@@ -10,28 +10,52 @@ wirenboard:
 
   light:
     - platform: mqtt
+      unique_id: 'wb-mr6c_42/K4'
+      state_topic: '/devices/wb-mr6c_42/controls/K4'
+      command_topic: '/devices/wb-mr6c_42/controls/K4/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Свет гостиной и кухни'
+  
+    - platform: mqtt
+      unique_id: 'wb-mr6c_42/K1'
+      state_topic: '/devices/wb-mr6c_42/controls/K1'
+      command_topic: '/devices/wb-mr6c_42/controls/K1/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Люстра балкона'
+  
+    - platform: mqtt
+      unique_id: 'wb-mr6c_42/K2'
+      state_topic: '/devices/wb-mr6c_42/controls/K2'
+      command_topic: '/devices/wb-mr6c_42/controls/K2/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Люстра санузла'
+  
+    - platform: mqtt
       unique_id: 'wb-mr6c_42/K3'
       state_topic: '/devices/wb-mr6c_42/controls/K3'
       command_topic: '/devices/wb-mr6c_42/controls/K3/on'
       payload_on: 1
       payload_off: 0
-      name: 'Люстра гостинной'
+      name: 'Свет прихожей и ванны'
   
     - platform: mqtt
-      unique_id: 'wb-mr6c_138/K1'
-      state_topic: '/devices/wb-mr6c_138/controls/K1'
-      command_topic: '/devices/wb-mr6c_138/controls/K1/on'
+      unique_id: 'wb-mr6c_42/K5'
+      state_topic: '/devices/wb-mr6c_42/controls/K5'
+      command_topic: '/devices/wb-mr6c_42/controls/K5/on'
       payload_on: 1
       payload_off: 0
-      name: 'Люстра кухни'
+      name: 'Люстра кабинета'
   
     - platform: mqtt
-      unique_id: 'wb-mr6c_138/K2'
-      state_topic: '/devices/wb-mr6c_138/controls/K2'
-      command_topic: '/devices/wb-mr6c_138/controls/K2/on'
+      unique_id: 'wb-mr6c_42/K6'
+      state_topic: '/devices/wb-mr6c_42/controls/K6'
+      command_topic: '/devices/wb-mr6c_42/controls/K6/on'
       payload_on: 1
       payload_off: 0
-      name: 'Просто что-то'
+      name: 'Люстра спальни'
   
     - platform: mqtt
       unique_id: 'wb-mdm3_104/K1'
