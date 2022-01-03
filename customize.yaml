@@ -7,3 +7,5 @@ input_number.climate_temp_weather_ac_min:
   friendly_name: Охлаждение от (улица)
 alarm_control_panel.home_alarm:
   friendly_name: Сигнализация
+switch.0x158d00025863b3_switch:
+  friendly_name: Розетка
