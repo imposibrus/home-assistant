@@ -46,12 +46,12 @@ lovelace:
 
 test:
 
-webostv:
-  host: !secret webostv_host
-  turn_on_action:
-    service: switch.turn_on
-    target:
-      entity_id: switch.lg_tv
+#webostv:
+#  host: !secret webostv_host
+#  turn_on_action:
+#    service: switch.turn_on
+#    target:
+#      entity_id: switch.lg_tv
 
 browser_mod:
   prefix: "browser_"

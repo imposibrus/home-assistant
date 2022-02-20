@@ -418,3 +418,16 @@
     target:
       entity_id: light.mqtt_lightentity_4
   mode: single
+- id: '1644352009872'
+  alias: Включение ТВ
+  description: ''
+  trigger:
+  - platform: webostv.turn_on
+    entity_id: media_player.lg_webos_smart_tv
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.lg_tv
+  mode: single
