@@ -15,6 +15,7 @@ XIAOMI_TYPE_DICT = {
     0x045B: "LYWSD02",
     0x055B: "LYWSD03MMC",
     0x1203: "XMWSDJ04MMC",
+    0x04E1: "XMMF01JQD",
     0x0098: "HHCCJCY01",
     0x03BC: "GCLS002",
     0x015D: "HHCCPOT002",
@@ -51,6 +52,8 @@ XIAOMI_TYPE_DICT = {
     0x03B6: "YLKG07YL/YLKG08YL",
     0x069E: "ZNMS16LM",
     0x069F: "ZNMS17LM",
+    0x04E9: "MJZNMSQ01YD",
+    0x098C: "XMZNMST02YD",
 }
 
 # Structured objects for data conversions
@@ -247,6 +250,7 @@ def obj1001(xobj, device_type):
         three_btn_switch_left = None
         three_btn_switch_middle = None
         three_btn_switch_right = None
+        cube_direction = None
         remote_binary = None
 
         if button_type == 0:
@@ -257,6 +261,7 @@ def obj1001(xobj, device_type):
             one_btn_switch = "toggle"
             two_btn_switch_left = "toggle"
             three_btn_switch_left = "toggle"
+            cube_direction = "right"
             remote_binary = 1
         elif button_type == 1:
             remote_command = "off"
@@ -265,6 +270,7 @@ def obj1001(xobj, device_type):
             bathroom_remote_command = "air exchange"
             two_btn_switch_right = "toggle"
             three_btn_switch_middle = "toggle"
+            cube_direction = "left"
             remote_binary = 0
         elif button_type == 2:
             remote_command = "sun"
@@ -351,8 +357,10 @@ def obj1001(xobj, device_type):
 
         # return device specific output
         result = {}
-        if device_type in ["RTCGQ02LM", "YLAI003", "JTYJGD03MI"]:
+        if device_type in ["RTCGQ02LM", "YLAI003", "JTYJGD03MI", "SJWS01LM"]:
             result["button"] = button_press_type
+        elif device_type == "XMMF01JQD":
+            result["button"] = cube_direction
         elif device_type == "YLYK01YL":
             result["remote"] = remote_command
             result["button"] = button_press_type
@@ -490,17 +498,17 @@ def obj1018(xobj):
 
 def obj1019(xobj):
     # Door
-    open = xobj[0]
-    if open == 0:
+    open_obj = xobj[0]
+    if open_obj == 0:
         opening = 1
         status = "opened"
-    elif open == 1:
+    elif open_obj == 1:
         opening = 0
         status = "closed"
-    elif open == 2:
+    elif open_obj == 2:
         opening = 1
         status = "closing timeout"
-    elif open == 3:
+    elif open_obj == 3:
         opening = 1
         status = "device reset"
     else:
@@ -762,7 +770,7 @@ def parse_xiaomi(self, data, source_mac, rssi):
 
     result = {
         "rssi": rssi,
-        "mac": ''.join('{:02X}'.format(x) for x in xiaomi_mac),
+        "mac": ''.join(f'{i:02X}' for i in xiaomi_mac),
         "type": device_type,
         "packet": packet_id,
         "firmware": firmware,
@@ -783,14 +791,14 @@ def parse_xiaomi(self, data, source_mac, rssi):
             if payload_length < next_start:
                 _LOGGER.debug("Invalid payload data length, payload: %s", payload.hex())
                 break
-            object = payload[payload_start + 3:next_start]
+            dobject = payload[payload_start + 3:next_start]
             if obj_length != 0:
                 resfunc = xiaomi_dataobject_dict.get(obj_typecode, None)
                 if resfunc:
                     if hex(obj_typecode) in ["0x1001", "0xf"]:
-                        result.update(resfunc(object, device_type))
+                        result.update(resfunc(dobject, device_type))
                     else:
-                        result.update(resfunc(object))
+                        result.update(resfunc(dobject))
                 else:
                     if self.report_unknown == "Xiaomi":
                         _LOGGER.info("%s, UNKNOWN dataobject in payload! Adv: %s", sinfo, data.hex())
@@ -878,4 +886,4 @@ def decrypt_mibeacon_legacy(self, data, i, xiaomi_mac):
 
 def to_mac(addr: int):
     """Return formatted MAC address"""
-    return ':'.join('{:02x}'.format(x) for x in addr).upper()
+    return ':'.join(f'{i:02X}' for i in addr)

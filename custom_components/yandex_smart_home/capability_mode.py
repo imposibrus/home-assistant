@@ -325,7 +325,7 @@ class ProgramCapabilityHumidifier(ProgramCapability):
 class ProgramCapabilityFan(ProgramCapability):
     modes_map_default = {
         const.MODE_INSTANCE_MODE_AUTO: [
-            fan._NOT_SPEED_AUTO,
+            climate.const.FAN_AUTO,
         ],
         const.MODE_INSTANCE_MODE_ECO: [
             const.XIAOMI_AIRPURIFIER_PRESET_IDLE,
@@ -481,10 +481,12 @@ class FanSpeedCapabilityClimate(FanSpeedCapability):
         const.MODE_INSTANCE_MODE_MEDIUM: [
             climate.const.FAN_MEDIUM,
             climate.const.FAN_MIDDLE,
+            const.FAN_SPEED_MID,
             const.TION_FAN_SPEED_3,
         ],
         const.MODE_INSTANCE_MODE_HIGH: [
             climate.const.FAN_HIGH,
+            const.FAN_SPEED_MAX,
             const.TION_FAN_SPEED_4,
         ],
         const.MODE_INSTANCE_MODE_TURBO: [
@@ -532,14 +534,14 @@ class FanSpeedCapabilityClimate(FanSpeedCapability):
 class FanSpeedCapabilityFanViaPreset(FanSpeedCapability):
     modes_map_default = {
         const.MODE_INSTANCE_MODE_AUTO: [
-            fan._NOT_SPEED_AUTO,
-            fan._NOT_SPEED_ON,
+            climate.const.FAN_AUTO,
+            climate.const.FAN_ON,
         ],
         const.MODE_INSTANCE_MODE_ECO: [
             const.XIAOMI_AIRPURIFIER_PRESET_IDLE,
         ],
         const.MODE_INSTANCE_MODE_QUIET: [
-            fan._NOT_SPEED_OFF,
+            fan.SPEED_OFF,
             const.XIAOMI_AIRPURIFIER_PRESET_SILENT,
             const.XIAOMI_FAN_PRESET_LEVEL_1,
         ],
@@ -703,7 +705,7 @@ class FanSpeedCapabilityFanViaPercentage(FanSpeedCapability):
 @register_capability
 class FanSpeedCapabilityFanLegacy(FanSpeedCapability):
     modes_map_default = {
-        const.MODE_INSTANCE_MODE_AUTO: [fan._NOT_SPEED_AUTO, fan._NOT_SPEED_ON],
+        const.MODE_INSTANCE_MODE_AUTO: [climate.const.FAN_AUTO, climate.const.FAN_ON],
         const.MODE_INSTANCE_MODE_QUIET: [fan.SPEED_OFF],
         const.MODE_INSTANCE_MODE_LOW: [fan.SPEED_LOW],
         const.MODE_INSTANCE_MODE_MEDIUM: [fan.SPEED_MEDIUM],
@@ -758,12 +760,12 @@ class CleanupModeCapability(ModeCapability):
     instance = const.MODE_INSTANCE_CLEANUP_MODE
     modes_map_default = {
         const.MODE_INSTANCE_MODE_AUTO: ['auto', 'automatic', '102'],
-        const.MODE_INSTANCE_MODE_TURBO: ['turbo', 'high', 'performance', '104'],
+        const.MODE_INSTANCE_MODE_TURBO: ['turbo', 'high', 'performance', '104', 'full speed'],
         const.MODE_INSTANCE_MODE_MIN: ['min', 'mop'],
         const.MODE_INSTANCE_MODE_LOW: ['gentle'],
         const.MODE_INSTANCE_MODE_MAX: ['max', 'strong'],
         const.MODE_INSTANCE_MODE_EXPRESS: ['express', '105'],
-        const.MODE_INSTANCE_MODE_NORMAL: ['normal', 'medium', 'middle', 'standard', '103'],
+        const.MODE_INSTANCE_MODE_NORMAL: ['normal', 'medium', 'middle', 'standard', 'basic', '103'],
         const.MODE_INSTANCE_MODE_QUIET: ['quiet', 'low', 'min', 'silent', 'eco', '101'],
     }
 
