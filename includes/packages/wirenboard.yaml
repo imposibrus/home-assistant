@@ -1,11 +1,27 @@
 wirenboard:
   sensor:
     - platform: mqtt
-      name: 'Температура подсветки ТВ'
-      state_topic: "/devices/wb-m1w2_224/controls/External Sensor 2"
+      name: 'Температура ТП санузла'
+      state_topic: "/devices/1wireSensors/controls/bath_small_floor"
       device_class: temperature
       icon: mdi:temperature-celsius
-      unique_id: 'wb-m1w2_224/External Sensor 2'
+      unique_id: '1wireSensors/bath_small_floor'
+      unit_of_measurement: '°C'
+
+    - platform: mqtt
+      name: 'Температура ТП душевой'
+      state_topic: "/devices/1wireSensors/controls/bath_small_floor_shower"
+      device_class: temperature
+      icon: mdi:temperature-celsius
+      unique_id: '1wireSensors/bath_small_floor_shower'
+      unit_of_measurement: '°C'
+
+    - platform: mqtt
+      name: 'Температура полотенцесушителя санузла'
+      state_topic: "/devices/1wireSensors/controls/bath_small_towel"
+      device_class: temperature
+      icon: mdi:temperature-celsius
+      unique_id: '1wireSensors/bath_small_towel'
       unit_of_measurement: '°C'
 
   light:
@@ -39,7 +55,7 @@ wirenboard:
       command_topic: '/devices/wb-mr6c_42/controls/K3/on'
       payload_on: 1
       payload_off: 0
-      name: 'Свет прихожей и ванны'
+      name: 'Свет прихожей'
   
     - platform: mqtt
       unique_id: 'wb-mr6c_42/K5'
@@ -58,6 +74,14 @@ wirenboard:
       name: 'Люстра спальни'
   
     - platform: mqtt
+      unique_id: 'wb-mr6c_138/K1'
+      state_topic: '/devices/wb-mr6c_138/controls/K1'
+      command_topic: '/devices/wb-mr6c_138/controls/K1/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Люстра ванны'
+  
+    - platform: mqtt
       unique_id: 'wb-mdm3_104/K1'
       state_topic: '/devices/wb-mdm3_104/controls/K1'
       command_topic: '/devices/wb-mdm3_104/controls/K1/on'
@@ -66,26 +90,75 @@ wirenboard:
       brightness_scale: 100
       payload_on: 1
       payload_off: 0
-      name: 'Подсветка гостинной'
+      name: 'Подсветка шторы спальни'
   
     - platform: mqtt
-      unique_id: 'wb-mrgbw-d_153/White 3-G'
+      unique_id: 'wb-mdm3_104/K2'
+      state_topic: '/devices/wb-mdm3_104/controls/K2'
+      command_topic: '/devices/wb-mdm3_104/controls/K2/on'
+      brightness_state_topic: '/devices/wb-mdm3_104/controls/Channel 2'
+      brightness_command_topic: '/devices/wb-mdm3_104/controls/Channel 2/on'
+      brightness_scale: 100
+      payload_on: 1
+      payload_off: 0
+      name: 'island_lamp'
+  
+    - platform: mqtt
+      unique_id: 'wb-mrgbw-d_153/White 3-B'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel B'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Подсветка ТВ'
+  
+    - platform: mqtt
+      unique_id: 'wb-mrgbw-d_153/White 4-G'
       state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/state'
       command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/set'
       brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G'
       brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/on'
       payload_on: 1
       payload_off: 0
-      name: 'Подсветка ТВ'
-  
+      name: 'Подсветка кухни'
+
     - platform: mqtt
-      unique_id: 'wb-mrgbw-d_153/White 4-W'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel W'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel W/on'
+      unique_id: 'wb-mrgbw-d_153/White 4-R'
+      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/state'
+      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/set'
+      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel R'
+      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/on'
       payload_on: 1
       payload_off: 0
-      name: 'Подсветка маленькая'
+      name: 'Подсветка прихожей пол'
+
+  switch:
+    - platform: mqtt
+      unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
+      state_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 1'
+      command_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 1/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Теплый пол душевой'
+
+    - platform: mqtt
+      unique_id: 'wb-mrm2-mini-nc_134/Relay 2'
+      state_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 2'
+      command_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 2/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Полотенцесушитель санузла'
+
+    - platform: mqtt
+      unique_id: 'alarm_fridge/enabled'
+      state_topic: '/devices/alarm_fridge/controls/enabled'
+      command_topic: '/devices/alarm_fridge/controls/silenced/on'
+      payload_on: 0
+      payload_off: 1
+      state_on: 1
+      state_off: 0
+      name: 'Сигнализация холодильника'
+
 
 
