@@ -1,16 +1,16 @@
 snmp:
   sensor:
     - platform: snmp
-      name: "pppoe-out1 bytes-in"
+      name: "ether1 bytes-in"
       host: 192.168.88.1
-      baseoid: .1.3.6.1.2.1.31.1.1.1.6.9
+      baseoid: .1.3.6.1.2.1.31.1.1.1.6.3
       unit_of_measurement: bytes
       version: 2c
       scan_interval: 10
     - platform: snmp
-      name: "pppoe-out1 bytes-out"
+      name: "ether1 bytes-out"
       host: 192.168.88.1
-      baseoid: .1.3.6.1.2.1.31.1.1.1.10.9
+      baseoid: .1.3.6.1.2.1.31.1.1.1.10.3
       unit_of_measurement: bytes
       version: 2c
       scan_interval: 10
@@ -150,14 +150,16 @@ snmp:
       scan_interval: 3600
 
     - platform: statistics
-      name: 'pppoe_out1_bytes_in_stats'
-      entity_id: sensor.pppoe_out1_bytes_in
+      name: 'ether1_bytes_in_stats'
+      entity_id: sensor.ether1_bytes_in
+      state_characteristic: change_second
       sampling_size: 4
       max_age:
         hours: 24
     - platform: statistics
-      name: 'pppoe_out1_bytes_out_stats'
-      entity_id: sensor.pppoe_out1_bytes_out
+      name: 'ether1_bytes_out_stats'
+      entity_id: sensor.ether1_bytes_out
+      state_characteristic: change_second
       sampling_size: 4
       max_age:
         hours: 24
@@ -184,10 +186,10 @@ snmp:
   template:
     sensor:
       - unique_id: internet_in_mbps
-        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_in_stats', 'change_rate') | float(default=0)) * 8 * (state_attr('sensor.pppoe_out1_bytes_in_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        state: "{{ ((states('sensor.ether1_bytes_in_stats') | float(default=0)) * 8 * (4 - 2) / 2**20) | round(2) }}"
         unit_of_measurement: 'MBps'
       - unique_id: internet_out_mbps
-        state: "{{ ((state_attr('sensor.pppoe_out1_bytes_out_stats', 'change_rate') | float(default=0)) * 8 * (state_attr('sensor.pppoe_out1_bytes_out_stats', 'sampling_size') - 2) / 2**20) | round(2) }}"
+        state: "{{ ((states('sensor.ether1_bytes_out_stats') | float(default=0)) * 8 * (4 - 2) / 2**20) | round(2) }}"
         unit_of_measurement: 'MBps'
       - unique_id: router_ram_usage
         state: "{{ ((states('sensor.router_ram_used') | int / states('sensor.router_ram_total') | int) * 100) | round(2) }}"
