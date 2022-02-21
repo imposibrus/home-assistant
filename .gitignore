@@ -13,3 +13,5 @@ webostv.conf
 .idea
 /image
 *.DS_Store
+custom_components/
+
