@@ -11,19 +11,11 @@
 - id: '1623060117764'
   name: Работа
   entities:
-    light.mqtt_lightentity_4:
+    light.liustra_kabineta:
       supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 102
-      friendly_name: Подсветка ТВ
-      supported_features: 1
+      - onoff
+      color_mode: onoff
+      friendly_name: Люстра кабинета
+      supported_features: 0
       state: 'on'
-    media_player.lg_webos_smart_tv:
-      source_list:
-      - Live TV
-      friendly_name: LG webOS Smart TV
-      supported_features: 20413
-      device_class: tv
-      state: 'off'
   icon: mdi:briefcase
