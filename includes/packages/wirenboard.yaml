@@ -104,31 +104,31 @@ wirenboard:
       name: 'island_lamp'
   
     - platform: mqtt
-      unique_id: 'wb-mrgbw-d_153/White 3-B'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel B'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel B/on'
+      unique_id: 'wb-mrgbw-d-fw3_153/White 3-B'
+      state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)'
+      command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)/on'
+      brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness'
+      brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness/on'
       payload_on: 1
       payload_off: 0
       name: 'Подсветка ТВ'
   
     - platform: mqtt
-      unique_id: 'wb-mrgbw-d_153/White 4-G'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel G'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel G/on'
+      unique_id: 'wb-mrgbw-d-fw3_153/White 4-G'
+      state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)'
+      command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)/on'
+      brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness'
+      brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness/on'
       payload_on: 1
       payload_off: 0
       name: 'Подсветка кухни'
 
     - platform: mqtt
-      unique_id: 'wb-mrgbw-d_153/White 4-R'
-      state_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/state'
-      command_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/set'
-      brightness_state_topic: '/devices/wb-mrgbw-d_153/controls/Channel R'
-      brightness_command_topic: '/devices/wb-mrgbw-d_153/controls/Channel R/on'
+      unique_id: 'wb-mrgbw-d-fw3_153/White 4-R'
+      state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)'
+      command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)/on'
+      brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness'
+      brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness/on'
       payload_on: 1
       payload_off: 0
       name: 'Подсветка прихожей пол'
