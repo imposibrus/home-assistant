@@ -109,6 +109,7 @@ wirenboard:
       command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)/on'
       brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness'
       brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness/on'
+      brightness_scale: 100
       payload_on: 1
       payload_off: 0
       name: 'Подсветка ТВ'
@@ -119,6 +120,7 @@ wirenboard:
       command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)/on'
       brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness'
       brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness/on'
+      brightness_scale: 100
       payload_on: 1
       payload_off: 0
       name: 'Подсветка кухни'
@@ -129,6 +131,7 @@ wirenboard:
       command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)/on'
       brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness'
       brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness/on'
+      brightness_scale: 100
       payload_on: 1
       payload_off: 0
       name: 'Подсветка прихожей пол'
