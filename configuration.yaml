@@ -30,6 +30,9 @@ zone:
 frontend:
   themes: !include_dir_merge_named themes/
 
+recorder:
+  purge_keep_days: 20
+
 http:
   use_x_forwarded_for: true
   trusted_proxies:
@@ -46,8 +49,6 @@ lovelace:
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js?v=1.11.0
       type: module
 
-test:
-
 #webostv:
 #  host: !secret webostv_host
 #  turn_on_action:
@@ -60,6 +61,9 @@ browser_mod:
   devices:
     68f87c9e-0545f5a0:
       name: 'Chrome Macbook'
+
+  disable:
+    - all
 
 logger:
   default: warning
