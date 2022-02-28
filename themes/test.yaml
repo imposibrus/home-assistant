@@ -1,0 +1,26 @@
+battery-rows:
+  card-mod-theme: battery-rows
+
+  card-mod-row: |
+    :host {
+      display: block;
+      {% set battery = state_attr(config.entity, 'battery') or state_attr(config.entity, 'battery_level') or (config.entity.endswith('battery_level') and states(config.entity)) %}
+      {% if battery %}
+        background: linear-gradient(to right, rgba(0,255,0,0.5), {{battery}}%, transparent {{battery}}%);
+      {% endif %}
+    }
+
+custom-secondary:
+  card-mod-theme: custom-secondary
+  card-mod-row-yaml: |
+    hui-generic-entity-row$: |
+      {% set maintenance_last = state_attr(config.entity, 'maintenance_last') %}
+      {% set maintenance_period = state_attr(config.entity, 'maintenance_period') %}
+      {% if maintenance_last and maintenance_period %}
+        .info.text-content::after {
+          content: "через {{ ((as_timestamp(as_datetime(maintenance_last | timestamp_local) + timedelta(days=maintenance_period)) - as_timestamp(now())) / 60 / 60 / 24) | int | format(morph='день', as_text=false) }}";
+          display: block;
+          color: var(--secondary-text-color);
+        }
+      {% endif %}
+
