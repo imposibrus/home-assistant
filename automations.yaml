@@ -431,3 +431,17 @@
     target:
       entity_id: switch.lg_tv
   mode: single
+- id: '1645999098032'
+  alias: HA->WB Кто-нибудь дома?
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.template_anyone_home
+  condition: []
+  action:
+  - service: mqtt.publish
+    data:
+      topic: /devices/is_anyone_home/controls/enabled
+      payload_template: "{%- if trigger.to_state.state == 'on' -%}\n  1\n{%- else\
+        \ -%}\n  0\n{%- endif -%}\n"
+  mode: single
