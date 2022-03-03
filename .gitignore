@@ -14,4 +14,4 @@ webostv.conf
 /image
 *.DS_Store
 custom_components/
-
+www/community/
