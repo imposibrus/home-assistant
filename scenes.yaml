@@ -19,3 +19,43 @@
       supported_features: 0
       state: 'on'
   icon: mdi:briefcase
+- id: '1646340696420'
+  name: Кино
+  entities:
+    light.svet_gostinoi_i_kukhni:
+      supported_color_modes:
+      - onoff
+      friendly_name: Свет гостиной и кухни
+      supported_features: 0
+      state: 'off'
+    light.podsvetka_tv:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 105
+      friendly_name: Подсветка ТВ
+      supported_features: 0
+      state: 'on'
+    switch.0x00158d00025863b3:
+      friendly_name: Розетка
+      state: 'on'
+    switch.0x00158d00025863b3_power_outage_memory:
+      icon: mdi:memory
+      friendly_name: plug_livingroom_power_outage_memory
+      state: 'on'
+    light.podsvetka_kukhni:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 26
+      friendly_name: Подсветка кухни
+      supported_features: 0
+      state: 'on'
+    light.island_lamp:
+      supported_color_modes:
+      - brightness
+      icon: mdi:island
+      friendly_name: Лампа острова
+      supported_features: 0
+      state: 'off'
+  icon: mdi:movie

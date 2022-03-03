@@ -445,3 +445,18 @@
       payload_template: "{%- if trigger.to_state.state == 'on' -%}\n  1\n{%- else\
         \ -%}\n  0\n{%- endif -%}\n"
   mode: single
+- id: '1646340554332'
+  alias: Алиса - кино
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Кино
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.kino
+    metadata: {}
+  mode: single
