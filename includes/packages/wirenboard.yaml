@@ -1,4 +1,18 @@
 wirenboard:
+  template:
+    sensor:
+      - state: "{{ 1 if is_state('switch.polotentsesushitel_sanuzla', 'on') else 0 }}"
+        name: polotentsesushitel_sanuzla
+        unique_id: is_polotentsesushitel_sanuzla_on
+
+      - state: "{{ 1 if is_state('switch.teplyi_pol_sanuzla', 'on') else 0 }}"
+        name: teplyi_pol_sanuzla
+        unique_id: is_teplyi_pol_sanuzla_on
+
+      - state: "{{ 1 if is_state('switch.teplyi_pol_dushevoi', 'on') else 0 }}"
+        name: teplyi_pol_dushevoi
+        unique_id: is_teplyi_pol_dushevoi_on
+
   sensor:
     - platform: mqtt
       name: 'Температура ТП санузла'
@@ -139,19 +153,27 @@ wirenboard:
   switch:
     - platform: mqtt
       unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
-      state_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 1'
-      command_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 1/on'
+      state_topic: '/devices/wb-mrm2-mini_134/controls/Relay 1'
+      command_topic: '/devices/wb-mrm2-mini_134/controls/Relay 1/on'
       payload_on: 1
       payload_off: 0
       name: 'Теплый пол душевой'
 
     - platform: mqtt
       unique_id: 'wb-mrm2-mini-nc_134/Relay 2'
-      state_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 2'
-      command_topic: '/devices/wb-mrm2-mini-nc_134/controls/Relay 2/on'
+      state_topic: '/devices/wb-mrm2-mini_134/controls/Relay 2'
+      command_topic: '/devices/wb-mrm2-mini_134/controls/Relay 2/on'
       payload_on: 1
       payload_off: 0
       name: 'Полотенцесушитель санузла'
+
+    - platform: mqtt
+      unique_id: 'wb-mr6c_138/controls/K2'
+      state_topic: '/devices/wb-mr6c_138/controls/K2'
+      command_topic: '/devices/wb-mr6c_138/controls/K2/on'
+      payload_on: 1
+      payload_off: 0
+      name: 'Теплый пол санузла'
 
     - platform: mqtt
       unique_id: 'alarm_fridge/enabled'
