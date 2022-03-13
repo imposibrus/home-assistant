@@ -460,3 +460,33 @@
       entity_id: scene.kino
     metadata: {}
   mode: single
+- id: '1646653902370'
+  alias: Включить музыку, при открытии унитаза
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: b63263834183418594907c3cd6f7495e
+    entity_id: binary_sensor.ble_opening_do_unitaz
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition:
+  - condition: state
+    entity_id: light.liustra_sanuzla
+    state: 'on'
+  action:
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.5
+    target:
+      entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+  - service: media_player.play_media
+    data:
+      media_content_id: Включи музыку
+      media_content_type: command
+    target:
+      entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+  mode: single
