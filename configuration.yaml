@@ -49,13 +49,6 @@ lovelace:
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js?v=1.11.0
       type: module
 
-#webostv:
-#  host: !secret webostv_host
-#  turn_on_action:
-#    service: switch.turn_on
-#    target:
-#      entity_id: switch.lg_tv
-
 browser_mod:
   prefix: "browser_"
   devices:
@@ -67,9 +60,9 @@ browser_mod:
 
 logger:
   default: warning
-  logs:
-    homeassistant.components.ble_monitor: debug
-    custom_components.ble_monitor: debug
+#  logs:
+#    homeassistant.components.ble_monitor: debug
+#    custom_components.ble_monitor: debug
 
 logbook: !include includes/logbook.yaml
 
