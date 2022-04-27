@@ -490,3 +490,89 @@
     target:
       entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
   mode: single
+- id: '1650020014963'
+  alias: '[Свет] Кладовка свет вкл/выкл'
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: ee447e2cadce402c4c5a67593e52549c
+    entity_id: binary_sensor.0x00124b0025127f59_occupancy
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    id: stop
+  - type: motion
+    platform: device
+    device_id: ee447e2cadce402c4c5a67593e52549c
+    entity_id: binary_sensor.0x00124b0025127f59_occupancy
+    domain: binary_sensor
+    id: start
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.id == ''start'' }}'
+      sequence:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.kladovka_svet
+    default:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.kladovka_svet
+  mode: single
+- id: '1650195632756'
+  alias: '[Свет] Гардероб свет вкл/выкл'
+  description: ''
+  trigger:
+  - type: no_motion
+    platform: device
+    device_id: d41ce2a5264e9347a7910243a6e9c9fd
+    entity_id: binary_sensor.0x00124b002512c774_occupancy
+    domain: binary_sensor
+    id: stop
+  - type: motion
+    platform: device
+    device_id: d41ce2a5264e9347a7910243a6e9c9fd
+    entity_id: binary_sensor.0x00124b002512c774_occupancy
+    domain: binary_sensor
+    id: start
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.id == ''start'' }}'
+      sequence:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.svet_garderob
+    default:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.svet_garderob
+  mode: single
+- id: '1650198456127'
+  alias: Мастер-выключатель
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.schetchik_mater_vykliuchatelia
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state | int < trigger.to_state.state |
+      int }}'
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.vse_ushli
+    metadata: {}
+  mode: single

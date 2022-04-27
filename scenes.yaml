@@ -59,3 +59,108 @@
       supported_features: 0
       state: 'off'
   icon: mdi:movie
+- id: '1650196286463'
+  name: Все ушли
+  entities:
+    light.liustra_vanny:
+      supported_color_modes:
+      - onoff
+      friendly_name: Люстра ванны
+      supported_features: 0
+      state: 'off'
+    switch.otoplenie:
+      friendly_name: Отопление
+      state: 'on'
+    light.podsvetka_kukhni:
+      supported_color_modes:
+      - brightness
+      friendly_name: Подсветка кухни
+      supported_features: 0
+      state: 'off'
+    light.podsvetka_tv:
+      supported_color_modes:
+      - brightness
+      friendly_name: Подсветка ТВ
+      supported_features: 0
+      state: 'off'
+    light.podsvetka_prikhozhei_pol:
+      supported_color_modes:
+      - brightness
+      friendly_name: Подсветка пола коридора
+      supported_features: 0
+      state: 'off'
+    light.mqtt_lightentity_3:
+      supported_color_modes:
+      - brightness
+      friendly_name: Подсветка шторы спальни
+      supported_features: 0
+      state: 'off'
+    switch.0x00158d00025863b3:
+      friendly_name: Розетка
+      state: 'off'
+    switch.0x00158d00025863b3_power_outage_memory:
+      icon: mdi:memory
+      friendly_name: plug_livingroom_power_outage_memory
+      state: 'on'
+    light.svet_garderob:
+      effect_list: []
+      supported_color_modes:
+      - onoff
+      friendly_name: Свет гардероб
+      supported_features: 4
+      state: 'off'
+    light.kladovka_svet:
+      effect_list: []
+      supported_color_modes:
+      - onoff
+      friendly_name: Кладовка свет
+      supported_features: 4
+      state: 'off'
+    light.island_lamp:
+      supported_color_modes:
+      - brightness
+      icon: mdi:island
+      friendly_name: Лампа острова
+      supported_features: 0
+      state: 'off'
+    media_player.lg_webos_smart_tv:
+      source_list:
+      - AV
+      - Apple TV
+      - Chromecast
+      - HDMI 2
+      - Homebrew Channel
+      - LG Channels
+      - LG Content Store
+      - Live TV
+      - MEGOGO ТВ и Кино
+      - Netflix
+      - Okko фильмы и сериалы HD
+      - PREMIER
+      - Plex
+      - 'START: Фильмы и сериалы 4К'
+      - Shop on TV
+      - Spotify - музыка и подкасты
+      - VK Видео
+      - Wink
+      - XPlay
+      - YouTube
+      - ivi - Full HD, 4K
+      - Веб-браузер
+      - Дом.ru Movix
+      - Кинопоиск
+      - Комп
+      - Компонентный вход
+      - Музыка
+      - Новинки кино
+      - Первый
+      - Российские программы
+      - Фото и видео
+      - Яндекс
+      - Яндекс Станция
+      sound_output: tv_speaker
+      assumed_state: true
+      device_class: tv
+      friendly_name: LG webOS Smart TV
+      supported_features: 24509
+      state: 'off'
