@@ -15,3 +15,4 @@ webostv.conf
 *.DS_Store
 custom_components/
 www/community/
+backups/

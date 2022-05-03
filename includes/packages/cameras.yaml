@@ -1,4 +1,4 @@
-cameras:
+#cameras:
 #  android_ip_webcam:
 #    - host: 192.168.88.99
 #      port: 8080
