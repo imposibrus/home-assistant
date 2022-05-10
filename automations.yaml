@@ -576,3 +576,11 @@
       entity_id: scene.vse_ushli
     metadata: {}
   mode: single
+- id: '1651772300833'
+  alias: '[Пылесос] Обновлять карту только во время работы'
+  description: ''
+  use_blueprint:
+    path: PiotrMachowski/disable_vacuum_camera_update_when_docked.yaml
+    input:
+      vacuum: vacuum.dreame_p2029_bf7e_robot_cleaner
+      camera: camera.xiaomi_cloud_map_extractor

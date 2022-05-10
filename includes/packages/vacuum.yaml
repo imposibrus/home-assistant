@@ -1,0 +1,67 @@
+vacuum:
+#  vacuum:
+#    - platform: xiaomi_vacuum
+#      host: 192.168.88.81
+#      token: "42574c3838484279354a344d4578635a"
+#      name: Dreame Bot L10 Pro
+
+  camera:
+    - platform: xiaomi_cloud_map_extractor
+      host: !secret dreame_l10pro_host
+      token: !secret dreame_l10pro_token
+      username: !secret xiaomi_cloud_username
+      password: !secret xiaomi_cloud_password
+      country: cn
+      draw: ['all']
+      attributes:
+        - calibration_points
+#        - rooms
+      colors:
+        color_map_inside: [32, 115, 185]
+        color_map_outside: [19, 87, 148]
+        color_map_wall: [155, 155, 155]
+        color_map_wall_v2: [93, 109, 126]
+        color_grey_wall: [93, 109, 126]
+        color_ignored_obstacle: [0, 0, 0, 127]
+        color_ignored_obstacle_with_photo: [0, 0, 0, 127]
+        color_obstacle: [0, 0, 0, 127]
+        color_obstacle_with_photo: [0, 0, 0, 127]
+        color_path: [255, 255, 255]
+        color_goto_path: [0, 255, 0]
+        color_predicted_path: [255, 255, 0, 0]
+        color_cleaned_area: [255, 255, 255]
+        color_zones: [0xAD, 0xD8, 0xFF, 0x8F]
+        color_zones_outline: [0xAD, 0xD8, 0xFF]
+        color_virtual_walls: [255, 0, 0]
+        color_new_discovered_area: [64, 64, 64]
+        color_no_go_zones: [255, 33, 55, 127]
+        color_no_go_zones_outline: [255, 0, 0]
+        color_no_mop_zones: [163, 130, 211, 127]
+        color_no_mop_zones_outline: [163, 130, 211]
+        color_charger: [0x66, 0xfe, 0xda, 0x7f]
+        color_robo: [255, 255, 255]
+        color_room_names: [0, 0, 0]
+        color_unknown: [0, 0, 0]
+        color_scan: [0xDF, 0xDF, 0xDF]
+      room_colors:
+        1: [240, 178, 122]
+        2: [133, 193, 233]
+        3: [217, 136, 128]
+        4: [52, 152, 219]
+        5: [205, 97, 85]
+        6: [243, 156, 18]
+        7: [88, 214, 141]
+        8: [245, 176, 65]
+        9: [252, 212, 81]
+        10: [72, 201, 176]
+        11: [84, 153, 199]
+        12: [133, 193, 233]
+        13: [245, 176, 65]
+        14: [82, 190, 128]
+        15: [72, 201, 176]
+        16: [165, 105, 18]
+      sizes:
+        charger_radius: 4
+        vacuum_radius: 6.5
+
+
