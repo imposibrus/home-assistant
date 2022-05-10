@@ -1,0 +1,55 @@
+google_home:
+  google_assistant:
+    project_id: !secret google_assistant_project_id
+    service_account: !include ../../credentials/bionic-run-311915-07c23c8015f6.json
+    report_state: true
+    expose_by_default: false
+    entity_config:
+      light.mqtt_lightentity:
+        name: Люстра прихожей
+      light.liustra_kabineta:
+        name: Люстра кабинета
+      light.svet_gostinoi_i_kukhni:
+        name: Люстра гостиной и кухни
+      light.liustra_spalni:
+        name: Люстра спальни
+      light.liustra_balkona:
+        name: Люстра балкона
+      light.liustra_sanuzla:
+        name: Люстра санузла
+      light.mqtt_lightentity_3:
+        name: Подсветка шторы спальни
+      switch.0x00158d00025863b3:
+        name: Розетка
+      light.svet_garderob:
+        name: Люстра гардероба
+      light.podsvetka_kukhni:
+        name: Подсветка кухни
+      light.podsvetka_tv:
+        name: Подсветка ТВ
+      light.podsvetka_prikhozhei_pol:
+        name: Подсветка пола коридора
+      light.liustra_vanny:
+        name: Люстра ванной
+      light.kladovka_svet:
+        name: Люстра кладовки
+      light.island_lamp:
+        name: Люстра острова
+      switch.polotentsesushitel_sanuzla:
+        name: Полотенцесушитель санузла
+      switch.teplyi_pol_sanuzla:
+        name: Теплный пол санузла
+      switch.teplyi_pol_dushevoi:
+        name: Теплный пол душевой
+      media_player.lg_webos_smart_tv:
+        name: Телевизор
+      media_player.yandex_station_lp00000000000005131900001aedca28:
+        name: Яндекс Станция
+      media_player.yandex_station_442078968308181c0410:
+        name: Яндекс Станция Лайт
+      vacuum.dreame_p2029_bf7e_robot_cleaner:
+        name: Dreame Bot L10 Pro
+      switch.signalizatsiia_kholodilnika:
+        name: Сигнализация холодильника
+      
+
