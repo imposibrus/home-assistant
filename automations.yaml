@@ -584,3 +584,11 @@
     input:
       vacuum: vacuum.dreame_p2029_bf7e_robot_cleaner
       camera: camera.xiaomi_cloud_map_extractor
+- id: '1652617820669'
+  alias: Cast to Cameras to Chromecast
+  description: ''
+  use_blueprint:
+    path: kind3r/cast-and-re-cast-a-lovelace-view-to-a-google-hub.yaml
+    input:
+      player: media_player.gostinaia_2
+      view: cameras
