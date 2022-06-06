@@ -1,9 +1,18 @@
 vacuum:
-#  vacuum:
-#    - platform: xiaomi_vacuum
-#      host: 192.168.88.81
-#      token: "42574c3838484279354a344d4578635a"
-#      name: Dreame Bot L10 Pro
+  vacuum:
+    - platform: xiaomi_vacuum
+      host: !secret dreame_l10pro_host
+      token: !secret dreame_l10pro_token
+      name: Dreame Bot L10 Pro
+# rooms dict:
+#- B => Гостиная
+#- C => Кухня
+#- A => Спальня
+#- F => Коридор
+#- D => Кладовка
+#- G => Прихожая
+#- E => Кабинет
+
 
   camera:
     - platform: xiaomi_cloud_map_extractor

@@ -34,8 +34,7 @@ yandex:
       pressure_unit: mmHg
     filter:
       include_entities:
-        - sensor.cgllc_airmonitor_s1
-#        - sensor.temperatura_bolshoi_podsvetki
+        - air_quality.cgllc_airmonitor_s1
 
         - light.mqtt_lightentity
         - light.mqtt_lightentity_3
@@ -52,7 +51,7 @@ yandex:
         - light.podsvetka_prikhozhei_pol
         - light.liustra_vanny
 
-#        - climate.hisense_irhvac
+        - climate.ac_office
 
         - media_player.lg_webos_smart_tv
         - media_player.yandex_intents
@@ -75,6 +74,9 @@ yandex:
         - switch
         - air_quality
         - climate
+        - camera
+        - vacuum
+        - binary_sensor
     entity_config:
       sensor.cgllc_airmonitor_s1:
         type: devices.types.sensor
