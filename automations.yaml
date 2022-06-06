@@ -597,3 +597,28 @@
     input:
       player: media_player.gostinaia_2
       view: cameras
+- id: '1653589958734'
+  alias: '[Alerts] Уведомление при перегреве'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.temperatura_polotentsesushitelia_sanuzla
+  condition:
+  - condition: template
+    value_template: '{{ states(''sensor.temperatura_polotentsesushitelia_sanuzla'')
+      | float(0) > states(''input_number.bath_small_towel_temp_max'') | float(0) }}'
+  - condition: template
+    value_template: '{{ not state_attr(''automation.alerts_uvedomlenie_pri_peregreve'',''last_triggered'')
+      or (as_timestamp(now()) - as_timestamp(state_attr(''automation.alerts_uvedomlenie_pri_peregreve'',''last_triggered'')))
+      > (60 * 5) }}'
+  action:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      message: Полотенчик в санузле перегрелся.
+      title: Перегрев
+  - service: notify.tg_home
+    data:
+      title: Перегрев
+      message: Полотенчик в санузле перегрелся.
+  mode: single
