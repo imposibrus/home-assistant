@@ -1,7 +1,7 @@
 version: '3'
 services:
   home-assistant:
-    image: 'homeassistant/home-assistant:2022.4.7'
+    image: 'homeassistant/home-assistant:2022.5.5'
     init: true
     restart: always
     container_name: 'home-assistant'
