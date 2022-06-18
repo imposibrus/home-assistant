@@ -1,17 +1,12 @@
 version: '3'
 services:
   home-assistant:
-    image: 'homeassistant/home-assistant:2022.5.5'
-    init: true
+    image: 'homeassistant/home-assistant:2022.6.4'
     restart: always
     container_name: 'home-assistant'
-#    privileged: true
     network_mode: host
 #    ports:
 #      - 8123:8123
-#    devices:
-#     - "/dev/ttyAMA0:/dev/ttyAMA0"
-#     - "/dev/vcio:/dev/vcio"
     volumes:
       - ./:/config
     environment:
