@@ -73,4 +73,11 @@ vacuum:
         charger_radius: 4
         vacuum_radius: 6.5
 
+  template:
+    - sensor:
+      - name: select_rooms_for_clean
+        state: >
+          {% set selestions = [[3,1,3,3,1]] %}
+          '{"selects":{{ selestions }}}'
+
 

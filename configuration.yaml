@@ -61,7 +61,8 @@ browser_mod:
 
 logger:
   default: warning
-#  logs:
+  logs:
+    custom_components.xiaomi_miot: debug
 #    homeassistant.components.ble_monitor: debug
 #    custom_components.ble_monitor: debug
 
