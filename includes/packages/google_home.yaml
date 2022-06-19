@@ -51,5 +51,7 @@ google_home:
         name: Dreame Bot L10 Pro
       switch.signalizatsiia_kholodilnika:
         name: Сигнализация холодильника
+      climate.ac_office:
+        name: Кондиционер кабинета
       
 
