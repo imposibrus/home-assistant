@@ -1,9 +1,9 @@
 vacuum:
-  vacuum:
-    - platform: xiaomi_vacuum
-      host: !secret dreame_l10pro_host
-      token: !secret dreame_l10pro_token
-      name: Dreame Bot L10 Pro
+#  vacuum:
+#    - platform: xiaomi_vacuum
+#      host: !secret dreame_l10pro_host
+#      token: !secret dreame_l10pro_token
+#      name: Dreame Bot L10 Pro
 # rooms dict:
 #- B => Гостиная
 #- C => Кухня
@@ -80,4 +80,79 @@ vacuum:
           {% set selestions = [[3,1,3,3,1]] %}
           '{"selects":{{ selestions }}}'
 
+  vacuum_zones:
+    entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+    zones:
+#      Trash:  # point name on your language
+#        goto: [25500, 25500]  # move to point
+#      Under the table:  # zone name on your language
+#        zone: [[23510,25311,25110,26361]]  # one or more zones
+#        repeats: 2  # optional, default 1
+
+      Гостиная:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [2]
+              repeats: 1
+
+      Спальня:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [1]
+              repeats: 1
+
+      Кабинет:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [5]
+              repeats: 1
+
+      Коридор:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [6]
+              repeats: 1
+
+      Прихожая:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [7]
+              repeats: 1
+
+      Кладовка:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [4]
+              repeats: 1
+
+      Кухня:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [3]
+              repeats: 1
+#          - service: xiaomi_miot.call_action
+#            data:
+#              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+#              siid: 4
+#              aiid: 1
+#              params:
+#                - piid: 1
+#                  value: 18
+#                - piid: 10
+#                  value: '{"selects": [[3, 1, 3, 3, 1]]}'
+#              force_params: true
 

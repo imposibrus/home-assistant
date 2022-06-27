@@ -63,6 +63,15 @@ yandex:
         - switch.polotentsesushitel_sanuzla
         - switch.teplyi_pol_dushevoi
         - switch.signalizatsiia_kholodilnika
+
+        - vacuum.dreame_p2029_bf7e_robot_cleaner
+#        - vacuum.gostinaia
+#        - vacuum.kabinet
+#        - vacuum.kladovka
+#        - vacuum.koridor
+#        - vacuum.kukhnia
+#        - vacuum.prikhozhaia
+#        - vacuum.spalnia
       exclude_entities: []
       exclude_domains:
         - scene
