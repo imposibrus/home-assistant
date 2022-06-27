@@ -11,6 +11,24 @@ yandex:
   #  include:
   #    - Телевизор
   #    - Кондиционер
+    media_source:
+      - title: Произнеси текст  # обязательное поле
+        media_content_type: text  # обязательное поле
+        thumbnail: https://brands.home-assistant.io/_/tts/icon.png
+      - title: Выполни команду
+        media_content_type: command
+        thumbnail: https://brands.home-assistant.io/_/automation/icon.png
+      - title: Включи любимое
+        media_content_id: Включи моё любимое вперемешку
+        media_content_type: command
+      - title: Произнеси шепотом
+        template: '<speaker is_whisper="true">{{ message }}'
+        media_content_type: dialog
+        extra:
+          volume_level: 0.2
+      - title: Статус эквалайзера
+        template: 'Эквалайзер установлен на {{ states("select.yandex_station_equalizer") }}'
+        media_content_type: text
 
   yandex_station_intents:
     intents:
@@ -72,6 +90,15 @@ yandex:
 #        - vacuum.kukhnia
 #        - vacuum.prikhozhaia
 #        - vacuum.spalnia
+
+        - camera.1k_1p_legenda_side
+        - camera.1k_enter
+        - camera.1k_4p_elevator
+        - camera.1k_4p_near_enter
+        - camera.1k_2p_near_enter
+        - camera.1k_jk_enter
+        - camera.1k_1p_external_side
+        - camera.4k_playground
       exclude_entities: []
       exclude_domains:
         - scene

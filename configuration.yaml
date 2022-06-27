@@ -1,22 +1,26 @@
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 #default_config:
+application_credentials:
 backup:
 #cloud:
 config:
 counter:
 dhcp:
+#energy:
 history:
 image:
 input_boolean:
+input_button:
 input_datetime:
 input_number:
 input_select:
 input_text:
 map:
-#media_source:
+media_source:
 mobile_app:
 my:
+network:
 person:
 ssdp:
 stream:
@@ -24,7 +28,8 @@ sun:
 system_health:
 tag:
 timer:
-#updater:
+#usb:
+webhook:
 zeroconf:
 zone:
 
@@ -62,9 +67,8 @@ browser_mod:
 logger:
   default: warning
   logs:
-    custom_components.xiaomi_miot: debug
-#    homeassistant.components.ble_monitor: debug
-#    custom_components.ble_monitor: debug
+#    custom_components.xiaomi_miot: debug
+    custom_components.ble_monitor: info
 
 logbook: !include includes/logbook.yaml
 
