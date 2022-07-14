@@ -1,0 +1,4 @@
+hyperion:
+  shell_command:
+    piccap_capture_service: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" root@192.168.88.8 "nohup /media/developer/apps/usr/palm/services/org.webosbrew.piccap.service/hyperion-webos -a 127.0.0.1 < /dev/null >> /tmp/hyper.log 2>&1 &"'
+

@@ -673,6 +673,31 @@
       message: Никого нет дома больше 15 минут
       title: Начинаю уборку
   mode: single
+- id: '1657696633368'
+  alias: '[Свет] Запустить Hyperion после включения ТВ'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.lg_webos_smart_tv
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
+  - platform: state
+    entity_id:
+    - device_tracker.lgwebostv
+    to: home
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
+  condition: []
+  action:
+  - service: shell_command.piccap_capture_service
+    data: {}
+  mode: single
 - id: '1657743087135'
   alias: '[Свет] Спальня мастер выключатель бра'
   description: ''
