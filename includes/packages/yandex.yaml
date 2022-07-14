@@ -38,6 +38,15 @@ yandex:
       Камин:
       Вечерняя подсветка:
       Кино:
+      Уберись дома:
+        extra_phrases:
+          - Приберись дома
+          - Уберись
+          - Приберись
+      Пропылесось:
+        extra_phrases:
+          - Помой полы
+          - Пропылесось дома
 
   conversation:
     intents:
@@ -82,14 +91,14 @@ yandex:
         - switch.teplyi_pol_dushevoi
         - switch.signalizatsiia_kholodilnika
 
-        - vacuum.dreame_p2029_bf7e_robot_cleaner
-#        - vacuum.gostinaia
-#        - vacuum.kabinet
-#        - vacuum.kladovka
-#        - vacuum.koridor
-#        - vacuum.kukhnia
-#        - vacuum.prikhozhaia
-#        - vacuum.spalnia
+#        - vacuum.dreame_p2029_bf7e_robot_cleaner
+        - vacuum.gostinaia
+        - vacuum.kabinet
+        - vacuum.kladovka
+        - vacuum.koridor
+        - vacuum.kukhnia
+        - vacuum.prikhozhaia
+        - vacuum.spalnia
 
         - camera.1k_1p_legenda_side
         - camera.1k_enter

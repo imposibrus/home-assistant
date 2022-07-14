@@ -622,3 +622,50 @@
       title: Перегрев
       message: Полотенчик в санузле перегрелся.
   mode: single
+- id: '1657037750024'
+  alias: '[Пылесос] Уборка всего дома через Алису'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Уберись дома
+  condition: []
+  action:
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+  mode: single
+- id: '1657633221475'
+  alias: '[Пылесос] Уборка всего дома, когда никого нет'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.template_anyone_home
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+    state: idle
+  - condition: state
+    entity_id: binary_sensor.vacuum_do_not_disturb
+    state: 'off'
+  - condition: template
+    value_template: '{{ now().strftime("%d") != this.attributes.last_triggered.strftime("%d")
+      }}'
+  action:
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+  - service: notify.tg_home
+    data:
+      message: Никого нет дома больше 15 минут
+      title: Начинаю уборку
+  mode: single

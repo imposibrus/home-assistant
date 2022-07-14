@@ -79,6 +79,15 @@ vacuum:
         state: >
           {% set selestions = [[3,1,3,3,1]] %}
           '{"selects":{{ selestions }}}'
+    - binary_sensor:
+        - name: vacuum_do_not_disturb
+          unique_id: dreame_10lpro_dnd
+          state: >
+            {% set dnd_start = state_attr('vacuum.dreame_p2029_bf7e_robot_cleaner', 'do_not_disturb.start_time') %}
+            {% set dnd_end = state_attr('vacuum.dreame_p2029_bf7e_robot_cleaner', 'do_not_disturb.end_time') %}
+            {{ now() > today_at(dnd_start) or now() < today_at(dnd_end) }}
+          icon: >
+            {{ 'mdi:robot-off' if is_state('binary_sensor.vacuum_do_not_disturb', 'on') else 'mdi:robot' }}
 
   vacuum_zones:
     entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
