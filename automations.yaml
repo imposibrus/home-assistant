@@ -525,12 +525,12 @@
       - service: light.turn_on
         data: {}
         target:
-          entity_id: light.kladovka_svet
+          entity_id: light.svet_kladovka
     default:
     - service: light.turn_off
       data: {}
       target:
-        entity_id: light.kladovka_svet
+        entity_id: light.svet_kladovka
   mode: single
 - id: '1650195632756'
   alias: '[Свет] Гардероб свет вкл/выкл'
@@ -539,13 +539,17 @@
   - type: no_motion
     platform: device
     device_id: d41ce2a5264e9347a7910243a6e9c9fd
-    entity_id: binary_sensor.0x00124b002512c774_occupancy
+    entity_id: binary_sensor.dd_wardrobe_occupancy
     domain: binary_sensor
     id: stop
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
   - type: motion
     platform: device
     device_id: d41ce2a5264e9347a7910243a6e9c9fd
-    entity_id: binary_sensor.0x00124b002512c774_occupancy
+    entity_id: binary_sensor.dd_wardrobe_occupancy
     domain: binary_sensor
     id: start
   condition: []
@@ -668,4 +672,31 @@
     data:
       message: Никого нет дома больше 15 минут
       title: Начинаю уборку
+  mode: single
+- id: '1657743087135'
+  alias: '[Свет] Спальня мастер выключатель бра'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.schetchik_dolgikh_nazhatii_bra_vadim
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state | int < trigger.to_state.state |
+      int }}'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id:
+      - light.liustra_spalni
+      - light.svet_garderob
+      - light.bra_vadim
+      - light.bra_aliia
+      - light.mqtt_lightentity_3
+    enabled: false
+  - service: scene.turn_on
+    target:
+      entity_id: scene.spalnia_zasypaem
+    metadata: {}
   mode: single

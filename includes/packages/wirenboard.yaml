@@ -21,25 +21,30 @@ wirenboard:
         icon: mdi:temperature-celsius
         unique_id: '1wireSensors/bath_small_floor'
         unit_of_measurement: '°C'
-  
+
       - name: 'Температура ТП душевой'
         state_topic: "/devices/1wireSensors/controls/bath_small_floor_shower"
         device_class: temperature
         icon: mdi:temperature-celsius
         unique_id: '1wireSensors/bath_small_floor_shower'
         unit_of_measurement: '°C'
-  
+
       - name: 'Температура полотенцесушителя санузла'
         state_topic: "/devices/1wireSensors/controls/bath_small_towel"
         device_class: temperature
         icon: mdi:temperature-celsius
         unique_id: '1wireSensors/bath_small_towel'
         unit_of_measurement: '°C'
-  
+
       - name: 'Счетчик мастер-выключателя'
         state_topic: "/devices/wb-mr6c_42/controls/input_3 Long Press Counter"
         icon: mdi:counter
         unique_id: 'master_off_counter'
+
+      - name: 'Счетчик долгих нажатий Бра Вадим'
+        state_topic: "/devices/wb-mr6c_138/controls/input_3 Long Press Counter"
+        icon: mdi:counter
+        unique_id: 'vadim_bra_long_counter'
 
     light:
       - unique_id: 'wb-mr6c_42/K4'
@@ -91,6 +96,20 @@ wirenboard:
         payload_off: 0
         name: 'Люстра ванны'
     
+      - unique_id: 'wb-mr6c_138/K3'
+        state_topic: '/devices/wb-mr6c_138/controls/K3'
+        command_topic: '/devices/wb-mr6c_138/controls/K3/on'
+        payload_on: 1
+        payload_off: 0
+        name: 'Бра Вадим'
+
+      - unique_id: 'wb-mr6c_138/K4'
+        state_topic: '/devices/wb-mr6c_138/controls/K4'
+        command_topic: '/devices/wb-mr6c_138/controls/K4/on'
+        payload_on: 1
+        payload_off: 0
+        name: 'Бра Алия'
+
       - unique_id: 'wb-mdm3_104/K1'
         state_topic: '/devices/wb-mdm3_104/controls/K1'
         command_topic: '/devices/wb-mdm3_104/controls/K1/on'

@@ -74,9 +74,11 @@ yandex:
         - light.podsvetka_kukhni
         - light.podsvetka_tv
         - light.island_lamp
-        - light.kladovka_svet
+        - light.svet_kladovka
         - light.podsvetka_prikhozhei_pol
         - light.liustra_vanny
+        - light.bra_vadim
+        - light.bra_aliia
 
         - climate.ac_office
 

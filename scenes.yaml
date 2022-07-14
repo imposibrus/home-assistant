@@ -164,3 +164,49 @@
       friendly_name: LG webOS Smart TV
       supported_features: 24509
       state: 'off'
+- id: '1657743372431'
+  name: Спальня засыпаем
+  entities:
+    light.bra_aliia:
+      supported_color_modes:
+      - onoff
+      friendly_name: Бра Алия
+      supported_features: 0
+      state: 'off'
+    light.bra_vadim:
+      supported_color_modes:
+      - onoff
+      friendly_name: Бра Вадим
+      supported_features: 0
+      state: 'off'
+    light.liustra_spalni:
+      supported_color_modes:
+      - onoff
+      friendly_name: Люстра спальни
+      supported_features: 0
+      state: 'off'
+    light.svet_garderob:
+      supported_color_modes:
+      - onoff
+      icon: mdi:wardrobe
+      friendly_name: Свет гардероб
+      supported_features: 0
+      state: 'off'
+    light.mqtt_lightentity_3:
+      supported_color_modes:
+      - brightness
+      friendly_name: Подсветка шторы спальни
+      supported_features: 0
+      state: 'off'
+  icon: mdi:power-sleep
+  metadata:
+    light.mqtt_lightentity_3:
+      entity_only: true
+    light.liustra_spalni:
+      entity_only: true
+    light.svet_garderob:
+      entity_only: true
+    light.bra_vadim:
+      entity_only: true
+    light.bra_aliia:
+      entity_only: true
