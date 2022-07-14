@@ -157,7 +157,15 @@ yandex:
         properties:
           - type: temperature
             entity: sensor.temperatura_tp_dushevoi
-
+      climate.ac_office:
+        modes:
+          fan_speed:
+            auto: ['auto']
+            low: ['low']
+            medium: ['medium']
+            high: ['high']
+            quiet: ['mute']
+            turbo: ['turbo']
 
   var:
     yandex_station_volume:
