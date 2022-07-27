@@ -112,6 +112,7 @@ yandex:
         - camera.4k_playground
       exclude_entities: []
       exclude_domains:
+        - automation
         - scene
         - script
         - input_boolean

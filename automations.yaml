@@ -326,7 +326,7 @@
   - service: notify.tg_home
     data:
       title: Вадим вышел из офиса
-      message: Ни дня не может без своей любимой😘
+      message: "Ни дня не может без своей любимой\U0001F618"
   mode: single
 - id: '1627055594058'
   alias: '[TG] Команды кондиционера'
@@ -447,8 +447,8 @@
   - service: mqtt.publish
     data:
       topic: /devices/is_anyone_home/controls/enabled
-      payload_template: "{%- if trigger.to_state.state == 'on' -%}\n  1\n{%- else\
-        \ -%}\n  0\n{%- endif -%}\n"
+      payload_template: "{%- if trigger.to_state.state == 'on' -%}\n  1\n{%- else
+        -%}\n  0\n{%- endif -%}\n"
   mode: single
 - id: '1646340554332'
   alias: Алиса - кино
