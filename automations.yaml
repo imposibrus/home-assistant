@@ -502,17 +502,17 @@
   - type: no_motion
     platform: device
     device_id: ee447e2cadce402c4c5a67593e52549c
-    entity_id: binary_sensor.0x00124b0025127f59_occupancy
+    entity_id: binary_sensor.dd_larder_occupancy
     domain: binary_sensor
+    id: stop
     for:
       hours: 0
       minutes: 1
       seconds: 0
-    id: stop
   - type: motion
     platform: device
     device_id: ee447e2cadce402c4c5a67593e52549c
-    entity_id: binary_sensor.0x00124b0025127f59_occupancy
+    entity_id: binary_sensor.dd_larder_occupancy
     domain: binary_sensor
     id: start
   condition: []
