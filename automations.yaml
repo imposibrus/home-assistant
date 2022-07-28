@@ -880,3 +880,114 @@
         message: Возвращаю как было
       enabled: false
   mode: single
+- id: '1657997914458'
+  alias: '[test] cube'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.magic_cube_action
+    id: shake
+    to: shake
+  - platform: state
+    entity_id:
+    - sensor.magic_cube_action_angle
+    id: rotate
+  - platform: state
+    entity_id:
+    - sensor.magic_cube_action
+    id: tap
+    to: tap
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: shake
+      sequence:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.liustra_kabineta
+    - conditions:
+      - condition: state
+        entity_id: sensor.magic_cube_last_side
+        state: '5'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: trigger
+            id: rotate
+          sequence:
+          - service: light.turn_on
+            data:
+              brightness_step_pct: '{{ trigger.to_state.state | int(default=0) / 5
+                | int }}'
+            target:
+              entity_id: light.island_lamp
+        - conditions:
+          - condition: trigger
+            id: tap
+          sequence:
+          - service: light.toggle
+            data: {}
+            target:
+              entity_id: light.island_lamp
+        default: []
+    - conditions:
+      - condition: state
+        entity_id: sensor.magic_cube_last_side
+        state: '1'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: trigger
+            id: rotate
+          sequence:
+          - service: light.turn_on
+            data:
+              brightness_step_pct: '{{ trigger.to_state.state | int(default=0) / 5
+                | int }}'
+            target:
+              entity_id: light.podsvetka_kukhni
+        - conditions:
+          - condition: trigger
+            id: tap
+          sequence:
+          - service: light.toggle
+            data: {}
+            target:
+              entity_id: light.podsvetka_kukhni
+        default: []
+    - conditions:
+      - condition: state
+        entity_id: sensor.magic_cube_last_side
+        state: '2'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: trigger
+            id: tap
+          sequence:
+          - service: switch.toggle
+            data: {}
+            target:
+              entity_id: switch.0x00158d00025863b3
+        default: []
+    - conditions:
+      - condition: state
+        entity_id: sensor.magic_cube_last_side
+        state: '4'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: trigger
+            id: tap
+          sequence:
+          - service: light.toggle
+            data: {}
+            target:
+              entity_id: light.svet_gostinoi_i_kukhni
+        default: []
+    default: []
+  mode: single
