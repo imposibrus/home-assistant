@@ -47,6 +47,11 @@ yandex:
         extra_phrases:
           - Помой полы
           - Пропылесось дома
+      Останови уборку:
+        extra_phrases:
+          - Останови пылесос
+          - Прекрати уборку
+          - Уборка стоп
 
   conversation:
     intents:

@@ -634,12 +634,36 @@
     event_type: yandex_intent
     event_data:
       text: Уберись дома
+    id: start1
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Останови уборку
+    id: stop
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Пропылесось
+    id: start2
   condition: []
   action:
-  - service: vacuum.start
-    data: {}
-    target:
-      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+  - if:
+    - condition: or
+      conditions:
+      - condition: trigger
+        id: start1
+      - condition: trigger
+        id: start2
+    then:
+    - service: vacuum.start
+      data: {}
+      target:
+        entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+    else:
+    - service: vacuum.stop
+      data: {}
+      target:
+        entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
   mode: single
 - id: '1657633221475'
   alias: '[Пылесос] Уборка всего дома, когда никого нет'
