@@ -786,3 +786,97 @@
       entity_id: scene.spalnia_zasypaem
     metadata: {}
   mode: single
+- id: '1657810467056'
+  alias: '[AC] Осушение кондиционера'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: /2
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: climate.ac_office
+      attribute: fan_mode
+      state: auto
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+    - condition: state
+      entity_id: climate.ac_office
+      attribute: fan_mode
+      state: low
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: climate.ac_office
+      state: dry
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+    - condition: state
+      entity_id: climate.ac_office
+      state: cool
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.ac_invertor_power
+      state: '0'
+      for:
+        hours: 0
+        minutes: 15
+        seconds: 0
+  - condition: numeric_state
+    entity_id: sensor.cleargrass_air_humidity
+    above: '55'
+  action:
+  - service: climate.set_fan_mode
+    data:
+      fan_mode: high
+    target:
+      entity_id: climate.ac_office
+  - service: notify.tg_home
+    data:
+      message: Запускаю просушку
+      title: Кондиционер, возможно, вспотел
+    enabled: false
+  - delay:
+      hours: 0
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - if:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: climate.ac_office
+        state: cool
+      - condition: state
+        entity_id: climate.ac_office
+        state: dry
+    - condition: state
+      entity_id: climate.ac_office
+      attribute: fan_mode
+      state: high
+    then:
+    - service: climate.set_fan_mode
+      data:
+        fan_mode: auto
+      target:
+        entity_id: climate.ac_office
+    - service: notify.tg_home
+      data:
+        title: Кондиционер должен был просушиться
+        message: Возвращаю как было
+      enabled: false
+  mode: single
