@@ -685,6 +685,7 @@
       hours: 0
       minutes: 0
       seconds: 10
+    id: tv_on
   - platform: state
     entity_id:
     - device_tracker.lgwebostv
@@ -693,10 +694,46 @@
       hours: 0
       minutes: 0
       seconds: 10
-  condition: []
+    id: device_tracker_tv_home
+  - platform: state
+    entity_id:
+    - media_player.lg_webos_smart_tv
+    to: 'off'
+    id: tv_off
+  condition:
+  - condition: state
+    entity_id: input_boolean.hyperion_running
+    state: 'off'
+    enabled: false
+  - condition: sun
+    after: sunset
+    after_offset: -02:00:00
+    enabled: false
   action:
-  - service: shell_command.piccap_capture_service
-    data: {}
+  - if:
+    - condition: or
+      conditions:
+      - condition: trigger
+        id: tv_on
+      - condition: trigger
+        id: device_tracker_tv_home
+    - condition: state
+      entity_id: input_boolean.hyperion_running
+      state: 'off'
+    then:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.hyperion_running
+    - service: shell_command.piccap_capture_service
+      data: {}
+    else:
+    - condition: trigger
+      id: tv_off
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.hyperion_running
   mode: single
 - id: '1657743087135'
   alias: '[Свет] Спальня мастер выключатель бра'

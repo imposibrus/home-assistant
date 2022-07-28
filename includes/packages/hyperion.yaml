@@ -1,4 +1,9 @@
 hyperion:
   shell_command:
-    piccap_capture_service: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" root@192.168.88.8 "nohup /media/developer/apps/usr/palm/services/org.webosbrew.piccap.service/hyperion-webos -a 127.0.0.1 < /dev/null >> /tmp/hyper.log 2>&1 &"'
+    piccap_capture_service: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" root@192.168.88.8 "killall hyperion-webos; nohup /media/developer/apps/usr/palm/services/org.webosbrew.piccap.service/hyperion-webos -a 127.0.0.1 < /dev/null >> /tmp/hyper.log 2>&1 &"'
+
+  input_boolean:
+    hyperion_running:
+      name: Hyperion запущен
+      icon: mdi:television-ambient-light
 
