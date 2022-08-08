@@ -1,8 +1,8 @@
 cube:
-  sensor:
-    - name: magic_cube_last_side
-      platform: mqtt
-      state_topic: 'zigbee2mqtt/magic_cube'
-      value_template: '{{ value_json.side }}'
-      icon: mdi:cube-outline
+  mqtt:
+    sensor:
+      - name: magic_cube_last_side
+        state_topic: 'zigbee2mqtt/magic_cube'
+        value_template: '{{ value_json.side }}'
+        icon: mdi:cube-outline
 
