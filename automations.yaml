@@ -811,6 +811,15 @@
         hours: 1
         minutes: 0
         seconds: 0
+    - condition: state
+      entity_id: climate.ac_office
+      attribute: preset_mode
+      state: sleep
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+    enabled: false
   - condition: or
     conditions:
     - condition: state
@@ -839,10 +848,26 @@
   - condition: numeric_state
     entity_id: sensor.cleargrass_air_humidity
     above: '55'
+    enabled: false
   action:
+  - service: var.set
+    data:
+      entity_id: var.ac_office_last_state
+      value_template: '{{ states("climate.ac_office") }}'
+    enabled: true
+  - service: var.set
+    data:
+      entity_id: var.ac_office_last_fan_mode
+      value_template: '{{ state_attr("climate.ac_office", "fan_mode") }}'
+    enabled: true
   - service: climate.set_fan_mode
     data:
       fan_mode: high
+    target:
+      entity_id: climate.ac_office
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: fan_only
     target:
       entity_id: climate.ac_office
   - service: notify.tg_home
@@ -860,10 +885,11 @@
       conditions:
       - condition: state
         entity_id: climate.ac_office
-        state: cool
+        state: fan_only
       - condition: state
         entity_id: climate.ac_office
         state: dry
+        enabled: false
     - condition: state
       entity_id: climate.ac_office
       attribute: fan_mode
@@ -871,7 +897,12 @@
     then:
     - service: climate.set_fan_mode
       data:
-        fan_mode: auto
+        fan_mode: '{{ states(''var.ac_office_last_fan_mode'') }}'
+      target:
+        entity_id: climate.ac_office
+    - service: climate.set_hvac_mode
+      data:
+        fan_mode: '{{ states(''var.ac_office_last_state'') }}'
       target:
         entity_id: climate.ac_office
     - service: notify.tg_home

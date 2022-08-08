@@ -1,0 +1,11 @@
+ac:
+  var:
+    ac_office_last_state:
+      friendly_name: 'Последнее состояние кондиционера кабинета'
+      initial_value: unavailable
+      icon: mdi:thermostat
+    ac_office_last_fan_mode:
+      friendly_name: 'Последний режим вентиляции кондиционера кабинета'
+      initial_value: unavailable
+      icon: mdi:fan-clock
+
