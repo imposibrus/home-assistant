@@ -162,15 +162,15 @@ wirenboard:
 
     switch:
       - unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
-        state_topic: '/devices/wb-mrm2-mini_134/controls/Relay 1'
-        command_topic: '/devices/wb-mrm2-mini_134/controls/Relay 1/on'
+        state_topic: '/devices/wb-mrm2-mini_134/controls/K1'
+        command_topic: '/devices/wb-mrm2-mini_134/controls/K1/on'
         payload_on: 1
         payload_off: 0
         name: 'Теплый пол душевой'
   
       - unique_id: 'wb-mrm2-mini-nc_134/Relay 2'
-        state_topic: '/devices/wb-mrm2-mini_134/controls/Relay 2'
-        command_topic: '/devices/wb-mrm2-mini_134/controls/Relay 2/on'
+        state_topic: '/devices/wb-mrm2-mini_134/controls/K2'
+        command_topic: '/devices/wb-mrm2-mini_134/controls/K2/on'
         payload_on: 1
         payload_off: 0
         name: 'Полотенцесушитель санузла'
