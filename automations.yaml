@@ -935,7 +935,7 @@
         entity_id: climate.ac_office
     - service: climate.set_hvac_mode
       data:
-        fan_mode: '{{ states(''var.ac_office_last_state'') }}'
+        hvac_mode: '{{ states(''var.ac_office_last_state'') }}'
       target:
         entity_id: climate.ac_office
     - service: notify.tg_home
@@ -1054,4 +1054,4 @@
               entity_id: light.svet_gostinoi_i_kukhni
         default: []
     default: []
-  mode: single
+  mode: queued

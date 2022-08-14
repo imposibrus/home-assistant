@@ -194,10 +194,10 @@ tv_on:
       description: Repeats count. Applied to all rooms
       example: 1
   variables:
-    param_selects: "{%- set data = namespace(numbers=[]) -%} {%- for i in selection\
-      \ -%}\n  {%- set data.numbers = data.numbers + [[i, repeats, 3, 3, 1]] -%}\n\
-      {%- endfor -%} {%- set val = {'piid':10, 'value': {'selects': data.numbers}|to_json\
-      \ } -%} {{ val }}"
+    param_selects: "{%- set data = namespace(numbers=[]) -%} {%- for i in selection
+      -%}\n  {%- set data.numbers = data.numbers + [[i, repeats, 3, 3, 1]] -%}\n{%-
+      endfor -%} {%- set val = {'piid':10, 'value': {'selects': data.numbers}|to_json
+      } -%} {{ val }}"
   sequence:
   - service: xiaomi_miot.call_action
     data:
