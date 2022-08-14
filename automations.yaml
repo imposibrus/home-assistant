@@ -608,23 +608,56 @@
   - platform: state
     entity_id:
     - sensor.temperatura_polotentsesushitelia_sanuzla
+    id: small_bath_towel
+  - platform: state
+    entity_id:
+    - sensor.temperatura_tp_sanuzla
+    id: small_bath_floor
+  - platform: state
+    entity_id:
+    - sensor.temperatura_tp_dushevoi
+    id: small_bath_shower
   condition:
-  - condition: template
-    value_template: '{{ states(''sensor.temperatura_polotentsesushitelia_sanuzla'')
-      | float(0) > states(''input_number.bath_small_towel_temp_max'') | float(0) }}'
   - condition: template
     value_template: '{{ not state_attr(''automation.alerts_uvedomlenie_pri_peregreve'',''last_triggered'')
       or (as_timestamp(now()) - as_timestamp(state_attr(''automation.alerts_uvedomlenie_pri_peregreve'',''last_triggered'')))
       > (60 * 5) }}'
   action:
-  - service: notify.mobile_app_oneplus_a5010
-    data:
-      message: Полотенчик в санузле перегрелся.
-      title: Перегрев
-  - service: notify.tg_home
-    data:
-      title: Перегрев
-      message: Полотенчик в санузле перегрелся.
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: small_bath_towel
+      - condition: template
+        value_template: '{{ trigger.to_state.state | float(0) > states(''input_number.bath_small_towel_temp_max'')
+          | float(0) }}'
+      sequence:
+      - service: script.alert
+        data:
+          title: Перегрев
+          message: Полотенчик в санузле перегрелся.
+    - conditions:
+      - condition: trigger
+        id: small_bath_floor
+      - condition: template
+        value_template: '{{ trigger.to_state.state | float(0) > states(''input_number.bath_small_floor_temp_max'')
+          | float(0) }}'
+      sequence:
+      - service: script.alert
+        data:
+          title: Перегрев
+          message: Пол в санузле перегрелся.
+    - conditions:
+      - condition: trigger
+        id: small_bath_shower
+      - condition: template
+        value_template: '{{ trigger.to_state.state | float(0) > states(''input_number.bath_small_shower_temp_max'')
+          | float(0) }}'
+      sequence:
+      - service: script.alert
+        data:
+          title: Перегрев
+          message: Душевой поддон в санузле перегрелся.
+    default: []
   mode: single
 - id: '1657037750024'
   alias: '[Пылесос] Уборка всего дома через Алису'

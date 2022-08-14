@@ -211,3 +211,24 @@ tv_on:
       force_params: true
   mode: single
   icon: mdi:robot-vacuum
+alert:
+  alias: Alert
+  fields:
+    title:
+      description: The title of the notification
+      example: State change
+    message:
+      description: The message content
+      example: The light is on!
+  sequence:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      message: '{{ message }}'
+      title: '{{ title }}'
+  - service: notify.tg_home
+    data:
+      message: '{{ message }}'
+      title: '{{ title }}'
+    enabled: false
+  mode: parallel
+  icon: mdi:alert-circle-outline
