@@ -106,6 +106,8 @@ yandex:
         - vacuum.kukhnia
         - vacuum.prikhozhaia
         - vacuum.spalnia
+        - vacuum.vanaia
+        - vacuum.sanuzel
 
         - camera.1k_1p_legenda_side
         - camera.1k_enter
