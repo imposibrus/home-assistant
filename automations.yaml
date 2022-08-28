@@ -1008,3 +1008,75 @@
         default: []
     default: []
   mode: queued
+- id: '1661098587855'
+  alias: '[Пылесос] Напоминание об очистке швабры'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - vacuum.dreame_p2029_bf7e_robot_cleaner
+    to: cleaning
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition:
+  - condition: numeric_state
+    entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+    attribute: vacuum_extend.waterbox_status
+    above: '0'
+  action:
+  - wait_for_trigger:
+    - platform: state
+      entity_id:
+      - vacuum.dreame_p2029_bf7e_robot_cleaner
+      to: docked
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+    - platform: state
+      entity_id:
+      - vacuum.dreame_p2029_bf7e_robot_cleaner
+      to: idle
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+    continue_on_timeout: false
+  - if:
+    - condition: numeric_state
+      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+      attribute: vacuum_extend.waterbox_status
+      above: '0'
+    then:
+    - service: notify.tg_imposibrus
+      data:
+        title: Полы помыты
+        message: Пора помыть салфетку
+        data:
+          inline_keyboard:
+          - Я сделяль:/VACUUM_MOP_CLEANED, Скройся:/do_nothing
+  mode: restart
+- id: '1661099249307'
+  alias: '[TG] Команды пылесоса'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: telegram_callback
+    event_data:
+      command: /VACUUM_MOP_CLEANED
+    id: VACUUM_MOP_CLEANED
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: VACUUM_MOP_CLEANED
+      sequence:
+      - service: telegram_bot.delete_message
+        data:
+          chat_id: '{{ trigger.event.data.chat_id }}'
+          message_id: '{{ trigger.event.data.message.message_id }}'
+    default: []
+  mode: single
