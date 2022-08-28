@@ -830,33 +830,6 @@
     conditions:
     - condition: state
       entity_id: climate.ac_office
-      attribute: fan_mode
-      state: auto
-      for:
-        hours: 1
-        minutes: 0
-        seconds: 0
-    - condition: state
-      entity_id: climate.ac_office
-      attribute: fan_mode
-      state: low
-      for:
-        hours: 1
-        minutes: 0
-        seconds: 0
-    - condition: state
-      entity_id: climate.ac_office
-      attribute: preset_mode
-      state: sleep
-      for:
-        hours: 1
-        minutes: 0
-        seconds: 0
-    enabled: false
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: climate.ac_office
       state: dry
       for:
         hours: 1
@@ -878,10 +851,6 @@
         hours: 0
         minutes: 15
         seconds: 0
-  - condition: numeric_state
-    entity_id: sensor.cleargrass_air_humidity
-    above: '55'
-    enabled: false
   action:
   - service: var.set
     data:
@@ -903,26 +872,15 @@
       hvac_mode: fan_only
     target:
       entity_id: climate.ac_office
-  - service: notify.tg_home
-    data:
-      message: Запускаю просушку
-      title: Кондиционер, возможно, вспотел
-    enabled: false
   - delay:
       hours: 0
       minutes: 30
       seconds: 0
       milliseconds: 0
   - if:
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: climate.ac_office
-        state: fan_only
-      - condition: state
-        entity_id: climate.ac_office
-        state: dry
-        enabled: false
+    - condition: state
+      entity_id: climate.ac_office
+      state: fan_only
     - condition: state
       entity_id: climate.ac_office
       attribute: fan_mode
@@ -938,11 +896,6 @@
         hvac_mode: '{{ states(''var.ac_office_last_state'') }}'
       target:
         entity_id: climate.ac_office
-    - service: notify.tg_home
-      data:
-        title: Кондиционер должен был просушиться
-        message: Возвращаю как было
-      enabled: false
   mode: single
 - id: '1657997914458'
   alias: '[test] cube'
