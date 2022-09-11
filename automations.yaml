@@ -1080,3 +1080,112 @@
           message_id: '{{ trigger.event.data.message.message_id }}'
     default: []
   mode: single
+- id: '1662904774435'
+  alias: '[WB] Настройки температур'
+  description: При старте HA, отправить запрос в WB на получение текущих настроек
+    температур (setpoints).
+  trigger:
+  - platform: homeassistant
+    event: start
+    id: ha_started
+  - platform: mqtt
+    topic: /rpc/v1/confed/Editor/Save/+
+    id: mqtt_saved
+  - platform: mqtt
+    topic: /rpc/v1/confed/Editor/Load/+/reply
+    id: mqtt_loaded
+  - platform: state
+    entity_id:
+    - input_number.bath_small_floor_temp_wanted
+    - input_number.bath_small_shower_temp_wanted
+    - input_number.bath_small_towel_temp_wanted
+    id: setpoints_changed
+  condition:
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: trigger
+        id: mqtt_saved
+      - condition: template
+        value_template: '{{ trigger.payload_json[''params''][''path''] == ''/usr/share/wb-mqtt-confed/schemas/wb-mqtt-setpoints.schema.json''
+          }}'
+    - condition: trigger
+      id: ha_started
+    - condition: and
+      conditions:
+      - condition: trigger
+        id: mqtt_loaded
+      - condition: template
+        value_template: '{{ trigger.payload_json[''result''][''configPath''] == ''/etc/wb-mqtt-setpoints.json''
+          }}'
+    - condition: trigger
+      id: setpoints_changed
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: ha_started
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: /rpc/v1/confed/Editor/Load/home-assistant
+          payload: '{"id":2,"params":{"path":"/usr/share/wb-mqtt-confed/schemas/wb-mqtt-setpoints.schema.json"}}'
+    - conditions:
+      - condition: trigger
+        id: mqtt_saved
+      sequence:
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''params''][''content''][''bath_small_floor_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_floor_temp_wanted
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''params''][''content''][''bath_small_shower_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_shower_temp_wanted
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''params''][''content''][''bath_small_towel_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_towel_temp_wanted
+    - conditions:
+      - condition: trigger
+        id: mqtt_loaded
+      sequence:
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''result''][''content''][''bath_small_floor_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_floor_temp_wanted
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''result''][''content''][''bath_small_shower_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_shower_temp_wanted
+      - service: input_number.set_value
+        data:
+          value: '{{ trigger.payload_json[''result''][''content''][''bath_small_towel_temp_wanted'']
+            }}'
+        target:
+          entity_id: input_number.bath_small_towel_temp_wanted
+    - conditions:
+      - condition: trigger
+        id: setpoints_changed
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: /rpc/v1/confed/Editor/Save/home-assistant
+          payload: "{\n  \"id\":3,\n  \"params\":{\n    \"path\":\"/usr/share/wb-mqtt-confed/schemas/wb-mqtt-setpoints.schema.json\",\n
+            \   \"content\":{\n      \"bath_small_floor_temp_wanted\":{{states('input_number.bath_small_floor_temp_wanted')}},\n
+            \     \"bath_small_shower_temp_wanted\":{{states('input_number.bath_small_shower_temp_wanted')}},\n
+            \     \"bath_small_towel_temp_wanted\":{{states('input_number.bath_small_towel_temp_wanted')}},\n
+            \     \"hall_floor_temp_wanted\":25,\n      \"hysteresis\":2\n    }\n
+            \ }\n}"
+  mode: single
