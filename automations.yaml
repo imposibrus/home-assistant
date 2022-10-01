@@ -1189,3 +1189,66 @@
             \     \"hall_floor_temp_wanted\":25,\n      \"hysteresis\":2\n    }\n
             \ }\n}"
   mode: single
+- id: '1664132624756'
+  alias: Звонок в дверь
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.button_snzb_action
+    to: single
+  - platform: state
+    entity_id:
+    - sensor.button_snzb_action
+    to: double
+  condition:
+  - condition: template
+    value_template: '{{trigger.to_state.state != ''unavailable'' and trigger.from_state.state
+      != trigger.to_state.state}}'
+  - condition: time
+    after: 06:00:00
+    before: 01:00:00
+  action:
+  - parallel:
+    - service: mqtt.publish
+      data:
+        topic: /devices/buzzersound/controls/Play Nokia/on
+        payload: 1
+      enabled: true
+    - service: media_player.play_media
+      data:
+        media_content_id: <speaker audio="alice-sounds-game-8-bit-phone-1.opus"> В
+          дверь звонят
+        media_content_type: dialog
+        extra:
+          volume_level: 0.5
+      target:
+        entity_id:
+        - media_player.yandex_station_442078968308181c0410
+        - media_player.yandex_station_lp00000000000005131900001aedca28
+  - parallel:
+    - sequence:
+      - wait_template: '{{ is_state_attr(''media_player.yandex_station_442078968308181c0410'',
+          ''alice_state'', ''LISTENING'') }}'
+        continue_on_timeout: false
+      - service: media_player.play_media
+        data:
+          media_content_type: text
+          media_content_id: '1'
+          extra:
+            volume_level: 0.1
+        target:
+          entity_id: media_player.yandex_station_442078968308181c0410
+    - sequence:
+      - wait_template: '{{ is_state_attr(''media_player.yandex_station_lp00000000000005131900001aedca28'',
+          ''alice_state'', ''LISTENING'') }}'
+        continue_on_timeout: false
+      - service: media_player.play_media
+        data:
+          media_content_type: text
+          media_content_id: '1'
+          extra:
+            volume_level: 0.1
+        target:
+          entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+  mode: single
