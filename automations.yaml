@@ -1050,7 +1050,7 @@
       attribute: vacuum_extend.waterbox_status
       above: '0'
     then:
-    - service: notify.tg_imposibrus
+    - service: notify.tg_home
       data:
         title: Полы помыты
         message: Пора помыть салфетку
