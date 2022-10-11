@@ -1239,7 +1239,7 @@
       - service: media_player.play_media
         data:
           media_content_type: text
-          media_content_id: '1'
+          media_content_id: ой
           extra:
             volume_level: 0.1
         target:
@@ -1251,7 +1251,7 @@
       - service: media_player.play_media
         data:
           media_content_type: text
-          media_content_id: '1'
+          media_content_id: ой
           extra:
             volume_level: 0.1
         target:
