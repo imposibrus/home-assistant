@@ -61,6 +61,7 @@ logger:
   logs:
 #    custom_components.xiaomi_miot: debug
     custom_components.ble_monitor: info
+#    homeassistant.components.mikrotik: debug
 
 logbook: !include includes/logbook.yaml
 
