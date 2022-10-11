@@ -1257,3 +1257,36 @@
         target:
           entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
   mode: single
+- id: '1665503496732'
+  alias: '[test] notify when "anyone home" changes'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.template_anyone_home
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      title: Все дома?
+      message: '{{ states(''binary_sensor.template_anyone_home'') }}'
+  mode: single
+- id: '1665519540633'
+  alias: '[test] person home/not home notification'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - person.imposibrus
+  - platform: state
+    entity_id:
+    - person.aliya
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
+  action:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      title: '{{ trigger.to_state.attributes.friendly_name }} дома/не дома'
+      message: '{{ states(''trigger.to_state.state'') }}'
+  mode: single
