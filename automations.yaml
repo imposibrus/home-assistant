@@ -1226,6 +1226,11 @@
         entity_id:
         - media_player.yandex_station_442078968308181c0410
         - media_player.yandex_station_lp00000000000005131900001aedca28
+    - service: rest_command.pipup_image_on_tv
+      data:
+        message: В дверь звонят!
+        position: 0
+        url: https://ha.imposibrus.space/local/plan/flat_plan.png
   - parallel:
     - sequence:
       - wait_template: '{{ is_state_attr(''media_player.yandex_station_442078968308181c0410'',
