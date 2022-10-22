@@ -43,7 +43,7 @@
       message: Обед закончился!
   mode: single
 - id: '1620208571379'
-  alias: Обед!
+  alias: Алиса - Обед!
   description: ''
   trigger:
   - platform: event
@@ -63,11 +63,13 @@
           entity_id: media_player.lg_webos_smart_tv
         data: {}
     default: []
+    enabled: false
   - delay:
       hours: 0
       minutes: 0
       seconds: 13
       milliseconds: 0
+    enabled: false
   - service: timer.start
     data:
       duration: '0'
@@ -78,10 +80,16 @@
       entity_id: media_player.lg_webos_smart_tv
     data:
       source: YouTube
+    enabled: false
   - service: light.turn_on
     data: {}
     target:
       entity_id: light.island_lamp
+    enabled: false
+  - service: scene.turn_on
+    target:
+      entity_id: scene.obed
+    metadata: {}
   mode: single
 - id: '1620222769842'
   alias: Алиса, Синхронизируй список покупок
@@ -1483,4 +1491,19 @@
     data: {}
     target:
       entity_id: input_boolean.alarm_clock_is_ringing
+  mode: single
+- id: '1665863130636'
+  alias: Алиса - готовка
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Готовка
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.gotovka
+    metadata: {}
   mode: single

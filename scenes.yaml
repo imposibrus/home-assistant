@@ -1,13 +1,81 @@
 - id: dinner
   name: Обед
-  icon: mdi:food-variant
   entities:
     media_player.lg_webos_smart_tv:
+      source_list:
+      - AV
+      - Apple TV
+      - Chromecast
+      - HDMI 2
+      - Homebrew Channel
+      - HyperHDR
+      - KION
+      - LG Channels
+      - LG Content Store
+      - Live TV
+      - MEGOGO ТВ и Кино
+      - Netflix
+      - 'Okko: кино, сериалы, спорт, ТВ'
+      - PREMIER
+      - PicCap
+      - Plex
+      - 'START: Фильмы и сериалы 4К'
+      - Shop on TV
+      - Spotify - музыка и подкасты
+      - VK Видео
+      - Wink
+      - XPlay
+      - YouTube
+      - ivi - Full HD, 4K
+      - Веб-браузер
+      - Дом.ru Movix
+      - Кинопоиск
+      - Комп
+      - Компонентный вход
+      - Музыка
+      - Новинки кино
+      - Первый
+      - Российские программы
+      - Фото и видео
+      - Яндекс
+      - Яндекс Станция
+      assumed_state: true
+      device_class: tv
+      friendly_name: LG webOS Smart TV
+      supported_features: 24509
+      volume_level: 0.12
+      is_volume_muted: false
       source: YouTube
       sound_output: tv_speaker
+      entity_picture: /api/media_player_proxy/media_player.lg_webos_smart_tv?token=c3eadcd2fc7b7ae699f120fa2819d73600c8716c2c831d7bf869540bf7fb2a75&cache=5ff9f5de3680cd11
       state: 'on'
     timer.dinner_end:
+      duration: 0:50:00
+      editable: true
+      icon: mdi:food
+      friendly_name: Продолжительность обеда
+      finishes_at: '2022-10-15T21:54:13+00:00'
+      remaining: 0:50:00
       state: active
+    switch.0x00158d00025863b3:
+      consumption: 7.92
+      device_temperature: 31
+      energy: 7.92
+      last_seen: '2022-10-15T21:04:23.292Z'
+      linkquality: 63
+      power: 5.24
+      power_outage_count: 36
+      power_outage_memory: true
+      temperature: 29
+      update:
+        state: idle
+      update_available:
+      friendly_name: Розетка
+      state: 'on'
+  icon: mdi:food-variant
+  metadata:
+    switch.0x00158d00025863b3:
+      entity_only: true
 - id: '1623060117764'
   name: Работа
   entities:
@@ -209,4 +277,39 @@
     light.bra_vadim:
       entity_only: true
     light.bra_aliia:
+      entity_only: true
+- id: '1665863063404'
+  name: Готовка
+  entities:
+    light.island_lamp:
+      supported_color_modes:
+      - brightness
+      icon: mdi:island
+      friendly_name: Лампа острова
+      supported_features: 0
+      color_mode: brightness
+      brightness: 207
+      state: 'on'
+    light.podsvetka_kukhni:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 178
+      friendly_name: Подсветка кухни
+      supported_features: 0
+      state: 'on'
+    light.svet_gostinoi_i_kukhni:
+      supported_color_modes:
+      - onoff
+      friendly_name: Свет гостиной и кухни
+      supported_features: 0
+      color_mode: onoff
+      state: 'on'
+  icon: mdi:chef-hat
+  metadata:
+    light.island_lamp:
+      entity_only: true
+    light.podsvetka_kukhni:
+      entity_only: true
+    light.svet_gostinoi_i_kukhni:
       entity_only: true

@@ -56,6 +56,10 @@ yandex:
         extra_phrases:
           - Разбуди нас утром
           - Разбуди утром
+      Готовка:
+        extra_phrases:
+          - Я иду готовить
+          - Начинаю готовить
 
   conversation:
     intents:
