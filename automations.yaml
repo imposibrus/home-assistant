@@ -1521,3 +1521,18 @@
     data:
       mac: 64:95:6C:95:29:3F
   mode: single
+- id: '1665947235292'
+  alias: '[Свет] Вкл/выкл подсветки раковины санузла'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bath_small_sink_switch
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: light.toggle
+    entity_id: light.bath_small_backlight
+    data: {}
+  mode: single
