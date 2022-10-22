@@ -46,6 +46,26 @@ wirenboard:
         icon: mdi:counter
         unique_id: 'vadim_bra_long_counter'
 
+      - name: 'Счетчик коротких нажатий Бра Вадим'
+        state_topic: "/devices/wb-mr6c_138/controls/input_3 Single Press Counter"
+        icon: mdi:counter
+        unique_id: 'vadim_bra_short_counter'
+
+      - name: 'Счетчик долгих нажатий Бра Алия'
+        state_topic: "/devices/wb-mr6c_138/controls/input_4 Long Press Counter"
+        icon: mdi:counter
+        unique_id: 'aliya_bra_long_counter'
+
+      - name: 'Счетчик коротких нажатий Бра Алия'
+        state_topic: "/devices/wb-mr6c_138/controls/input_4 Single Press Counter"
+        icon: mdi:counter
+        unique_id: 'aliya_bra_short_counter'
+
+      - name: 'Счетчик нажатий подсветка шторы спальни'
+        state_topic: "/devices/wb-mdm3_104/controls/Input 1 counter"
+        icon: mdi:counter
+        unique_id: 'bedroom_cover_light_counter'
+
     binary_sensor:
       - name: doorbell_button
         state_topic: '/devices/wb-gpio/controls/EXT1_IN14'

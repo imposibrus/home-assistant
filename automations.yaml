@@ -809,8 +809,8 @@
     - sensor.schetchik_dolgikh_nazhatii_bra_vadim
   condition:
   - condition: template
-    value_template: '{{ trigger.from_state.state | int(0) < trigger.to_state.state
-      | int(0) }}'
+    value_template: '{{ trigger.to_state.state != ''unavailable'' and trigger.from_state.state
+      | int(0) < trigger.to_state.state | int(0) }}'
   action:
   - service: light.turn_off
     data: {}
