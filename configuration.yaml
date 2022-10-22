@@ -30,6 +30,7 @@ system_health:
 tag:
 timer:
 #usb:
+wake_on_lan:
 webhook:
 zeroconf:
 zone:
@@ -62,6 +63,7 @@ logger:
 #    custom_components.xiaomi_miot: debug
     custom_components.ble_monitor: info
 #    homeassistant.components.mikrotik: debug
+#    aiowebostv: debug
 
 logbook: !include includes/logbook.yaml
 

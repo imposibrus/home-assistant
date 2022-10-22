@@ -1507,3 +1507,17 @@
       entity_id: scene.gotovka
     metadata: {}
   mode: single
+- id: '1665867675999'
+  alias: LgWebOSTV Wake on LAN
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 977915d4fe2efb7b16f1125f39998638
+    domain: webostv
+    type: webostv.turn_on
+  condition: []
+  action:
+  - service: wake_on_lan.send_magic_packet
+    data:
+      mac: 64:95:6C:95:29:3F
+  mode: single
