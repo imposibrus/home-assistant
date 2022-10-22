@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 30">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: .3;
+      }
+
+      .cls-2 {
+        fill: #abc2e6;
+      }
+
+      .cls-3 {
+        fill: #1d2446;
+      }
+
+      .cls-4 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-5 {
+        fill: none;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-5" x="0" width="40" height="30"/>
+    </clipPath>
+  </defs>
+  <g id="_Слой_1-2" data-name="Слой 1">
+    <g>
+      <g class="cls-1">
+        <g class="cls-4">
+          <path class="cls-3" d="M33.99,30H6.01c-3.32,0-6.01-2.83-6.01-6.31V6.31C0,2.83,2.69,0,6.01,0h27.97C37.31,0,40,2.83,40,6.31V23.69c0,3.49-2.69,6.31-6.01,6.31"/>
+        </g>
+      </g>
+      <path class="cls-3" d="M29.05,24H10.95c-3.29,0-5.95-2.79-5.95-6.24v-5.52c0-3.44,2.66-6.24,5.95-6.24H29.05c3.29,0,5.95,2.79,5.95,6.24v5.52c0,3.44-2.66,6.24-5.95,6.24"/>
+      <path class="cls-2" d="M28.22,19.33H11.61c-.48,0-.86-.41-.86-.91s.39-.9,.86-.9H28.22c.48,0,.86,.4,.86,.9s-.39,.91-.86,.91"/>
+      <path class="cls-2" d="M24.83,16.73H15v-.82c0-2.85,2.2-5.16,4.91-5.16s4.91,2.31,4.91,5.16v.82Z"/>
+    </g>
+  </g>
+</svg>

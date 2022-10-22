@@ -1,0 +1,15 @@
+light:
+  template:
+    - sensor:
+      - name: kitchen_backlight_level
+        state: >-
+          {{ (state_attr('light.podsvetka_kukhni', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+      - name: hall_floor_backlight_level
+        state: >-
+          {{ (state_attr('light.podsvetka_prikhozhei_pol', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+      - name: living_room_wled_backlight_level
+        state: >-
+          {{ (state_attr('light.wled', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        
+      
+
