@@ -1,0 +1,18 @@
+alarm_clock:
+  template:
+#    - trigger:
+#        - platform: state
+#          entity_id: input_datetime.alarm_clock
+#        - platform: state
+#          entity_id: input_boolean.alarm_clock_canceled
+    binary_sensor:
+      - state: "{{ states('input_datetime.alarm_clock') | as_datetime > now().replace(tzinfo=none) and is_state('input_boolean.alarm_clock_canceled', 'off') }}"
+        name: alarm_clock_enabled
+        unique_id: alarm_clock_enabled
+        icon: >-
+          {% if is_state('binary_sensor.alarm_clock_enabled', 'on') %}
+            mdi:alarm
+          {% else %}
+            mdi:alarm-off
+          {% endif %}
+ 

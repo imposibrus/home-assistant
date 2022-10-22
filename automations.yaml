@@ -1290,3 +1290,183 @@
       title: '{{ trigger.to_state.attributes.friendly_name }} дома/не дома'
       message: '{{ states(''trigger.to_state.state'') }}'
   mode: single
+- id: '1665850925808'
+  alias: Будильник управление
+  description: 'Алиса - разбуди нас утром: Ставит будильник через 8 часов'
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Мы спать
+    id: alice
+  - platform: state
+    entity_id:
+    - input_datetime.alarm_clock
+    id: date_changed
+  - platform: state
+    entity_id:
+    - input_boolean.alarm_clock_canceled
+    to: 'on'
+    id: alarm_canceled
+  - platform: state
+    entity_id:
+    - automation.budilnik_svetom_i_alisoi
+    id: automation_reloaded
+    from: 'on'
+  - platform: state
+    entity_id:
+    - sensor.schetchik_dolgikh_nazhatii_bra_aliia
+    - sensor.schetchik_dolgikh_nazhatii_bra_vadim
+    - sensor.schetchik_korotkikh_nazhatii_bra_vadim
+    - sensor.schetchik_korotkikh_nazhatii_bra_aliia
+    - sensor.schetchik_nazhatii_podsvetka_shtory_spalni
+    id: bed_buttons_press
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: alice
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.alarm_clock
+        data:
+          timestamp: '{{ now().timestamp() + (60 * 60 * 8) }}'
+    - conditions:
+      - condition: trigger
+        id: date_changed
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.alarm_clock_canceled
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.alarm_clock_is_ringing
+    - conditions:
+      - condition: trigger
+        id: alarm_canceled
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.alarm_clock_is_ringing
+    - conditions:
+      - condition: trigger
+        id: bed_buttons_press
+      - condition: state
+        entity_id: input_boolean.alarm_clock_is_ringing
+        state: 'on'
+      - condition: template
+        value_template: '{{ trigger.to_state.state  != ''unavailable'' and trigger.from_state.state
+          != trigger.to_state.state and int(trigger.to_state.state, 0) > 0 }}'
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.alarm_clock_canceled
+    - conditions:
+      - condition: trigger
+        id: automation_reloaded
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.alarm_clock_is_ringing
+  mode: parallel
+  max: 10
+- id: '1665851712685'
+  alias: Будильник светом и Алисой
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.alarm_clock
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.alarm_clock_is_ringing
+  - repeat:
+      while:
+      - condition: template
+        value_template: '{{ state_attr(''input_datetime.alarm_clock'', ''timestamp'')
+          + (60 * 5) > now().timestamp() and is_state(''input_boolean.alarm_clock_canceled'',
+          ''off'') }}'
+      sequence:
+      - if:
+        - condition: state
+          entity_id: input_boolean.alarm_clock_canceled
+          state: 'on'
+        then:
+        - stop: Будильник отключен
+      - service: light.turn_on
+        data:
+          brightness_pct: '{% set total = 60 * 5 %} {% set elapsed = now().timestamp()
+            - state_attr(''input_datetime.alarm_clock'', ''timestamp'') %} {% set
+            percent = int(elapsed / total * 100, 0) %} {{ percent }}'
+        target:
+          entity_id: light.mqtt_lightentity_3
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 9
+          milliseconds: 0
+  - wait_template: '{{ is_state(''input_boolean.alarm_clock_canceled'', ''on'') }}'
+    continue_on_timeout: true
+    timeout: 00:05:00
+  - if:
+    - condition: state
+      entity_id: input_boolean.alarm_clock_canceled
+      state: 'on'
+    then:
+    - stop: Будильник отключен
+  - service: media_player.volume_set
+    data:
+      volume_level: 0.1
+    target:
+      entity_id:
+      - media_player.yandex_station_442078968308181c0410
+      - media_player.yandex_station_lp00000000000005131900001aedca28
+  - service: media_player.play_media
+    data:
+      media_content_type: command
+      media_content_id: Включи музыку везде
+    target:
+      entity_id:
+      - media_player.yandex_station_442078968308181c0410
+  - repeat:
+      count: '5'
+      sequence:
+      - if:
+        - condition: state
+          entity_id: input_boolean.alarm_clock_canceled
+          state: 'on'
+        then:
+        - service: media_player.media_pause
+          data: {}
+          target:
+            entity_id:
+            - media_player.yandex_station_442078968308181c0410
+            - media_player.yandex_station_lp00000000000005131900001aedca28
+          enabled: false
+        - stop: Будильник отключен
+      - service: media_player.volume_set
+        data:
+          volume_level: '{{ 0.1 + ((repeat.index - 1) * 0.1) }}'
+        target:
+          entity_id:
+          - media_player.yandex_station_442078968308181c0410
+          - media_player.yandex_station_lp00000000000005131900001aedca28
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 20
+          milliseconds: 0
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.alarm_clock_is_ringing
+  mode: single
