@@ -1195,12 +1195,8 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.button_snzb_action
-    to: single
-  - platform: state
-    entity_id:
-    - sensor.button_snzb_action
-    to: double
+    - binary_sensor.doorbell_button
+    to: 'on'
   condition:
   - condition: template
     value_template: '{{trigger.to_state.state != ''unavailable'' and trigger.from_state.state
@@ -1226,11 +1222,29 @@
         entity_id:
         - media_player.yandex_station_442078968308181c0410
         - media_player.yandex_station_lp00000000000005131900001aedca28
-    - service: rest_command.pipup_image_on_tv
-      data:
-        message: В дверь звонят!
-        position: 0
-        url: https://ha.imposibrus.space/local/plan/flat_plan.png
+    - if:
+      - condition: state
+        entity_id: media_player.lg_webos_smart_tv
+        attribute: source
+        state: Chromecast
+      then:
+      - service: rest_command.pipup_url_on_tv
+        data:
+          message: В дверь звонят!
+          position: 0
+          url: https://ha.imposibrus.space/api/camera_proxy_stream/camera.doorbell_cam?token={{
+            state_attr('camera.doorbell_cam', 'access_token') }}
+      - service: rest_command.pipup_image_on_tv
+        data:
+          message: В дверь звонят!
+          position: 0
+          url: https://ha.imposibrus.space{{ state_attr('camera.doorbell_cam', 'entity_picture')
+            }}
+        enabled: false
+      else:
+      - service: notify.lg_webos_smart_tv
+        data:
+          message: В дверь звонят!
   - parallel:
     - sequence:
       - wait_template: '{{ is_state_attr(''media_player.yandex_station_442078968308181c0410'',
