@@ -128,6 +128,12 @@ yandex:
         - camera.1k_jk_enter
         - camera.1k_1p_external_side
         - camera.4k_playground
+        - camera.doorbell_cam
+
+        - binary_sensor.dd_larder_occupancy
+        - binary_sensor.dd_wardrobe_occupancy
+        # fridge:
+        - binary_sensor.0x00158d000689f052_contact
       exclude_entities: []
       exclude_domains:
         - automation
@@ -185,6 +191,27 @@ yandex:
             high: ['high']
             quiet: ['mute']
             turbo: ['turbo']
+      binary_sensor.dd_larder_occupancy:
+        name: Движение кладовка
+        properties:
+          - type: motion
+            entity: binary_sensor.dd_larder_occupancy
+          - type: battery_level
+            entity: sensor.dd_larder_battery
+      binary_sensor.dd_wardrobe_occupancy:
+        name: Движение градероб
+        properties:
+          - type: motion
+            entity: binary_sensor.dd_wardrobe_occupancy
+          - type: battery_level
+            entity: sensor.dd_wardrobe_battery
+      binary_sensor.0x00158d000689f052_contact:
+        name: Дверь холодильника
+        properties:
+          - type: open
+            entity: binary_sensor.0x00158d000689f052_contact
+          - type: battery_level
+            entity: sensor.0x00158d000689f052_battery
 
   var:
     yandex_station_volume:
