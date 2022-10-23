@@ -66,12 +66,22 @@ wirenboard:
         icon: mdi:counter
         unique_id: 'bedroom_cover_light_counter'
 
+      - name: 'bedroom_enter_long_counter'
+        state_topic: '/devices/wb-mr6c_42/controls/input_6 Long Press Counter'
+        icon: mdi:counter
+        unique_id: bedroom_enter_long_counter
+
     binary_sensor:
       - name: bath_small_sink_switch
         state_topic: '/devices/wb-gpio/controls/EXT1_IN9'
         payload_on: '1'
         payload_off: '0'
         unique_id: 'bath_small_sink_switch'
+      - name: livingroom_torchere_switch
+        state_topic: '/devices/wb-gpio/controls/EXT1_IN13'
+        payload_on: '1'
+        payload_off: '0'
+        unique_id: 'livingroom_5_button'
       - name: doorbell_button
         state_topic: '/devices/wb-gpio/controls/EXT1_IN14'
         payload_on: '1'
@@ -79,12 +89,12 @@ wirenboard:
         unique_id: 'doorbell_button'
 
     light:
-      - unique_id: 'wb-mr6c_42/K4'
+      - unique_id: 'kitchen_top_light'
         state_topic: '/devices/wb-mr6c_42/controls/K4'
         command_topic: '/devices/wb-mr6c_42/controls/K4/on'
         payload_on: 1
         payload_off: 0
-        name: 'Свет гостиной и кухни'
+        name: kitchen_top_light
     
       - unique_id: 'wb-mr6c_42/K1'
         state_topic: '/devices/wb-mr6c_42/controls/K1'
@@ -141,6 +151,13 @@ wirenboard:
         payload_on: 1
         payload_off: 0
         name: 'Бра Алия'
+
+      - unique_id: 'livingroom_top_light'
+        state_topic: '/devices/wb-mr6c_138/controls/K5'
+        command_topic: '/devices/wb-mr6c_138/controls/K5/on'
+        payload_on: 1
+        payload_off: 0
+        name: livingroom_top_light
 
       - unique_id: 'wb-mdm3_104/K1'
         state_topic: '/devices/wb-mdm3_104/controls/K1'

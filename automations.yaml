@@ -807,10 +807,13 @@
   - platform: state
     entity_id:
     - sensor.schetchik_dolgikh_nazhatii_bra_vadim
+    - sensor.schetchik_dolgikh_nazhatii_bra_aliia
   condition:
   - condition: template
-    value_template: '{{ trigger.to_state.state != ''unavailable'' and trigger.from_state.state
-      | int(0) < trigger.to_state.state | int(0) }}'
+    value_template: '{{ trigger.to_state.state != ''unavailable'' and trigger.to_state.state
+      != ''unknown'' and trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.from_state.state | int(0) < trigger.to_state.state
+      | int(0) }}'
   action:
   - service: light.turn_off
     data: {}
@@ -1535,4 +1538,44 @@
   - service: light.toggle
     entity_id: light.bath_small_backlight
     data: {}
+  mode: single
+- id: '1666532990316'
+  alias: '[Свет] Включение торшера гостиной по кнопке'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.livingroom_torchere_switch
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.0x00158d00025863b3
+  mode: single
+- id: '1666533904225'
+  alias: '[Свет] Мастер-выключатель спальни у входа'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.bedroom_enter_long_counter
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != ''unavailable'' and trigger.to_state.state
+      != ''unknown'' and trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.from_state.state | int(0) < trigger.to_state.state
+      | int(0) }}'
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id:
+      - light.liustra_spalni
+      - light.svet_garderob
+      - light.bra_vadim
+      - light.bra_aliia
+      - light.mqtt_lightentity_3
   mode: single
