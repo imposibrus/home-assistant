@@ -999,6 +999,7 @@
           sequence:
           - service: switch.toggle
             data: {}
+            enabled: false
             target:
               entity_id: switch.0x00158d00025863b3
         default: []
@@ -1539,22 +1540,6 @@
     entity_id: light.bath_small_backlight
     data: {}
   mode: single
-- id: '1666532990316'
-  alias: '[Свет] Включение торшера гостиной по кнопке'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.livingroom_torchere_switch
-    from: 'on'
-    to: 'off'
-  condition: []
-  action:
-  - service: switch.toggle
-    data: {}
-    target:
-      entity_id: switch.0x00158d00025863b3
-  mode: single
 - id: '1666533904225'
   alias: '[Свет] Мастер-выключатель спальни у входа'
   description: ''
@@ -1578,4 +1563,20 @@
       - light.bra_vadim
       - light.bra_aliia
       - light.mqtt_lightentity_3
+  mode: single
+- id: '1667222472920'
+  alias: '[Свет] Включение света в гардеробе'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bedroom_makeup_table_switch
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    target:
+      entity_id: switch.light_wardrobe
   mode: single

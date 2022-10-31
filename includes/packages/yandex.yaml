@@ -212,6 +212,15 @@ yandex:
             entity: binary_sensor.0x00158d000689f052_contact
           - type: battery_level
             entity: sensor.0x00158d000689f052_battery
+      switch.0x00158d00025863b3:
+        name: Розетка
+        properties:
+          - type: power
+            entity: switch.0x00158d00025863b3
+            attribute: power
+          - type: temperature
+            entity: switch.0x00158d00025863b3
+            attribute: temperature
 
   var:
     yandex_station_volume:
