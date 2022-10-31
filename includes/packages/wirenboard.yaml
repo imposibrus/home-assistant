@@ -72,6 +72,11 @@ wirenboard:
         unique_id: bedroom_enter_long_counter
 
     binary_sensor:
+      - name: bedroom_makeup_table_switch
+        state_topic: '/devices/wb-gpio/controls/EXT1_IN5'
+        payload_on: '1'
+        payload_off: '0'
+        unique_id: 'bedroom_makeup_table_switch'
       - name: bath_small_sink_switch
         state_topic: '/devices/wb-gpio/controls/EXT1_IN9'
         payload_on: '1'
