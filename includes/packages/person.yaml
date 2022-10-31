@@ -25,3 +25,9 @@ person:
         state: >
           {{ is_state('binary_sensor.macbook_pro_audio_output_in_use', 'on') or is_state('sensor.macbook_pro_active_audio_output', 'External Headphones') or is_state('binary_sensor.oneplus_a5010_naushniki', 'on') or is_state('binary_sensor.oneplus_a5010_muzyka_aktivna', 'on') }}
 
+      - name: is_aliya_sleep_in_bed
+        unique_id: is_aliya_sleep_in_bed
+        icon: mdi:sleep
+        state: >-
+          {{ states('sensor.bed_aliya_force_sensor') | int(0) < 15 * 1000 * 1000 }}
+
