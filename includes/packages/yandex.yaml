@@ -76,18 +76,18 @@ yandex:
       include_entities:
         - air_quality.cgllc_airmonitor_s1
 
-        - light.mqtt_lightentity
+        - light.hall_top_light
         - light.mqtt_lightentity_3
         - light.kitchen_top_light
         - light.livingroom_top_light
+        - light.livingroom_dinner_light
         - light.liustra_spalni
         - light.bath_small_backlight
-        - light.liustra_sanuzla
+        - light.bath_small_top_light
         - light.liustra_kabineta
-        - light.liustra_balkona
+        - light.balcony_top_light
         - light.svet_garderob
         - light.podsvetka_kukhni
-        - light.podsvetka_tv
         - light.wled
         - light.island_lamp
         - light.svet_kladovka

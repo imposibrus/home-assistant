@@ -67,7 +67,7 @@ wirenboard:
         unique_id: 'bedroom_cover_light_counter'
 
       - name: 'bedroom_enter_long_counter'
-        state_topic: '/devices/wb-mr6c_42/controls/input_6 Long Press Counter'
+        state_topic: '/devices/wb-mr6c_42/controls/input_4 Long Press Counter'
         icon: mdi:counter
         unique_id: bedroom_enter_long_counter
 
@@ -89,44 +89,23 @@ wirenboard:
         unique_id: 'doorbell_button'
 
     light:
-      - unique_id: 'kitchen_top_light'
-        state_topic: '/devices/wb-mr6c_42/controls/K4'
-        command_topic: '/devices/wb-mr6c_42/controls/K4/on'
-        payload_on: 1
-        payload_off: 0
-        name: kitchen_top_light
-    
-      - unique_id: 'wb-mr6c_42/K1'
-        state_topic: '/devices/wb-mr6c_42/controls/K1'
-        command_topic: '/devices/wb-mr6c_42/controls/K1/on'
-        payload_on: 1
-        payload_off: 0
-        name: 'Люстра балкона'
-    
-      - unique_id: 'wb-mr6c_42/K2'
+      - unique_id: kitchen_top_light
         state_topic: '/devices/wb-mr6c_42/controls/K2'
         command_topic: '/devices/wb-mr6c_42/controls/K2/on'
         payload_on: 1
         payload_off: 0
-        name: 'Люстра санузла'
-    
-      - unique_id: 'wb-mr6c_42/K3'
-        state_topic: '/devices/wb-mr6c_42/controls/K3'
-        command_topic: '/devices/wb-mr6c_42/controls/K3/on'
-        payload_on: 1
-        payload_off: 0
-        name: 'Свет прихожей'
+        name: kitchen_top_light
     
       - unique_id: 'wb-mr6c_42/K5'
-        state_topic: '/devices/wb-mr6c_42/controls/K5'
-        command_topic: '/devices/wb-mr6c_42/controls/K5/on'
+        state_topic: '/devices/wb-mr6c_42/controls/K3'
+        command_topic: '/devices/wb-mr6c_42/controls/K3/on'
         payload_on: 1
         payload_off: 0
         name: 'Люстра кабинета'
     
       - unique_id: 'wb-mr6c_42/K6'
-        state_topic: '/devices/wb-mr6c_42/controls/K6'
-        command_topic: '/devices/wb-mr6c_42/controls/K6/on'
+        state_topic: '/devices/wb-mr6c_42/controls/K4'
+        command_topic: '/devices/wb-mr6c_42/controls/K4/on'
         payload_on: 1
         payload_off: 0
         name: 'Люстра спальни'
@@ -152,12 +131,26 @@ wirenboard:
         payload_off: 0
         name: 'Бра Алия'
 
-      - unique_id: 'livingroom_top_light'
+      - unique_id: balcony_top_light
         state_topic: '/devices/wb-mr6c_138/controls/K5'
         command_topic: '/devices/wb-mr6c_138/controls/K5/on'
         payload_on: 1
         payload_off: 0
+        name: balcony_top_light
+
+      - unique_id: livingroom_top_light
+        state_topic: '/devices/wb-mr6c_42/controls/K1'
+        command_topic: '/devices/wb-mr6c_42/controls/K1/on'
+        payload_on: 1
+        payload_off: 0
         name: livingroom_top_light
+
+      - unique_id: livingroom_dinner_light
+        state_topic: '/devices/wb-mr6c_42/controls/K5'
+        command_topic: '/devices/wb-mr6c_42/controls/K5/on'
+        payload_on: 1
+        payload_off: 0
+        name: livingroom_dinner_light
 
       - unique_id: 'wb-mdm3_104/K1'
         state_topic: '/devices/wb-mdm3_104/controls/K1'
@@ -177,9 +170,9 @@ wirenboard:
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
-        name: 'island_lamp'
+        name: island_lamp
     
-      - unique_id: 'wb-mrgbw-d-fw3_153/White 3-B'
+      - unique_id: hall_top_light
         state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)'
         command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)/on'
         brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness'
@@ -187,7 +180,7 @@ wirenboard:
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
-        name: 'Подсветка ТВ'
+        name: hall_top_light
     
       - unique_id: 'wb-mrgbw-d-fw3_153/White 4-G'
         state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)'
@@ -208,6 +201,16 @@ wirenboard:
         payload_on: 1
         payload_off: 0
         name: 'Подсветка прихожей пол'
+
+      - unique_id: 'wb-mrgbw-d-fw3_153/White 4-w'
+        state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)'
+        command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)/on'
+        brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness'
+        brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness/on'
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: bath_small_top_light
 
     switch:
       - unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
