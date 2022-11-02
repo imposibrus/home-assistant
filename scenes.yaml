@@ -45,37 +45,19 @@
       supported_features: 24509
       volume_level: 0.12
       is_volume_muted: false
-      source: YouTube
+      source: Chromecast
       sound_output: tv_speaker
-      entity_picture: /api/media_player_proxy/media_player.lg_webos_smart_tv?token=c3eadcd2fc7b7ae699f120fa2819d73600c8716c2c831d7bf869540bf7fb2a75&cache=5ff9f5de3680cd11
       state: 'on'
     timer.dinner_end:
       duration: 0:50:00
       editable: true
       icon: mdi:food
       friendly_name: Продолжительность обеда
-      finishes_at: '2022-10-15T21:54:13+00:00'
+      finishes_at: '2022-10-31T18:27:32+00:00'
       remaining: 0:50:00
       state: active
-    switch.0x00158d00025863b3:
-      consumption: 7.92
-      device_temperature: 31
-      energy: 7.92
-      last_seen: '2022-10-15T21:04:23.292Z'
-      linkquality: 63
-      power: 5.24
-      power_outage_count: 36
-      power_outage_memory: true
-      temperature: 29
-      update:
-        state: idle
-      update_available:
-      friendly_name: Розетка
-      state: 'on'
   icon: mdi:food-variant
-  metadata:
-    switch.0x00158d00025863b3:
-      entity_only: true
+  metadata: {}
 - id: '1623060117764'
   name: Работа
   entities:
@@ -90,27 +72,6 @@
 - id: '1646340696420'
   name: Кино
   entities:
-    light.svet_gostinoi_i_kukhni:
-      supported_color_modes:
-      - onoff
-      friendly_name: Свет гостиной и кухни
-      supported_features: 0
-      state: 'off'
-    light.podsvetka_tv:
-      supported_color_modes:
-      - brightness
-      color_mode: brightness
-      brightness: 105
-      friendly_name: Подсветка ТВ
-      supported_features: 0
-      state: 'on'
-    switch.0x00158d00025863b3:
-      friendly_name: Розетка
-      state: 'on'
-    switch.0x00158d00025863b3_power_outage_memory:
-      icon: mdi:memory
-      friendly_name: plug_livingroom_power_outage_memory
-      state: 'on'
     light.podsvetka_kukhni:
       supported_color_modes:
       - brightness
@@ -127,6 +88,7 @@
       supported_features: 0
       state: 'off'
   icon: mdi:movie
+  metadata: {}
 - id: '1650196286463'
   name: Все ушли
   entities:

@@ -20,7 +20,7 @@ google_home:
       light.mqtt_lightentity_3:
         name: Подсветка шторы спальни
       switch.0x00158d00025863b3:
-        name: Розетка
+        name: Кофеварка
       light.svet_garderob:
         name: Люстра гардероба
       light.podsvetka_kukhni:

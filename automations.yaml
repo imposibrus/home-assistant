@@ -63,7 +63,7 @@
           entity_id: media_player.lg_webos_smart_tv
         data: {}
     default: []
-    enabled: false
+    enabled: true
   - delay:
       hours: 0
       minutes: 0
@@ -90,6 +90,7 @@
     target:
       entity_id: scene.obed
     metadata: {}
+    enabled: false
   mode: single
 - id: '1620222769842'
   alias: Алиса, Синхронизируй список покупок
