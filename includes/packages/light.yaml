@@ -16,6 +16,14 @@ light:
       - name: bath_small_top_light_level
         state: >-
           {{ (state_attr('light.bath_small_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-        
-      
+
+  yeelight:
+    custom_effects:
+      - name: 'Flash'
+        flow_params:
+          count: 2
+          transitions:
+            - TemperatureTransition: [1900, 300, 10]
+            - TemperatureTransition: [1900, 300, 80]
+#            - SleepTransition:       [1000]
 

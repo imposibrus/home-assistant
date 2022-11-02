@@ -64,6 +64,8 @@ logger:
     custom_components.ble_monitor: info
 #    homeassistant.components.mikrotik: debug
 #    aiowebostv: debug
+#    yeelight: debug
+#    homeassistant.components.yeelight: debug
 
 logbook: !include includes/logbook.yaml
 
