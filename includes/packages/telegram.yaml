@@ -1,6 +1,6 @@
 telegram:
   telegram_bot:
-    - platform: polling
+    - platform: webhooks
       api_key: !secret tg_bot_api_key
       allowed_chat_ids: !secret tg_bot_chat_ids
 
