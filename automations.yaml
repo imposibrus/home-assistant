@@ -1258,6 +1258,10 @@
       - service: notify.lg_webos_smart_tv
         data:
           message: В дверь звонят!
+    - service: light.turn_on
+      data:
+        entity_id: light.yeelight_torchere
+        effect: Flash
   - parallel:
     - sequence:
       - wait_template: '{{ is_state_attr(''media_player.yandex_station_442078968308181c0410'',
