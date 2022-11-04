@@ -29,7 +29,7 @@ google_home:
         name: Подсветка ТВ
       light.podsvetka_prikhozhei_pol:
         name: Подсветка пола коридора
-      light.liustra_vanny:
+      light.bath_big_top_light:
         name: Люстра ванной
       light.kladovka_svet:
         name: Люстра кладовки

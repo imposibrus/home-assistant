@@ -37,27 +37,27 @@ wirenboard:
         unit_of_measurement: '°C'
 
       - name: 'Счетчик мастер-выключателя'
-        state_topic: "/devices/wb-mr6c_42/controls/input_3 Long Press Counter"
+        state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Input 1 Shortlong Press Counter"
         icon: mdi:counter
         unique_id: 'master_off_counter'
 
       - name: 'Счетчик долгих нажатий Бра Вадим'
-        state_topic: "/devices/wb-mr6c_138/controls/input_3 Long Press Counter"
+        state_topic: "/devices/wb-mr6c_42/controls/input_2 Long Press Counter"
         icon: mdi:counter
         unique_id: 'vadim_bra_long_counter'
 
       - name: 'Счетчик коротких нажатий Бра Вадим'
-        state_topic: "/devices/wb-mr6c_138/controls/input_3 Single Press Counter"
+        state_topic: "/devices/wb-mr6c_42/controls/input_2 Single Press Counter"
         icon: mdi:counter
         unique_id: 'vadim_bra_short_counter'
 
       - name: 'Счетчик долгих нажатий Бра Алия'
-        state_topic: "/devices/wb-mr6c_138/controls/input_4 Long Press Counter"
+        state_topic: "/devices/wb-mr6c_42/controls/input_3 Long Press Counter"
         icon: mdi:counter
         unique_id: 'aliya_bra_long_counter'
 
       - name: 'Счетчик коротких нажатий Бра Алия'
-        state_topic: "/devices/wb-mr6c_138/controls/input_4 Single Press Counter"
+        state_topic: "/devices/wb-mr6c_42/controls/input_3 Single Press Counter"
         icon: mdi:counter
         unique_id: 'aliya_bra_short_counter'
 
@@ -66,10 +66,10 @@ wirenboard:
         icon: mdi:counter
         unique_id: 'bedroom_cover_light_counter'
 
-      - name: 'bedroom_enter_long_counter'
-        state_topic: '/devices/wb-mr6c_42/controls/input_4 Long Press Counter'
+      - name: bedroom_enter_master_switch_counter
+        state_topic: '/devices/wb-led_45/controls/Input 3 Shortlong Press Counter'
         icon: mdi:counter
-        unique_id: bedroom_enter_long_counter
+        unique_id: bedroom_enter_master_switch_counter
 
     binary_sensor:
       - name: bedroom_makeup_table_switch
@@ -90,64 +90,79 @@ wirenboard:
 
     light:
       - unique_id: kitchen_top_light
-        state_topic: '/devices/wb-mr6c_42/controls/K2'
-        command_topic: '/devices/wb-mr6c_42/controls/K2/on'
+        state_topic: '/devices/wb-led_45/controls/Channel 1'
+        command_topic: '/devices/wb-led_45/controls/Channel 1/on'
+        brightness_state_topic: '/devices/wb-led_45/controls/Channel 1 Brightness'
+        brightness_command_topic: '/devices/wb-led_45/controls/Channel 1 Brightness/on'
+        brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: kitchen_top_light
     
       - unique_id: 'wb-mr6c_42/K5'
-        state_topic: '/devices/wb-mr6c_42/controls/K3'
-        command_topic: '/devices/wb-mr6c_42/controls/K3/on'
+        state_topic: '/devices/wb-led_45/controls/Channel 2'
+        command_topic: '/devices/wb-led_45/controls/Channel 2/on'
+        brightness_state_topic: '/devices/wb-led_45/controls/Channel 2 Brightness'
+        brightness_command_topic: '/devices/wb-led_45/controls/Channel 2 Brightness/on'
+        brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: 'Люстра кабинета'
     
       - unique_id: 'wb-mr6c_42/K6'
-        state_topic: '/devices/wb-mr6c_42/controls/K4'
-        command_topic: '/devices/wb-mr6c_42/controls/K4/on'
+        state_topic: '/devices/wb-led_45/controls/Channel 3'
+        command_topic: '/devices/wb-led_45/controls/Channel 3/on'
+        brightness_state_topic: '/devices/wb-led_45/controls/Channel 3 Brightness'
+        brightness_command_topic: '/devices/wb-led_45/controls/Channel 3 Brightness/on'
+        brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: 'Люстра спальни'
     
-      - unique_id: 'wb-mr6c_138/K1'
-        state_topic: '/devices/wb-mr6c_138/controls/K1'
-        command_topic: '/devices/wb-mr6c_138/controls/K1/on'
+      - unique_id: bath_big_top_light
+        state_topic: '/devices/wb-mr6c_42/controls/K1'
+        command_topic: '/devices/wb-mr6c_42/controls/K1/on'
         payload_on: 1
         payload_off: 0
-        name: 'Люстра ванны'
+        name: bath_big_top_light
     
-      - unique_id: 'wb-mr6c_138/K3'
-        state_topic: '/devices/wb-mr6c_138/controls/K3'
-        command_topic: '/devices/wb-mr6c_138/controls/K3/on'
+      - unique_id: bedroom_bra_vadim
+        state_topic: '/devices/wb-mr6c_42/controls/K2'
+        command_topic: '/devices/wb-mr6c_42/controls/K2/on'
         payload_on: 1
         payload_off: 0
-        name: 'Бра Вадим'
+        name: bedroom_bra_vadim
 
-      - unique_id: 'wb-mr6c_138/K4'
-        state_topic: '/devices/wb-mr6c_138/controls/K4'
-        command_topic: '/devices/wb-mr6c_138/controls/K4/on'
+      - unique_id: bedroom_bra_aliya
+        state_topic: '/devices/wb-mr6c_42/controls/K3'
+        command_topic: '/devices/wb-mr6c_42/controls/K3/on'
         payload_on: 1
         payload_off: 0
-        name: 'Бра Алия'
+        name: bedroom_bra_aliya
 
       - unique_id: balcony_top_light
-        state_topic: '/devices/wb-mr6c_138/controls/K5'
-        command_topic: '/devices/wb-mr6c_138/controls/K5/on'
+        state_topic: '/devices/wb-mr6c_42/controls/K4'
+        command_topic: '/devices/wb-mr6c_42/controls/K4/on'
         payload_on: 1
         payload_off: 0
         name: balcony_top_light
 
       - unique_id: livingroom_top_light
-        state_topic: '/devices/wb-mr6c_42/controls/K1'
-        command_topic: '/devices/wb-mr6c_42/controls/K1/on'
+        state_topic: '/devices/wb-led_41/controls/Channel 4'
+        command_topic: '/devices/wb-led_41/controls/Channel 4/on'
+        brightness_state_topic: '/devices/wb-led_41/controls/Channel 4 Brightness'
+        brightness_command_topic: '/devices/wb-led_41/controls/Channel 4 Brightness/on'
+        brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: livingroom_top_light
 
       - unique_id: livingroom_dinner_light
-        state_topic: '/devices/wb-mr6c_42/controls/K5'
-        command_topic: '/devices/wb-mr6c_42/controls/K5/on'
+        state_topic: '/devices/wb-led_45/controls/Channel 4'
+        command_topic: '/devices/wb-led_45/controls/Channel 4/on'
+        brightness_state_topic: '/devices/wb-led_45/controls/Channel 4 Brightness'
+        brightness_command_topic: '/devices/wb-led_45/controls/Channel 4 Brightness/on'
+        brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: livingroom_dinner_light
@@ -227,12 +242,12 @@ wirenboard:
         payload_off: 0
         name: 'Полотенцесушитель санузла'
   
-      - unique_id: 'wb-mr6c_138/controls/K2'
-        state_topic: '/devices/wb-mr6c_138/controls/K2'
-        command_topic: '/devices/wb-mr6c_138/controls/K2/on'
+      - unique_id: bath_small_warm_floor
+        state_topic: '/devices/wb-mr6cu_28/controls/K4'
+        command_topic: '/devices/wb-mr6cu_28/controls/K4/on'
         payload_on: 1
         payload_off: 0
-        name: 'Теплый пол санузла'
+        name: bath_small_warm_floor
   
       - unique_id: 'alarm_fridge/enabled'
         state_topic: '/devices/alarm_fridge/controls/enabled'

@@ -92,7 +92,7 @@
 - id: '1650196286463'
   name: Все ушли
   entities:
-    light.liustra_vanny:
+    light.bath_big_top_light:
       supported_color_modes:
       - onoff
       friendly_name: Люстра ванны
@@ -119,7 +119,7 @@
       friendly_name: Подсветка пола коридора
       supported_features: 0
       state: 'off'
-    light.mqtt_lightentity_3:
+    light.bedroom_cover_backlight:
       supported_color_modes:
       - brightness
       friendly_name: Подсветка шторы спальни
@@ -197,21 +197,9 @@
 - id: '1657743372431'
   name: Спальня засыпаем
   entities:
-    light.bra_aliia:
-      supported_color_modes:
-      - onoff
-      friendly_name: Бра Алия
-      supported_features: 0
-      state: 'off'
-    light.bra_vadim:
-      supported_color_modes:
-      - onoff
-      friendly_name: Бра Вадим
-      supported_features: 0
-      state: 'off'
     light.liustra_spalni:
       supported_color_modes:
-      - onoff
+      - brightness
       friendly_name: Люстра спальни
       supported_features: 0
       state: 'off'
@@ -222,23 +210,35 @@
       friendly_name: Свет гардероб
       supported_features: 0
       state: 'off'
-    light.mqtt_lightentity_3:
+    light.bedroom_cover_backlight:
       supported_color_modes:
       - brightness
       friendly_name: Подсветка шторы спальни
       supported_features: 0
       state: 'off'
+    light.bedroom_bra_aliya:
+      supported_color_modes:
+      - onoff
+      friendly_name: bedroom_bra_aliya
+      supported_features: 0
+      state: 'off'
+    light.bedroom_bra_vadim:
+      supported_color_modes:
+      - onoff
+      friendly_name: bedroom_bra_vadim
+      supported_features: 0
+      state: 'off'
   icon: mdi:power-sleep
   metadata:
-    light.mqtt_lightentity_3:
-      entity_only: true
     light.liustra_spalni:
       entity_only: true
     light.svet_garderob:
       entity_only: true
-    light.bra_vadim:
+    light.bedroom_cover_backlight:
       entity_only: true
-    light.bra_aliia:
+    light.bedroom_bra_aliya:
+      entity_only: true
+    light.bedroom_bra_vadim:
       entity_only: true
 - id: '1665863063404'
   name: Готовка

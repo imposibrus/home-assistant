@@ -77,7 +77,7 @@ yandex:
         - air_quality.cgllc_airmonitor_s1
 
         - light.hall_top_light
-        - light.mqtt_lightentity_3
+        - light.bedroom_cover_backlight
         - light.kitchen_top_light
         - light.livingroom_top_light
         - light.livingroom_dinner_light
@@ -92,9 +92,9 @@ yandex:
         - light.island_lamp
         - light.svet_kladovka
         - light.podsvetka_prikhozhei_pol
-        - light.liustra_vanny
-        - light.bra_vadim
-        - light.bra_aliia
+        - light.bath_big_top_light
+        - light.bedroom_bra_vadim
+        - light.bedroom_bra_aliya
 
         - climate.ac_office
 
