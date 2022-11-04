@@ -82,11 +82,6 @@ wirenboard:
         payload_on: '1'
         payload_off: '0'
         unique_id: 'bath_small_sink_switch'
-      - name: livingroom_torchere_switch
-        state_topic: '/devices/wb-gpio/controls/EXT1_IN13'
-        payload_on: '1'
-        payload_off: '0'
-        unique_id: 'livingroom_5_button'
       - name: doorbell_button
         state_topic: '/devices/wb-gpio/controls/EXT1_IN14'
         payload_on: '1'

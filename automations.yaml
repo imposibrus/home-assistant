@@ -586,8 +586,15 @@
     entity_id: sensor.schetchik_mater_vykliuchatelia
   condition:
   - condition: template
+    value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.from_state.state != '''' and trigger.to_state.state
+      != ''unavailable'' and trigger.to_state.state != ''unknown'' and trigger.to_state.state
+      != '''' }}'
+    alias: Состояние не unavailable и не unknown
+  - condition: template
     value_template: '{{ trigger.from_state.state | int(0) < trigger.to_state.state
       | int(0) }}'
+    alias: Счетчик изменился в большую сторону
   action:
   - service: scene.turn_on
     target:
@@ -1314,7 +1321,13 @@
     - person.aliya
   condition:
   - condition: template
+    value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.to_state.state != ''unavailable'' and trigger.to_state.state
+      != ''unknown'' }}'
+    alias: Состояние не unavailable и не unknown
+  - condition: template
     value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
+    alias: Предыдущее состояние не равно новому
   action:
   - service: notify.mobile_app_oneplus_a5010
     data:
@@ -1391,8 +1404,15 @@
         entity_id: input_boolean.alarm_clock_is_ringing
         state: 'on'
       - condition: template
-        value_template: '{{ trigger.to_state.state  != ''unavailable'' and trigger.from_state.state
-          != trigger.to_state.state and int(trigger.to_state.state, 0) > 0 }}'
+        value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+          != ''unknown'' and trigger.from_state.state != '''' and trigger.to_state.state
+          != ''unavailable'' and trigger.to_state.state != ''unknown'' and trigger.to_state.state
+          != '''' }}'
+        alias: Состояние не unavailable и не unknown
+      - condition: template
+        value_template: '{{ trigger.from_state.state != trigger.to_state.state and
+          int(trigger.to_state.state, 0) > 0 }}'
+        alias: Счетчик нажатий кнопок изменился и больше 0
       sequence:
       - service: input_boolean.turn_on
         data: {}
