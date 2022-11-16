@@ -71,6 +71,11 @@ wirenboard:
         icon: mdi:counter
         unique_id: bedroom_enter_master_switch_counter
 
+      - name: office_enter_master_switch_counter
+        state_topic: '/devices/wb-led_45/controls/Input 2 Shortlong Press Counter'
+        icon: mdi:counter
+        unique_id: office_enter_master_switch_counter
+
     binary_sensor:
       - name: bedroom_makeup_table_switch
         state_topic: '/devices/wb-gpio/controls/EXT1_IN5'

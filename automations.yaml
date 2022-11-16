@@ -1604,3 +1604,29 @@
     target:
       entity_id: switch.light_wardrobe
   mode: single
+- id: '1667597719587'
+  alias: '[Свет] Мастер-выключатель кабинета'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.office_enter_master_switch_counter
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.from_state.state != '''' and trigger.to_state.state
+      != ''unavailable'' and trigger.to_state.state != ''unknown'' and trigger.to_state.state
+      != '''' }}'
+    alias: Состояние не unavailable и не unknown
+  - condition: template
+    value_template: '{{ trigger.from_state.state | int(0) < trigger.to_state.state
+      | int(0) }}'
+    alias: Счетчик увеличился
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id:
+      - light.yeelight_torchere
+      - light.liustra_kabineta
+  mode: single
