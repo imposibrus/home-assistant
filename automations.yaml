@@ -1453,7 +1453,9 @@
             - state_attr(''input_datetime.alarm_clock'', ''timestamp'') %} {% set
             percent = int(elapsed / total * 100, 0) %} {{ percent }}'
         target:
-          entity_id: light.bedroom_cover_backlight
+          entity_id:
+          - light.bedroom_cover_backlight
+          - light.liustra_spalni
       - delay:
           hours: 0
           minutes: 0
