@@ -110,15 +110,17 @@ yandex:
         - switch.signalizatsiia_kholodilnika
 
 #        - vacuum.dreame_p2029_bf7e_robot_cleaner
+        - vacuum.garderob
         - vacuum.gostinaia
         - vacuum.kabinet
         - vacuum.kladovka
         - vacuum.koridor
         - vacuum.kukhnia
         - vacuum.prikhozhaia
-        - vacuum.spalnia
-        - vacuum.vanaia
         - vacuum.sanuzel
+        - vacuum.spalnia
+        - vacuum.stolovaia
+        - vacuum.vanaia
 
         - camera.1k_1p_legenda_side
         - camera.1k_enter

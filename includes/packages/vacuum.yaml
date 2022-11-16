@@ -108,10 +108,26 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [2]
+              selection: [7]
+              repeats: 1
+
+      Столовая:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [10]
               repeats: 1
 
       Спальня:
+        sequence:
+          - service: script.1655650573947
+            data:
+              entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+              selection: [8]
+              repeats: 1
+
+      Гардероб:
         sequence:
           - service: script.1655650573947
             data:
@@ -124,7 +140,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [5]
+              selection: [9]
               repeats: 1
 
       Коридор:
@@ -132,7 +148,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [8]
+              selection: [6]
               repeats: 1
 
       Санузел:
@@ -140,7 +156,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [6]
+              selection: [2]
               repeats: 1
 
       Прихожая:
@@ -148,7 +164,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [7]
+              selection: [3]
               repeats: 2
 
       Кладовка:
@@ -156,7 +172,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [4]
+              selection: [3]
               repeats: 2
 
       Кухня:
@@ -164,7 +180,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [3]
+              selection: [5]
               repeats: 1
 
       Ваная:
@@ -172,7 +188,7 @@ vacuum:
           - service: script.1655650573947
             data:
               entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-              selection: [9]
+              selection: [4]
               repeats: 1
 
 #          - service: xiaomi_miot.call_action
