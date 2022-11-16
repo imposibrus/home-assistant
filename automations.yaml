@@ -1475,15 +1475,14 @@
       volume_level: 0.1
     target:
       entity_id:
-      - media_player.yandex_station_442078968308181c0410
-      - media_player.yandex_station_lp00000000000005131900001aedca28
+      - media_player.yandex_station_m0079n500vwm0g
   - service: media_player.play_media
     data:
       media_content_type: command
-      media_content_id: Включи музыку везде
+      media_content_id: Включи музыку
     target:
       entity_id:
-      - media_player.yandex_station_442078968308181c0410
+      - media_player.yandex_station_m0079n500vwm0g
   - repeat:
       count: '5'
       sequence:
@@ -1505,8 +1504,7 @@
           volume_level: '{{ 0.1 + ((repeat.index - 1) * 0.1) }}'
         target:
           entity_id:
-          - media_player.yandex_station_442078968308181c0410
-          - media_player.yandex_station_lp00000000000005131900001aedca28
+          - media_player.yandex_station_m0079n500vwm0g
       - delay:
           hours: 0
           minutes: 0
