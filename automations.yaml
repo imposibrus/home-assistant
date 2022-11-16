@@ -1230,7 +1230,6 @@
       data:
         topic: /devices/buzzersound/controls/Play Nokia/on
         payload: 1
-      enabled: true
     - service: media_player.play_media
       data:
         media_content_id: <speaker audio="alice-sounds-game-8-bit-phone-1.opus"> В
@@ -1242,12 +1241,14 @@
         entity_id:
         - media_player.yandex_station_442078968308181c0410
         - media_player.yandex_station_lp00000000000005131900001aedca28
-    - if:
-      - condition: state
-        entity_id: media_player.lg_webos_smart_tv
-        attribute: source
-        state: Chromecast
-      then:
+    - service: light.turn_on
+      data:
+        entity_id: light.yeelight_torchere
+        effect: Flash
+    - parallel:
+      - service: notify.lg_webos_smart_tv
+        data:
+          message: В дверь звонят!
       - service: rest_command.pipup_url_on_tv
         data:
           message: В дверь звонят!
@@ -1261,14 +1262,6 @@
           url: https://ha.imposibrus.space{{ state_attr('camera.doorbell_cam', 'entity_picture')
             }}
         enabled: false
-      else:
-      - service: notify.lg_webos_smart_tv
-        data:
-          message: В дверь звонят!
-    - service: light.turn_on
-      data:
-        entity_id: light.yeelight_torchere
-        effect: Flash
   - parallel:
     - sequence:
       - wait_template: '{{ is_state_attr(''media_player.yandex_station_442078968308181c0410'',
@@ -1294,6 +1287,7 @@
             volume_level: 0.1
         target:
           entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+    enabled: false
   mode: single
 - id: '1665503496732'
   alias: '[test] notify when "anyone home" changes'
