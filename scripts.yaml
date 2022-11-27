@@ -232,3 +232,40 @@ alert:
     enabled: false
   mode: parallel
   icon: mdi:alert-circle-outline
+set_input_datetime:
+  alias: set input datetime
+  fields:
+    entity_id:
+      name: entity_id
+      description: which input datetime to change
+      required: true
+      selector:
+        entity:
+          domain: input_datetime
+          multiple: true
+    hours:
+      name: hours
+      description: how many hours to add/substract from date
+      default: 0
+      selector:
+        number:
+          min: -100
+          max: 100
+          mode: box
+    minutes:
+      name: minutes
+      description: how many minutes to add/substract from date
+      default: 0
+      selector:
+        number:
+          min: -60
+          max: 60
+          mode: box
+  sequence:
+  - service: input_datetime.set_datetime
+    data:
+      entity_id: '{{ entity_id }}'
+      timestamp: '{% if minutes is not defined %} {% set minutes = 0 %} {% endif %}
+        {% if hours is not defined %} {% set hours = 0 %} {% endif %} {{ as_timestamp(now()
+        + timedelta( hours = hours, minutes = minutes )) }}'
+  mode: single
