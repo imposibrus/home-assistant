@@ -42,3 +42,42 @@ person:
         state: >-
           {{ states('input_number.oclean_x_battery') | int(0) < 30 }}
 
+      - name: imposibrus watch connected
+        unique_id: imposibrus_watch_connected
+        icon: mdi:bluetooth-connect
+        state: >-
+          {{ is_state('sensor.amazfit_connected', '1') }}
+
+    sensor:
+      - name: imposibrus watch battery level
+        unique_id: imposibrus_watch_battery_level
+        device_class: battery
+#        icon: mdi:bluetooth-connect
+        unit_of_measurement: '%'
+        state: >-
+          {{ states('sensor.amazfit_battery') }}
+        
+      - name: imposibrus watch heartrate
+        unique_id: imposibrus_watch_heartrate
+        icon: mdi:heart-pulse
+        unit_of_measurement: 'bpm'
+        state: >-
+          {{ states('sensor.amazfit_heartrate') }}
+        
+      - name: imposibrus watch sleep duration
+        unique_id: imposibrus_watch_sleep_duration
+#        icon: mdi:heart-pulse
+        device_class: duration
+        unit_of_measurement: 'minutes'
+        state: >-
+          {{ states('sensor.amazfit_sleepduration') }}
+        
+      - name: imposibrus watch steps
+        unique_id: imposibrus_watch_steps
+        icon: mdi:shoe-print
+        device_class: distance
+        unit_of_measurement: 'steps'
+        state: >-
+          {{ states('sensor.amazfit_steps') }}
+        
+
