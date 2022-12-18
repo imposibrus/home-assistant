@@ -5,9 +5,9 @@ wirenboard:
         name: polotentsesushitel_sanuzla
         unique_id: is_polotentsesushitel_sanuzla_on
 
-      - state: "{{ 1 if is_state('switch.teplyi_pol_sanuzla', 'on') else 0 }}"
-        name: teplyi_pol_sanuzla
-        unique_id: is_teplyi_pol_sanuzla_on
+      - state: "{{ 1 if is_state('switch.bath_small_warm_floor', 'on') else 0 }}"
+        name: bath_small_warm_floor
+        unique_id: is_bath_small_warm_floor_on
 
       - state: "{{ 1 if is_state('switch.teplyi_pol_dushevoi', 'on') else 0 }}"
         name: teplyi_pol_dushevoi
