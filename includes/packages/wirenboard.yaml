@@ -232,6 +232,16 @@ wirenboard:
         payload_off: 0
         name: bath_small_top_light
 
+      - unique_id: bath_small_shower_backlight
+        state_topic: '/devices/wb-led_41/controls/Channel 3'
+        command_topic: '/devices/wb-led_41/controls/Channel 3/on'
+        brightness_state_topic: '/devices/wb-led_41/controls/Channel 3 Brightness'
+        brightness_command_topic: '/devices/wb-led_41/controls/Channel 3 Brightness/on'
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: bath_small_shower_backlight
+
     switch:
       - unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
         state_topic: '/devices/wb-mrm2-mini_134/controls/K1'

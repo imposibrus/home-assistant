@@ -86,6 +86,7 @@ yandex:
         - light.liustra_spalni
         - light.bath_small_backlight
         - light.bath_small_top_light
+        - light.bath_small_shower_backlight
         - light.liustra_kabineta
         - light.balcony_top_light
         - light.svet_garderob
