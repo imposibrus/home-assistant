@@ -829,8 +829,8 @@
       entity_id:
       - light.liustra_spalni
       - light.svet_garderob
-      - light.bra_vadim
-      - light.bra_aliia
+      - light.bedroom_bra_vadim
+      - light.bedroom_bra_aliya
       - light.bedroom_cover_backlight
     enabled: false
   - service: scene.turn_on
@@ -1579,8 +1579,8 @@
       entity_id:
       - light.liustra_spalni
       - light.svet_garderob
-      - light.bra_vadim
-      - light.bra_aliia
+      - light.bedroom_bra_vadim
+      - light.bedroom_bra_aliya
       - light.bedroom_cover_backlight
     enabled: false
   - service: scene.turn_on
