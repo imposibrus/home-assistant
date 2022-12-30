@@ -29,7 +29,13 @@ person:
         unique_id: is_aliya_sleep_in_bed
         icon: mdi:sleep
         state: >-
-          {{ states('sensor.bed_aliya_force_sensor') | int(0) < 15 * 1000 * 1000 }}
+          {{ states('sensor.bed_aliya_force_sensor') | int(0) < 85000 }}
+
+      - name: is_vadim_sleep_in_bed
+        unique_id: is_vadim_sleep_in_bed
+        icon: mdi:sleep
+        state: >-
+          {{ states('sensor.bed_vadim_force_sensor') | int(0) < 85000 }}
 
       - name: Oclean X Pro Elite Battery Low
         unique_id: oclean_x_pro_elite_battery_low
