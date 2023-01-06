@@ -660,14 +660,6 @@
       entity_id: scene.vse_ushli
     metadata: {}
   mode: single
-- id: '1651772300833'
-  alias: '[Пылесос] Обновлять карту только во время работы'
-  description: ''
-  use_blueprint:
-    path: PiotrMachowski/disable_vacuum_camera_update_when_docked.yaml
-    input:
-      vacuum: vacuum.dreame_p2029_bf7e_robot_cleaner
-      camera: camera.xiaomi_cloud_map_extractor
 - id: '1652617820669'
   alias: Cast to Cameras to Chromecast
   description: ''
@@ -766,12 +758,12 @@
     - service: vacuum.start
       data: {}
       target:
-        entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+        entity_id: vacuum.dreame_bot_l10_pro
     else:
     - service: vacuum.stop
       data: {}
       target:
-        entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+        entity_id: vacuum.dreame_bot_l10_pro
   mode: single
 - id: '1657633221475'
   alias: '[Пылесос] Уборка всего дома, когда никого нет'
@@ -787,8 +779,8 @@
       seconds: 0
   condition:
   - condition: state
-    entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-    state: idle
+    entity_id: vacuum.dreame_bot_l10_pro
+    state: docked
   - condition: state
     entity_id: binary_sensor.vacuum_do_not_disturb
     state: 'off'
@@ -799,7 +791,7 @@
   - service: vacuum.start
     data: {}
     target:
-      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
+      entity_id: vacuum.dreame_bot_l10_pro
   - service: notify.tg_home
     data:
       message: Никого нет дома больше 15 минут
@@ -1093,22 +1085,20 @@
   trigger:
   - platform: state
     entity_id:
-    - vacuum.dreame_p2029_bf7e_robot_cleaner
+    - vacuum.dreame_bot_l10_pro
     to: cleaning
     for:
       hours: 0
       minutes: 1
       seconds: 0
   condition:
-  - condition: numeric_state
-    entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-    attribute: vacuum_extend.waterbox_status
-    above: '0'
+  - condition: template
+    value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'') == true }}'
   action:
   - wait_for_trigger:
     - platform: state
       entity_id:
-      - vacuum.dreame_p2029_bf7e_robot_cleaner
+      - vacuum.dreame_bot_l10_pro
       to: docked
       for:
         hours: 0
@@ -1116,7 +1106,7 @@
         seconds: 0
     - platform: state
       entity_id:
-      - vacuum.dreame_p2029_bf7e_robot_cleaner
+      - vacuum.dreame_bot_l10_pro
       to: idle
       for:
         hours: 0
@@ -1124,10 +1114,8 @@
         seconds: 0
     continue_on_timeout: false
   - if:
-    - condition: numeric_state
-      entity_id: vacuum.dreame_p2029_bf7e_robot_cleaner
-      attribute: vacuum_extend.waterbox_status
-      above: '0'
+    - condition: template
+      value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'') == true }}'
     then:
     - service: notify.tg_home
       data:

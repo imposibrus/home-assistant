@@ -66,6 +66,9 @@ logger:
 #    aiowebostv: debug
 #    yeelight: debug
 #    homeassistant.components.yeelight: debug
+#    motioneye_client: debug
+#    homeassistant.components.motioneye: debug
+#    custom_components.dreame_vacuum: debug
 
 logbook: !include includes/logbook.yaml
 

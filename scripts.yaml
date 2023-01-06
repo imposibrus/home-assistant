@@ -181,36 +181,6 @@ tv_on:
           milliseconds: 0
     default: []
   mode: single
-'1655650573947':
-  alias: Уборка комнат
-  fields:
-    entity_id:
-      description: Vacuum entity id
-      example: vacuum.dreame_p2029_bf7e_robot_cleaner
-    selection:
-      description: Rooms ids array/collection (not string)
-      example: '[1,2]'
-    repeats:
-      description: Repeats count. Applied to all rooms
-      example: 1
-  variables:
-    param_selects: "{%- set data = namespace(numbers=[]) -%} {%- for i in selection
-      -%}\n  {%- set data.numbers = data.numbers + [[i, repeats, 3, 3, 1]] -%}\n{%-
-      endfor -%} {%- set val = {'piid':10, 'value': {'selects': data.numbers}|to_json
-      } -%} {{ val }}"
-  sequence:
-  - service: xiaomi_miot.call_action
-    data:
-      entity_id: '{{entity_id}}'
-      siid: 4
-      aiid: 1
-      params:
-      - piid: 1
-        value: 18
-      - '{{ param_selects }}'
-      force_params: true
-  mode: single
-  icon: mdi:robot-vacuum
 alert:
   alias: Alert
   fields:
