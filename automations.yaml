@@ -138,26 +138,85 @@
   - condition: state
     entity_id: media_player.yandex_station_442078968308181c0410
     state: playing
+    enabled: false
   action:
   - service: var.set
     data:
       entity_id: var.yandex_station_volume
       value: '{{ state_attr(''media_player.yandex_station_442078968308181c0410'',
         ''volume_level'') }}'
+    enabled: false
+  - parallel:
+    - service: var.set
+      data:
+        entity_id: var.yandex_station_volume
+        value: '{{ state_attr(''media_player.yandex_station_442078968308181c0410'',
+          ''volume_level'') }}'
+    - service: var.set
+      data:
+        entity_id: var.yandex_station_lite_volume
+        value: '{{ state_attr(''media_player.yandex_station_lp00000000000005131900001aedca28'',
+          ''volume_level'') }}'
+    - service: var.set
+      data:
+        entity_id: var.yandex_station_mini2_volume
+        value: '{{ state_attr(''media_player.yandex_station_m0079n500vwm0g'', ''volume_level'')
+          }}'
+    enabled: true
   - service: media_player.volume_mute
     entity_id: media_player.yandex_station_442078968308181c0410
     data:
       is_volume_muted: true
+    enabled: false
+  - parallel:
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_442078968308181c0410
+      data:
+        volume_level: 0.1
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+      data:
+        volume_level: 0.1
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_m0079n500vwm0g
+      data:
+        volume_level: 0.1
+    enabled: true
   - wait_for_trigger:
     - platform: state
       entity_id: sensor.oneplus_a5010_sostoianie_telefona
       to: idle
-    timeout: '300'
+    timeout:
+      hours: 2
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+    continue_on_timeout: false
   - service: media_player.volume_set
     target:
       entity_id: media_player.yandex_station_442078968308181c0410
     data:
       volume_level: '{{ states(''var.yandex_station_volume'') }}'
+    enabled: false
+  - parallel:
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_442078968308181c0410
+      data:
+        volume_level: '{{ states(''var.yandex_station_volume'') }}'
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_lp00000000000005131900001aedca28
+      data:
+        volume_level: '{{ states(''var.yandex_station_lite_volume'') }}'
+    - service: media_player.volume_set
+      target:
+        entity_id: media_player.yandex_station_m0079n500vwm0g
+      data:
+        volume_level: '{{ states(''var.yandex_station_mini2_volume'') }}'
   mode: single
 - id: '1623060310948'
   alias: Работа!

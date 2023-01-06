@@ -233,4 +233,13 @@ yandex:
       initial_value: 0.4
       icon: mdi:volume-high
   
+    yandex_station_lite_volume:
+      friendly_name: 'Громкость Я.Станции lite'
+      initial_value: 0.4
+      icon: mdi:volume-high
  
+    yandex_station_mini2_volume:
+      friendly_name: 'Громкость Я.Станции mini2'
+      initial_value: 0.4
+      icon: mdi:volume-high
+
