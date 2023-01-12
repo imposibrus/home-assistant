@@ -77,3 +77,15 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+proximity:
+  home:
+    devices:
+      - device_tracker.iphone_aliia
+      - device_tracker.oneplus_a5010
+
+panel_iframe:
+  grafana:
+    title: "Grafana"
+    url: "https://grafana.home.imposibrus.space"
+    icon: mdi:chart-areaspline
+

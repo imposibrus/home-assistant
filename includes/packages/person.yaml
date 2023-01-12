@@ -74,14 +74,14 @@ person:
         unique_id: imposibrus_watch_sleep_duration
 #        icon: mdi:heart-pulse
         device_class: duration
-        unit_of_measurement: 'minutes'
+        unit_of_measurement: min
         state: >-
           {{ states('sensor.amazfit_sleepduration') }}
         
       - name: imposibrus watch steps
         unique_id: imposibrus_watch_steps
         icon: mdi:shoe-print
-        device_class: distance
+#        device_class: distance
         unit_of_measurement: 'steps'
         state: >-
           {{ states('sensor.amazfit_steps') }}

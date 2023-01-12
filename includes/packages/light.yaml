@@ -19,6 +19,9 @@ light:
       - name: bath_small_shower_backlight_level
         state: >-
           {{ (state_attr('light.bath_small_shower_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+      - name: bedroom_bed_backlight_level
+        state: >-
+          {{ (state_attr('light.bedroom_bed_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
 
   yeelight:
     custom_effects:

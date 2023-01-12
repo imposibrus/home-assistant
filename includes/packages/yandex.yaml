@@ -98,6 +98,7 @@ yandex:
         - light.bath_big_top_light
         - light.bedroom_bra_vadim
         - light.bedroom_bra_aliya
+        - light.bedroom_bed_backlight
 
         - climate.ac_office
 

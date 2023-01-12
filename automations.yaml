@@ -1093,7 +1093,8 @@
       seconds: 0
   condition:
   - condition: template
-    value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'') == true }}'
+    value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'')
+      == true }}'
   action:
   - wait_for_trigger:
     - platform: state
@@ -1115,7 +1116,8 @@
     continue_on_timeout: false
   - if:
     - condition: template
-      value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'') == true }}'
+      value_template: '{{ state_attr(''vacuum.dreame_bot_l10_pro'', ''water_tank'')
+        == true }}'
     then:
     - service: notify.tg_home
       data:
@@ -1603,8 +1605,9 @@
   condition: []
   action:
   - service: light.toggle
-    entity_id: light.bath_small_backlight
     data: {}
+    target:
+      entity_id: light.bath_small_shower_backlight
   mode: single
 - id: '1666533904225'
   alias: '[Свет] Мастер-выключатель спальни у входа'
