@@ -253,13 +253,19 @@
     light.bedroom_bra_aliya:
       supported_color_modes:
       - onoff
-      friendly_name: bedroom_bra_aliya
+      friendly_name: Бра Алия
       supported_features: 0
       state: 'off'
     light.bedroom_bra_vadim:
       supported_color_modes:
       - onoff
-      friendly_name: bedroom_bra_vadim
+      friendly_name: Бра Вадим
+      supported_features: 0
+      state: 'off'
+    light.bedroom_bed_backlight:
+      supported_color_modes:
+      - brightness
+      friendly_name: bedroom_bed_backlight
       supported_features: 0
       state: 'off'
   icon: mdi:power-sleep
@@ -273,6 +279,8 @@
     light.bedroom_bra_aliya:
       entity_only: true
     light.bedroom_bra_vadim:
+      entity_only: true
+    light.bedroom_bed_backlight:
       entity_only: true
 - id: '1665863063404'
   name: Готовка
