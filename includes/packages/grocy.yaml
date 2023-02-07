@@ -1,0 +1,98 @@
+grocy:
+  rest:
+    - resource: !secret grocy_chores_url
+      params:
+        order: next_estimated_execution_time
+        limit: 3
+      method: 'GET'
+      timeout: 10
+      headers:
+        'GROCY-API-KEY': !secret grocy_api_key
+      sensor:
+        - unique_id: grocy_chore_0
+          name: grocy chore rest 0
+          value_template: >
+            {% if value_json[0] is defined %}
+              {{ (value_json[0].next_estimated_execution_time) | as_timestamp | timestamp_custom('%Y-%m-%dT%H:%M:%S%z', False) }}
+            {% else %}
+              unknown
+            {% endif %}
+          json_attributes_path: "$.[0]"
+          device_class: timestamp
+          json_attributes:
+            - chore_id
+            - chore_name
+            - last_tracked_time
+            - next_estimated_execution_time
+            - track_date_only
+            - next_execution_assigned_to_user_id
+            - is_rescheduled
+            - is_reassigned
+
+        - unique_id: grocy_chore_1
+          name: grocy chore rest 1
+          value_template: >
+            {% if value_json[1] is defined %}
+              {{ (value_json[1].next_estimated_execution_time) | as_timestamp | timestamp_custom('%Y-%m-%dT%H:%M:%S%z', False) }}
+            {% else %}
+              unknown
+            {% endif %}
+          json_attributes_path: "$.[1]"
+          device_class: timestamp
+          json_attributes:
+            - chore_id
+            - chore_name
+            - last_tracked_time
+            - next_estimated_execution_time
+            - track_date_only
+            - next_execution_assigned_to_user_id
+            - is_rescheduled
+            - is_reassigned
+
+        - unique_id: grocy_chore_2
+          name: grocy chore rest 2
+          value_template: >
+            {% if value_json[2] is defined %}
+              {{ (value_json[2].next_estimated_execution_time) | as_timestamp | timestamp_custom('%Y-%m-%dT%H:%M:%S%z', False) }}
+            {% else %}
+              unknown
+            {% endif %}
+          json_attributes_path: "$.[2]"
+          device_class: timestamp
+          json_attributes:
+            - chore_id
+            - chore_name
+            - last_tracked_time
+            - next_estimated_execution_time
+            - track_date_only
+            - next_execution_assigned_to_user_id
+            - is_rescheduled
+            - is_reassigned
+
+  template:
+    - sensor:
+      - unique_id: grocy_chore_template_0
+        name: "{{ state_attr('sensor.grocy_chore_rest_0', 'chore_name') or 'grocy_chore_template_0' }}"
+        state: "{{ states('sensor.grocy_chore_rest_0') }}"
+        device_class: timestamp
+        attributes:
+          chore_name: "{{ state_attr('sensor.grocy_chore_rest_0', 'chore_name') }}"
+          chore_id: "{{ state_attr('sensor.grocy_chore_rest_0', 'chore_id') }}"
+
+      - unique_id: grocy_chore_template_1
+        name: "{{ state_attr('sensor.grocy_chore_rest_1', 'chore_name') or 'grocy_chore_template_1' }}"
+        state: "{{ states('sensor.grocy_chore_rest_1') }}"
+        device_class: timestamp
+        attributes:
+          chore_name: "{{ state_attr('sensor.grocy_chore_rest_1', 'chore_name') }}"
+          chore_id: "{{ state_attr('sensor.grocy_chore_rest_1', 'chore_id') }}"
+
+      - unique_id: grocy_chore_template_2
+        name: "{{ state_attr('sensor.grocy_chore_rest_2', 'chore_name') or 'grocy_chore_template_2' }}"
+        state: "{{ states('sensor.grocy_chore_rest_2') }}"
+        device_class: timestamp
+        attributes:
+          chore_name: "{{ state_attr('sensor.grocy_chore_rest_2', 'chore_name') }}"
+          chore_id: "{{ state_attr('sensor.grocy_chore_rest_2', 'chore_id') }}"
+
+

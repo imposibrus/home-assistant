@@ -4,9 +4,28 @@ battery-rows:
   card-mod-row: |
     :host {
       display: block;
-      {% set battery = state_attr(config.entity, 'battery') or state_attr(config.entity, 'battery_level') or (config.entity.endswith('battery_level') and states(config.entity)) %}
+      {% set battery = state_attr(config.entity, 'battery') or state_attr(config.entity, 'battery_level') or (config.entity.endswith('battery_level') and states(config.entity)) or (config.entity.endswith('battery') and states(config.entity)) %}
       {% if battery %}
         background: linear-gradient(to right, rgba(0,255,0,0.5), {{battery}}%, transparent {{battery}}%);
+      {% endif %}
+    }
+
+chore-rows:
+  card-mod-theme: chore-rows
+
+  card-mod-row: |
+    :host {
+      display: block;
+      {% if config is defined %}
+        {% if config.entity is defined %}
+          {% set timeDelta = (states(config.entity) | as_datetime | as_local - now()) %}
+          {% set isPast = timeDelta.days < 0 %}
+          {% set isToday = timeDelta.days == 0 %}
+          {% set color = '#471116' if isPast else '#473604' if isToday else 'transparent' %}
+          {% if timeDelta %}
+            background: linear-gradient(to right, {{ color }}, 100%, transparent 100%);
+          {% endif %}
+        {% endif %}
       {% endif %}
     }
 
