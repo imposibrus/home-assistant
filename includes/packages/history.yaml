@@ -7,3 +7,43 @@ history:
       entity_globs:
         - sensor.cleargrass_air*
 
+  influxdb:
+    api_version: 1
+    host: !secret victoria_metrics_host
+    port: !secret victoria_metrics_port
+    max_retries: 3
+    precision: ms
+    measurement_attr: entity_id
+    default_measurement: state
+    tags_attributes:
+      - friendly_name
+      - unit_of_measurement
+    ignore_attributes:
+      - icon
+      - source
+      - options
+      - editable
+      - min
+      - max
+      - step
+      - mode
+      - marker_type
+      - preset_modes
+      - supported_features
+      - supported_color_modes
+      - effect_list
+      - attribution
+      - assumed_state
+      - state_open
+      - state_closed
+      - writable
+      - stateExtra
+      - event
+      - friendly_name
+      - device_class
+      - state_class
+      - ip_address
+      - device_file
+      - unit_of_measurement
+      - unitOfMeasure
+
