@@ -78,10 +78,14 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 proximity:
-  home:
+  home_vadim:
+    zone: home
+    devices:
+      - device_tracker.oneplus_a5010
+  home_aliya:
+    zone: home
     devices:
       - device_tracker.iphone_aliia
-      - device_tracker.oneplus_a5010
 
 panel_iframe:
   grafana:
