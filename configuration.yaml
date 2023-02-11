@@ -81,7 +81,7 @@ proximity:
   home_vadim:
     zone: home
     devices:
-      - device_tracker.oneplus_a5010
+      - device_tracker.nothing_phone
   home_aliya:
     zone: home
     devices:

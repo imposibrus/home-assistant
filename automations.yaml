@@ -127,10 +127,10 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.oneplus_a5010_sostoianie_telefona
+    entity_id: sensor.nothing_phone_phone_state
     to: ringing
   - platform: state
-    entity_id: sensor.oneplus_a5010_sostoianie_telefona
+    entity_id: sensor.nothing_phone_phone_state
     to: offhook
   condition:
   - condition: template
@@ -187,7 +187,7 @@
     enabled: true
   - wait_for_trigger:
     - platform: state
-      entity_id: sensor.oneplus_a5010_sostoianie_telefona
+      entity_id: sensor.nothing_phone_phone_state
       to: idle
     timeout:
       hours: 2
@@ -1347,7 +1347,7 @@
     - binary_sensor.template_anyone_home
   condition: []
   action:
-  - service: notify.mobile_app_oneplus_a5010
+  - service: notify.mobile_app_nothing_phone
     data:
       title: Все дома?
       message: '{{ states(''binary_sensor.template_anyone_home'') }}'
@@ -1372,7 +1372,7 @@
     value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
     alias: Предыдущее состояние не равно новому
   action:
-  - service: notify.mobile_app_oneplus_a5010
+  - service: notify.mobile_app_nothing_phone
     data:
       title: '{{ trigger.to_state.attributes.friendly_name }} дома/не дома'
       message: '{{ states(''trigger.to_state.state'') }}'

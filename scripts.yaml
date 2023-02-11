@@ -191,7 +191,7 @@ alert:
       description: The message content
       example: The light is on!
   sequence:
-  - service: notify.mobile_app_oneplus_a5010
+  - service: notify.mobile_app_nothing_phone
     data:
       message: '{{ message }}'
       title: '{{ title }}'

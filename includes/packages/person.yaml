@@ -23,7 +23,7 @@ person:
       # TODO: bluetooth headphones can't be recognized throught HA app on Macbook
       - unique_id: is_imposibrus_in_headphones
         state: >
-          {{ is_state('binary_sensor.macbook_pro_audio_output_in_use', 'on') or is_state('sensor.macbook_pro_active_audio_output', 'External Headphones') or is_state('binary_sensor.oneplus_a5010_naushniki', 'on') or is_state('binary_sensor.oneplus_a5010_muzyka_aktivna', 'on') }}
+          {{ is_state('binary_sensor.mbp_2021_audio_output_in_use_2', 'on') or is_state('sensor.mbp_2021_active_audio_output_2', 'External Headphones') or is_state('binary_sensor.nothing_phone_headphones', 'on') or is_state('binary_sensor.nothing_phone_music_active', 'on') }}
 
       - name: is_aliya_sleep_in_bed
         unique_id: is_aliya_sleep_in_bed
