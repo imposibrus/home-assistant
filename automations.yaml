@@ -6,17 +6,6 @@
     input:
       notification_message: Home Assistant has successfully restarted!
       notify_device: 1ada3fdc6976622bd0226b539a5ccf25
-- id: '1618991966165'
-  alias: Home Assistant update notification
-  description: ''
-  use_blueprint:
-    path: Klumper/update_notification.yaml
-    input:
-      notification_message: Home Assistant {{ newest_version }} is available
-      delay: 0
-      updater: binary_sensor.updater
-      notify_device: 1ada3fdc6976622bd0226b539a5ccf25
-      is_ios: false
 - id: '1620159708446'
   alias: Обед закончился!
   description: ''
