@@ -1669,3 +1669,30 @@
       - light.yeelight_torchere
       - light.liustra_kabineta
   mode: single
+- id: '1676115710782'
+  alias: Алиса - задачка - Кошки накормлены
+  description: ''
+  trigger:
+  - platform: event
+    event_type: yandex_intent
+    event_data:
+      text: Кошки накормлены
+  condition: []
+  action:
+  - parallel:
+    - service: grocy.execute_chore
+      data:
+        done_by: '1'
+        chore_id: '1'
+        skipped: false
+      enabled: true
+    - service: media_player.play_media
+      data:
+        media_content_type: text
+        media_content_id: '{{ [''Кошечки довольны!'', ''Пометила задачку выполненной,
+          спасибо!'']|random }}
+
+          '
+      target:
+        entity_id: '{{ trigger.event.data.entity_id }}'
+  mode: single
