@@ -95,4 +95,11 @@ grocy:
           chore_name: "{{ state_attr('sensor.grocy_chore_rest_2', 'chore_name') }}"
           chore_id: "{{ state_attr('sensor.grocy_chore_rest_2', 'chore_id') }}"
 
+  var:
+    grocy_overdue_chores_notifications:
+      unique_id: grocy_overdue_chores_notifications
+      friendly_name: 'grocy_overdue_chores_notifications'
+      initial_value: 0
+      attributes:
+        notifications: {}
 

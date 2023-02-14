@@ -1696,3 +1696,46 @@
       target:
         entity_id: '{{ trigger.event.data.entity_id }}'
   mode: single
+- id: '1676404766269'
+  alias: '[Grocy] Напоминание о просроченных задачках'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.grocy_overdue_chores
+    attribute: overdue_chores
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.attributes.overdue_chores is defined and
+      trigger.to_state.attributes.overdue_chores | length > 0 }}'
+  - condition: state
+    entity_id: schedule.do_not_disturb
+    state: 'off'
+  action:
+  - repeat:
+      for_each: '{{ trigger.to_state.attributes.overdue_chores }}
+
+        '
+      sequence:
+      - if:
+        - condition: template
+          value_template: '{% set last_date = state_attr(''var.grocy_overdue_chores_notifications'',
+            ''chore_'' ~ repeat.item.id) %}
+
+            {% set repeat_interval = 60 * 60 %}
+
+            {{ last_date == none or (now() | as_timestamp) > last_date + repeat_interval
+            }}'
+        then:
+        - service: notify.mobile_app_nothing_phone
+          data:
+            message: Пора выполнять задачку '{{ repeat.item.name }}'
+        - service: var.set
+          data:
+            entity_id: var.grocy_overdue_chores_notifications
+            attributes: '{% set update = {''chore_'' ~ repeat.item.id: now() | as_timestamp}
+              %} {{ dict(states.var.grocy_overdue_chores_notifications.attributes,
+              **update) }}
+
+              '
+  mode: single
