@@ -1739,3 +1739,45 @@
 
               '
   mode: single
+- id: '1676723839601'
+  alias: Считана метка Cats fed
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 1cbe7b35-6073-41f7-be23-f7c8b9623a7d
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '1'
+      done_by: '1'
+      skipped: false
+  mode: single
+- id: '1676724336749'
+  alias: Считана метка Cats water changed
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 3278cc7c-9b13-4ce4-bafb-63b3e5bf855d
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '2'
+      done_by: '1'
+      skipped: false
+  mode: single
+- id: '1676724656364'
+  alias: Считана метка Avocado water
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 08ce9eea-2691-4261-b8a4-54f9a29b3af5
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '4'
+      done_by: '1'
+      skipped: false
+  mode: single
