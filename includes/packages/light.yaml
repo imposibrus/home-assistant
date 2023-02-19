@@ -33,3 +33,9 @@ light:
             - TemperatureTransition: [1900, 300, 80]
 #            - SleepTransition:       [1000]
 
+  var:
+    last_state_yeelight_torchere:
+      unique_id: last_state_yeelight_torchere
+      friendly_name: 'last_state_yeelight_torchere'
+      initial_value: off
+
