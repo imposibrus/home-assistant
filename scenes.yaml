@@ -154,13 +154,13 @@
       supported_features: 0
       state: 'off'
     switch.0x00158d00025863b3:
-      consumption: 116.16
-      device_temperature: 32
-      energy: 116.16
-      last_seen: '2023-02-09T16:09:55.988Z'
-      linkquality: 55
+      consumption: 127.73
+      device_temperature: 34
+      energy: 127.73
+      last_seen: '2023-02-21T17:48:29.791Z'
+      linkquality: 86
       power: 0
-      power_outage_count: 43
+      power_outage_count: 45
       power_outage_memory: true
       temperature: 29
       update:
@@ -169,13 +169,13 @@
       friendly_name: Розетка
       state: 'off'
     switch.0x00158d00025863b3_power_outage_memory:
-      consumption: 116.16
-      device_temperature: 32
-      energy: 116.16
-      last_seen: '2023-02-09T16:09:55.988Z'
-      linkquality: 55
+      consumption: 127.73
+      device_temperature: 34
+      energy: 127.73
+      last_seen: '2023-02-21T17:48:29.791Z'
+      linkquality: 86
       power: 0
-      power_outage_count: 43
+      power_outage_count: 45
       power_outage_memory: true
       temperature: 29
       update:
@@ -329,7 +329,7 @@
       - Flash
       supported_color_modes:
       - brightness
-      flowing: 0
+      flowing: false
       music_mode: false
       friendly_name: Торшер
       supported_features: 44
@@ -466,6 +466,24 @@
       friendly_name: WLED
       supported_features: 36
       state: 'off'
+    light.light_bed_wall:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      last_seen: '2023-02-21T17:48:29.442Z'
+      linkquality: 57
+      update:
+        state: idle
+      update_available:
+      friendly_name: Подсветка стены кровати
+      supported_features: 44
+      state: 'off'
   metadata:
     light.bedroom_bra_aliya:
       entity_only: true
@@ -496,6 +514,8 @@
     light.bath_small_backlight:
       entity_only: true
     light.wled:
+      entity_only: true
+    light.light_bed_wall:
       entity_only: true
 - id: '1657743372431'
   name: Спальня засыпаем
@@ -537,6 +557,24 @@
       friendly_name: bedroom_bed_backlight
       supported_features: 0
       state: 'off'
+    light.light_bed_wall:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      last_seen: '2023-02-21T17:48:04.390Z'
+      linkquality: 60
+      update:
+        state: idle
+      update_available:
+      friendly_name: Подсветка стены кровати
+      supported_features: 44
+      state: 'off'
   icon: mdi:power-sleep
   metadata:
     light.liustra_spalni:
@@ -550,6 +588,8 @@
     light.bedroom_bra_vadim:
       entity_only: true
     light.bedroom_bed_backlight:
+      entity_only: true
+    light.light_bed_wall:
       entity_only: true
 - id: '1665863063404'
   name: Готовка

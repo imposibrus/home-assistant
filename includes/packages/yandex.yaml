@@ -104,6 +104,7 @@ yandex:
         - light.bedroom_bra_vadim
         - light.bedroom_bra_aliya
         - light.bedroom_bed_backlight
+        - light.light_bed_wall
 
         - climate.ac_office
 
@@ -161,6 +162,7 @@ yandex:
         - vacuum
         - binary_sensor
         - button
+        - lock
     entity_config:
       sensor.cgllc_airmonitor_s1:
         type: devices.types.sensor
