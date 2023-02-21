@@ -39,3 +39,21 @@ light:
       friendly_name: 'last_state_yeelight_torchere'
       initial_value: off
 
+  circadian_lighting:
+    interval: 30
+
+  switch:
+    - platform: circadian_lighting
+#      lights_brightness:
+#        - light.liustra_kabineta
+#        - light.kitchen_top_light
+#        - light.livingroom_dinner_light
+
+#    - platform: flux
+##      start_time: "7:00"
+##      stop_time: "23:00"
+#      lights:
+#        - light.yeelight_torchere
+#        - light.hall_top_light
+#        - light.podsvetka_kukhni
+#        - light.island_lamp

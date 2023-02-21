@@ -1772,3 +1772,14 @@
       done_by: '1'
       skipped: false
   mode: single
+- id: '1676829663287'
+  alias: '[Свет] циркадное освещение'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.circadian_lighting_circadian_lighting
+    attribute: brightness
+  condition: []
+  action: []
+  mode: single
