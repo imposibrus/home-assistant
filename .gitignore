@@ -16,3 +16,4 @@ webostv.conf
 custom_components/
 www/community/
 backups/
+.env
