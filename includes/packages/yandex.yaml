@@ -96,7 +96,7 @@ yandex:
         - light.balcony_top_light
         - light.svet_garderob
         - light.podsvetka_kukhni
-        - light.wled
+#        - light.wled
         - light.island_lamp
         - light.svet_kladovka
         - light.podsvetka_prikhozhei_pol
