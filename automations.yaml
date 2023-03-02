@@ -1783,3 +1783,19 @@
   condition: []
   action: []
   mode: single
+- id: '1677759333579'
+  alias: Накормить кошек
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.feed_state
+    from: feeding
+    to: done
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '1'
+      done_by: '1'
+  mode: single
