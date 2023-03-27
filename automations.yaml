@@ -1661,27 +1661,25 @@
       - light.liustra_kabineta
   mode: single
 - id: '1676115710782'
-  alias: Алиса - задачка - Кошки накормлены
+  alias: Алиса - Накорми кошек
   description: ''
   trigger:
   - platform: event
     event_type: yandex_intent
     event_data:
-      text: Кошки накормлены
+      text: Накорми кошек
   condition: []
   action:
   - parallel:
-    - service: grocy.execute_chore
-      data:
-        done_by: '1'
-        chore_id: '1'
-        skipped: false
-      enabled: true
+    - service: input_button.press
+      data: {}
+      target:
+        entity_id: input_button.pet_feeder_manual_feed
     - service: media_player.play_media
       data:
         media_content_type: text
-        media_content_id: '{{ [''Кошечки довольны!'', ''Пометила задачку выполненной,
-          спасибо!'']|random }}
+        media_content_id: '{{ [''Кошечки довольны!'', ''Пирожочек вам благодарен!'',
+          ''Сонечка, кушать!'']|random }}
 
           '
       target:
@@ -1799,3 +1797,47 @@
       chore_id: '1'
       done_by: '1'
   mode: single
+- id: '1678118130948'
+  alias: '[Pet feeder] Накормить кошек вручную'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_button.pet_feeder_manual_feed
+  condition: []
+  action:
+  - service: localtuya.set_dp
+    data:
+      device_id: bf572bb3e884911887rcib
+      dp: 3
+      value: '{{ states(''input_number.pet_feeder_portions'') | int }}'
+  mode: single
+- id: '1678189059382'
+  alias: '[Pet feeder] Напоминание о наполнении кормушки'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.fault
+    to: '2'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition:
+  - condition: template
+    value_template: '{{ now().strftime("%d") != this.attributes.last_triggered.strftime("%d")
+      }}'
+    alias: Сегодня еще не напоминали
+  - condition: state
+    entity_id: schedule.do_not_disturb
+    state: 'off'
+  action:
+  - service: notify.tg_home
+    data:
+      title: Кошачья кормушка почти пустая
+      message: Пора наполнить ее едой
+      data:
+        inline_keyboard:
+        - Я сделяль:/do_nothing, Скройся:/do_nothing
+  mode: restart
