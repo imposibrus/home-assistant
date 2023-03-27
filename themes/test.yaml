@@ -29,6 +29,28 @@ chore-rows:
       {% endif %}
     }
 
+healthcheck-rows:
+  card-mod-theme: healthcheck-rows
+
+  card-mod-row: |
+    :host {
+      display: block;
+      {% if config is defined %}
+        {% if config.entity is defined %}
+          {% set timeDelta = (now() - states(config.entity) | as_datetime | as_local) %}
+          {% set isPrune = 'prune' in config.entity %}
+          {% set warnDaysLow = 7 if isPrune else 1 %}
+          {% set warnDaysHigh = 21 if isPrune else 3 %}
+          {% set isWarn = warnDaysLow < timeDelta.days < warnDaysHigh %}
+          {% set isCrit = timeDelta.days >= warnDaysHigh %}
+          {% set color = '#471116' if isCrit else '#473604' if isWarn else 'transparent' %}
+          {% if timeDelta %}
+            background: linear-gradient(to right, {{ color }}, 100%, transparent 100%);
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    }
+
 custom-secondary:
   card-mod-theme: custom-secondary
   card-mod-row-yaml: |

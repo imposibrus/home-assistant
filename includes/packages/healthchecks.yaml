@@ -1,0 +1,70 @@
+healthchecks:
+  template:
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-wb-backup
+      sensor:
+        - name: healthcheck-wb-backup
+          unique_id: healthcheck-wb-backup
+          state: '{{ now() }}'
+          device_class: timestamp
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-wb-backup-prune
+      sensor:
+        - name: healthcheck-wb-backup-prune
+          unique_id: healthcheck-wb-backup-prune
+          state: '{{ now() }}'
+          device_class: timestamp
+
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-raspb-backup-root
+      sensor:
+        - name: healthcheck-raspb-backup-root
+          unique_id: healthcheck-raspb-backup-root
+          state: '{{ now() }}'
+          device_class: timestamp
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-raspb-backup-root-prune
+      sensor:
+        - name: healthcheck-raspb-backup-root-prune
+          unique_id: healthcheck-raspb-backup-root-prune
+          state: '{{ now() }}'
+          device_class: timestamp
+
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-raspb-backup-projects
+      sensor:
+        - name: healthcheck-raspb-backup-projects
+          unique_id: healthcheck-raspb-backup-projects
+          state: '{{ now() }}'
+          device_class: timestamp
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-raspb-backup-projects-prune
+      sensor:
+        - name: healthcheck-raspb-backup-projects-prune
+          unique_id: healthcheck-raspb-backup-projects-prune
+          state: '{{ now() }}'
+          device_class: timestamp
+
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-mikrot-backup
+      sensor:
+        - name: healthcheck-mikrot-backup
+          unique_id: healthcheck-mikrot-backup
+          state: '{{ now() }}'
+          device_class: timestamp
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-healthcheck-mikrot-backup-prune
+      sensor:
+        - name: healthcheck-mikrot-backup-prune
+          unique_id: healthcheck-mikrot-backup-prune
+          state: '{{ now() }}'
+          device_class: timestamp
+
