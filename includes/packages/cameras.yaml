@@ -1,4 +1,9 @@
-#cameras:
+cameras:
+  rest_command:
+    motion_detection:
+      url: "http://192.168.88.104:7999/{{ camera_id }}/detection/{{ state }}"
+      method: get
+
 #  android_ip_webcam:
 #    - host: 192.168.88.99
 #      port: 8080

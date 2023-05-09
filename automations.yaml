@@ -1855,3 +1855,78 @@
         inline_keyboard:
         - Я сделяль:/do_nothing, Скройся:/do_nothing
   mode: restart
+- id: '1682539988499'
+  alias: '[Cam] Включение обнаружения движения ночью'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.do_not_disturb
+    to: 'on'
+    id: start
+  - platform: state
+    entity_id:
+    - schedule.do_not_disturb
+    to: 'off'
+    id: stop
+  - platform: state
+    entity_id:
+    - binary_sensor.template_anyone_home
+    id: anybody_home
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: start
+      sequence:
+      - service: rest_command.motion_detection
+        data:
+          camera_id: 2
+          state: start
+      - service: notify.mobile_app_nothing_phone
+        data:
+          title: DND включен
+          message: Запись с камеры включена
+    - conditions:
+      - condition: trigger
+        id: stop
+      sequence:
+      - service: rest_command.motion_detection
+        data:
+          camera_id: 2
+          state: pause
+      - service: notify.mobile_app_nothing_phone
+        data:
+          title: DND вЫключен
+          message: Запись с камеры вЫключена
+    - conditions:
+      - condition: trigger
+        id: anybody_home
+      - condition: state
+        entity_id: binary_sensor.template_anyone_home
+        state: 'off'
+      sequence:
+      - service: rest_command.motion_detection
+        data:
+          camera_id: 2
+          state: start
+      - service: notify.mobile_app_nothing_phone
+        data:
+          title: Никого нет дома
+          message: Запись с камеры включена
+    - conditions:
+      - condition: trigger
+        id: anybody_home
+      - condition: state
+        entity_id: binary_sensor.template_anyone_home
+        state: 'on'
+      - condition: state
+        entity_id: schedule.do_not_disturb
+        state: 'off'
+      sequence:
+      - service: rest_command.motion_detection
+        data:
+          camera_id: 2
+          state: pause
+  mode: single
