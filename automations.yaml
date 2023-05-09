@@ -1880,6 +1880,98 @@
         inline_keyboard:
         - Я сделяль:/do_nothing, Скройся:/do_nothing
   mode: single
+- id: '1680357165909'
+  alias: '[TV] Переключение вывода звука со встроенных динамиков на динамики+оптика'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.lg_webos_smart_tv
+    from: 'off'
+    id: power_on
+  - platform: state
+    entity_id:
+    - media_player.lg_webos_smart_tv
+    attribute: sound_output
+    to: tv_speaker
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - if:
+    - condition: state
+      entity_id: media_player.lg_webos_smart_tv
+      attribute: sound_output
+      state: tv_speaker
+    then:
+    - service: webostv.select_sound_output
+      data:
+        entity_id: media_player.lg_webos_smart_tv
+        sound_output: tv_external_speaker
+  mode: single
+- id: '1680357611759'
+  alias: '[TV] Включение мульти-рум звука в санузле'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.bath_small
+    to: 'on'
+    id: bath_small_light_on
+  - platform: state
+    entity_id:
+    - media_player.lg_webos_smart_tv
+    to: 'off'
+    id: tv_off
+  - platform: state
+    entity_id:
+    - light.bath_small
+    to: 'off'
+    id: bath_small_light_off
+  condition: []
+  action:
+  - if:
+    - condition: trigger
+      id: tv_off
+    then:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.audio_loopback
+  - if:
+    - condition: trigger
+      id: bath_small_light_on
+    - condition: state
+      entity_id: switch.audio_loopback
+      state: 'off'
+    - condition: state
+      entity_id: media_player.lg_webos_smart_tv
+      attribute: sound_output
+      state: tv_external_speaker
+    - condition: state
+      entity_id: media_player.lg_webos_smart_tv
+      state: playing
+    then:
+    - service: switch.turn_on
+      data: {}
+      target:
+        entity_id: switch.audio_loopback
+  - if:
+    - condition: trigger
+      id: bath_small_light_off
+    - condition: state
+      entity_id: switch.audio_loopback
+      state: 'on'
+      enabled: false
+    then:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.audio_loopback
+  mode: single
 - id: '1682539988499'
   alias: '[Cam] Включение обнаружения движения ночью'
   description: ''
