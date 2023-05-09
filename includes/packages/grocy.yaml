@@ -4,6 +4,7 @@ grocy:
       params:
         order: next_estimated_execution_time
         limit: 3
+        'query[]': 'next_estimated_execution_time!~null'
       method: 'GET'
       timeout: 10
       headers:
