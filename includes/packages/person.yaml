@@ -62,14 +62,18 @@ person:
         unit_of_measurement: '%'
         state: >-
           {{ states('sensor.amazfit_battery') }}
-        
+        availability: >-
+          {{ has_value(states('sensor.amazfit_battery')) }}
+
       - name: imposibrus watch heartrate
         unique_id: imposibrus_watch_heartrate
         icon: mdi:heart-pulse
         unit_of_measurement: 'bpm'
         state: >-
           {{ states('sensor.amazfit_heartrate') }}
-        
+        availability: >-
+          {{ has_value(states('sensor.amazfit_heartrate')) }}
+
       - name: imposibrus watch sleep duration
         unique_id: imposibrus_watch_sleep_duration
 #        icon: mdi:heart-pulse
@@ -77,7 +81,9 @@ person:
         unit_of_measurement: min
         state: >-
           {{ states('sensor.amazfit_sleepduration') }}
-        
+        availability: >-
+          {{ has_value(states('sensor.amazfit_sleepduration')) }}
+
       - name: imposibrus watch steps
         unique_id: imposibrus_watch_steps
         icon: mdi:shoe-print
@@ -85,5 +91,7 @@ person:
         unit_of_measurement: 'steps'
         state: >-
           {{ states('sensor.amazfit_steps') }}
-        
+        availability: >-
+          {{ has_value(states('sensor.amazfit_steps')) }}
+
 
