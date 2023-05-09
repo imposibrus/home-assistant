@@ -1423,6 +1423,17 @@
         data: {}
         target:
           entity_id: input_boolean.alarm_clock_is_ringing
+      - if:
+        - condition: template
+          value_template: '{{ states(''input_datetime.alarm_clock'') | as_datetime
+            | as_local > now() }}'
+        then:
+        - service: script.set_input_datetime
+          data:
+            hours: 0
+            minutes: -1
+            entity_id:
+            - input_datetime.alarm_clock
     - conditions:
       - condition: trigger
         id: bed_buttons_press
