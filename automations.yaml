@@ -1855,6 +1855,31 @@
         inline_keyboard:
         - Я сделяль:/do_nothing, Скройся:/do_nothing
   mode: restart
+- id: '1680355455025'
+  alias: '[Alerts] Уведомление о белье в стиралке'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.plug_wash_machine_power
+    to: '0'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' }}'
+  action:
+  - service: notify.tg_home
+    data:
+      title: Стиралка достирала
+      message: Пора доставать белье
+      data:
+        inline_keyboard:
+        - Я сделяль:/do_nothing, Скройся:/do_nothing
+  mode: single
 - id: '1682539988499'
   alias: '[Cam] Включение обнаружения движения ночью'
   description: ''
