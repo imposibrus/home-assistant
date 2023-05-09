@@ -93,7 +93,6 @@ yandex:
         - light.livingroom_top_light
         - light.livingroom_dinner_light
         - light.liustra_spalni
-        - light.bath_small_backlight
         - light.bath_small_top_light
         - light.bath_small_shower_backlight
         - light.liustra_kabineta
@@ -111,6 +110,8 @@ yandex:
         - light.light_bed_wall
 
         - climate.ac_office
+        - climate.ac_livingroom
+        - climate.ac_bedroom
 
         - media_player.lg_webos_smart_tv
         - media_player.yandex_intents

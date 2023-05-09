@@ -334,12 +334,6 @@
       friendly_name: Торшер
       supported_features: 44
       state: 'off'
-    light.bath_small_backlight:
-      supported_color_modes:
-      - onoff
-      friendly_name: Bath small backlight
-      supported_features: 8
-      state: 'off'
     light.wled:
       effect_list:
       - Android
@@ -510,8 +504,6 @@
     light.bath_small_top_light:
       entity_only: true
     light.yeelight_torchere:
-      entity_only: true
-    light.bath_small_backlight:
       entity_only: true
     light.wled:
       entity_only: true
