@@ -3,6 +3,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-wb-backup
+          local_only: false
       sensor:
         - name: healthcheck-wb-backup
           unique_id: healthcheck-wb-backup
@@ -11,6 +12,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-wb-backup-prune
+          local_only: false
       sensor:
         - name: healthcheck-wb-backup-prune
           unique_id: healthcheck-wb-backup-prune
@@ -20,6 +22,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-raspb-backup-root
+          local_only: false
       sensor:
         - name: healthcheck-raspb-backup-root
           unique_id: healthcheck-raspb-backup-root
@@ -28,6 +31,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-raspb-backup-root-prune
+          local_only: false
       sensor:
         - name: healthcheck-raspb-backup-root-prune
           unique_id: healthcheck-raspb-backup-root-prune
@@ -37,6 +41,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-raspb-backup-projects
+          local_only: false
       sensor:
         - name: healthcheck-raspb-backup-projects
           unique_id: healthcheck-raspb-backup-projects
@@ -45,6 +50,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-raspb-backup-projects-prune
+          local_only: false
       sensor:
         - name: healthcheck-raspb-backup-projects-prune
           unique_id: healthcheck-raspb-backup-projects-prune
@@ -54,6 +60,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-mikrot-backup
+          local_only: false
       sensor:
         - name: healthcheck-mikrot-backup
           unique_id: healthcheck-mikrot-backup
@@ -62,6 +69,7 @@ healthchecks:
     - trigger:
         - platform: webhook
           webhook_id: !secret webhook-healthcheck-mikrot-backup-prune
+          local_only: false
       sensor:
         - name: healthcheck-mikrot-backup-prune
           unique_id: healthcheck-mikrot-backup-prune
