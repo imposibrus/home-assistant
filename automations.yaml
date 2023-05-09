@@ -1972,6 +1972,58 @@
       target:
         entity_id: switch.audio_loopback
   mode: single
+- id: '1681239529705'
+  alias: Считана метка Sonya pills
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: d14409bc-4982-4d2b-966b-a44bf9059d49
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '7'
+      done_by: '1'
+  mode: single
+- id: '1681554733179'
+  alias: Считана метка Pills Vadim morning
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 09520fac-cdd1-472b-a28b-a5f285809a3c
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '8'
+      done_by: '1'
+  mode: single
+- id: '1681554756206'
+  alias: Считана метка Pills Vadim day
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 5b55aff1-9cf7-4793-b5e9-dbdb5d7b5d8e
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '9'
+      done_by: '1'
+  mode: single
+- id: '1681554777642'
+  alias: Считана метка Pills Vadim evening
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: a86d1860-25f6-4587-81ae-3e850f713b75
+  condition: []
+  action:
+  - service: grocy.execute_chore
+    data:
+      chore_id: '10'
+      done_by: '1'
+  mode: single
 - id: '1682539988499'
   alias: '[Cam] Включение обнаружения движения ночью'
   description: ''
