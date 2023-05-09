@@ -1325,7 +1325,10 @@
   - platform: state
     entity_id:
     - binary_sensor.template_anyone_home
-  condition: []
+  condition:
+  - condition: template
+    value_template: '{{ has_value(trigger.from_state.state) or has_value(trigger.to_state.state)
+      }}'
   action:
   - service: notify.mobile_app_nothing_phone
     data:
@@ -1355,7 +1358,7 @@
   - service: notify.mobile_app_nothing_phone
     data:
       title: '{{ trigger.to_state.attributes.friendly_name }} дома/не дома'
-      message: '{{ states(''trigger.to_state.state'') }}'
+      message: '{{ trigger.to_state.state }}'
   mode: single
 - id: '1665850925808'
   alias: Будильник управление
