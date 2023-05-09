@@ -1,11 +1,5 @@
 history:
   history:
-    exclude:
-      entities:
-        - air_quality.cgllc_airmonitor_s1
-        - sensor.cgllc_airmonitor_s1
-      entity_globs:
-        - sensor.cleargrass_air*
 
   influxdb:
     api_version: 1
