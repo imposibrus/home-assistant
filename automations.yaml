@@ -1527,7 +1527,7 @@
       entity_id:
       - media_player.yandex_station_m0079n500vwm0g
   - repeat:
-      count: '5'
+      count: '7'
       sequence:
       - if:
         - condition: state
