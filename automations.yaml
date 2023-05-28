@@ -2139,3 +2139,19 @@
           camera_id: 2
           state: pause
   mode: single
+- id: '1684270555938'
+  alias: '[Alerts] уведомление о полном мешке в кошачьем туалете'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.store_full_notify
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_aliia
+    data:
+      title: Мешок в кошачьем туалете полный
+      message: Пора менять
+  mode: single
