@@ -3,11 +3,11 @@ audio:
     loopback_service_start: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" imposibrus@192.168.88.104 "systemctl --user start audio-loopback.service"'
     loopback_service_stop: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" imposibrus@192.168.88.104 "systemctl --user stop audio-loopback.service"'
 
-  sensor:
-    - platform: command_line
-      name: audio-loopback-status
-      unique_id: audio-loopback-status
-      command: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" imposibrus@192.168.88.104 "systemctl --user status audio-loopback.service | perl -lne ''print $2 if /Active: (\\w+) \\((\\w+)\\)/''"'
+  command_line:
+    - sensor:
+        name: audio-loopback-status
+        unique_id: audio-loopback-status
+        command: 'ssh -i "/config/.ssh/id_rsa" -o "StrictHostKeyChecking=no" imposibrus@192.168.88.104 "systemctl --user status audio-loopback.service | perl -lne ''print $2 if /Active: (\\w+) \\((\\w+)\\)/''"'
 
   switch:
     - platform: template
