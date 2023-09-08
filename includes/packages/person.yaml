@@ -37,16 +37,16 @@ person:
         state: >-
           {{ states('sensor.bed_vadim_force_sensor') | int(0) < 85000 }}
 
-      - name: Oclean X Pro Elite Battery Low
+      - name: Oclean Aliya Battery Low
         unique_id: oclean_x_pro_elite_battery_low
         icon: mdi:battery-alert-variant-outline
         state: >-
-          {{ states('input_number.oclean_x_pro_elite_battery') | int(0) < 30 }}
-      - name: Oclean X Battery Low
+          {{ states('input_number.oclean_aliya_battery') | int(0) < 30 }}
+      - name: Oclean Vadim Battery Low
         unique_id: oclean_x_battery_low
         icon: mdi:battery-alert-variant-outline
         state: >-
-          {{ states('input_number.oclean_x_battery') | int(0) < 30 }}
+          {{ states('input_number.oclean_vadim_battery') | int(0) < 30 }}
 
       - name: imposibrus watch connected
         unique_id: imposibrus_watch_connected
