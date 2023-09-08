@@ -17,7 +17,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 2
+              segments: 9
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -25,7 +25,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 7
+              segments: 10
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -33,7 +33,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 8
+              segments: 12
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -41,7 +41,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 1
+              segments: 3
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -49,7 +49,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 9
+              segments: 1
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -57,7 +57,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 10
+              segments: 6
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -65,7 +65,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 3
+              segments: 5
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -82,7 +82,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 5
+              segments: 7
               repeats: 2
             target:
               entity_id: vacuum.dreame_bot_l10_pro
@@ -91,7 +91,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 6
+              segments: 4
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
@@ -99,7 +99,7 @@ vacuum:
         sequence:
           - service: dreame_vacuum.vacuum_clean_segment
             data:
-              segments: 4
+              segments: 2
             target:
               entity_id: vacuum.dreame_bot_l10_pro
 
