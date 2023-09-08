@@ -1,12 +1,13 @@
 version: '3'
 services:
   home-assistant:
-    image: 'homeassistant/home-assistant:2023.7.0'
+    image: 'homeassistant/home-assistant:2023.9.0'
     restart: always
     container_name: 'home-assistant'
     network_mode: host
     volumes:
       - ./:/config
+      - /run/dbus:/run/dbus:ro
     environment:
       - 'TZ=Europe/Moscow'
     labels:
