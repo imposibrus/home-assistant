@@ -2155,3 +2155,34 @@
       title: Мешок в кошачьем туалете полный
       message: Пора менять
   mode: single
+- id: '1697211408104'
+  alias: '[Report] VPN status WG Vdsina Amster'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.report_vpn_wg_vdsina_amster_up
+  condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.to_state.state != ''unavailable'' and trigger.to_state.state
+      != ''unknown'' }}'
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      sequence:
+      - service: notify.tg_imposibrus
+        data:
+          title: VPN доступен
+          message: WG Vdsina Amsterdam
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''off'' }}'
+      sequence:
+      - service: notify.tg_imposibrus
+        data:
+          title: VPN недоступен
+          message: WG Vdsina Amsterdam
+  mode: single
