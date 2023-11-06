@@ -13,6 +13,9 @@ light:
       - name: hall_top_light_level
         state: >-
           {{ (state_attr('light.hall_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+      - name: hall_wled_backlight_level
+        state: >-
+          {{ (state_attr('light.wled_hall', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
       - name: bath_small_top_light_level
         state: >-
           {{ (state_attr('light.bath_small_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
