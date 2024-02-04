@@ -1,8 +1,16 @@
 telegram:
   telegram_bot:
-    - platform: webhooks
+    # - platform: webhooks
+    #   api_key: !secret tg_bot_api_key
+    #   allowed_chat_ids: !secret tg_bot_chat_ids
+    #   trusted_networks:
+    #     - 0.0.0.0/0
+
+    - platform: polling
       api_key: !secret tg_bot_api_key
       allowed_chat_ids: !secret tg_bot_chat_ids
+      # trusted_networks:
+      #   - 0.0.0.0/0
 
   notify:
     - platform: telegram
@@ -11,4 +19,3 @@ telegram:
     - platform: telegram
       name: tg_home
       chat_id: !secret tg_bot_notify_home_chat_id
-
