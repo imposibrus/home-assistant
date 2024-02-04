@@ -627,7 +627,7 @@
         entity_id: light.wardrobe_light
   mode: single
 - id: '1650198456127'
-  alias: Мастер-выключатель
+  alias: '[Свет] Мастер-выключатель'
   description: ''
   trigger:
   - platform: state
@@ -1867,6 +1867,15 @@
       hours: 0
       minutes: 10
       seconds: 0
+    enabled: false
+  - platform: state
+    entity_id:
+    - sensor.plug_wash_machine_power_mean_1h
+    to: '0'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
   condition:
   - condition: template
     value_template: '{{ trigger.from_state.state != ''unavailable'' and trigger.from_state.state
@@ -2185,4 +2194,174 @@
         data:
           title: VPN недоступен
           message: WG Vdsina Amsterdam
+  mode: single
+- id: '1704064196065'
+  alias: '[Свет] Санузел и ванная предупреждения на потолке'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.bath_small
+    to: 'on'
+    id: small-on
+  - platform: state
+    entity_id:
+    - light.bath_small
+    to: 'off'
+    id: small-off
+  - platform: state
+    entity_id:
+    - light.bath_big
+    to: 'on'
+    id: big-on
+  - platform: state
+    entity_id:
+    - light.bath_big
+    to: 'off'
+    id: big-off
+  - platform: state
+    entity_id:
+    - binary_sensor.is_imposibrus_in_call
+    to: 'on'
+    id: call-on
+  - platform: state
+    entity_id:
+    - binary_sensor.is_imposibrus_in_call
+    to: 'off'
+    id: call-off
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - small-on
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.wled_hall
+        data:
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_pct: 20
+    - conditions:
+      - condition: trigger
+        id:
+        - small-off
+      sequence:
+      - service: light.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: light.wled_hall
+    - conditions:
+      - condition: trigger
+        id:
+        - big-on
+      sequence:
+      - service: light.turn_on
+        metadata: {}
+        data:
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_pct: 20
+        target:
+          entity_id: light.wled_hall_segment_2
+    - conditions:
+      - condition: trigger
+        id:
+        - big-off
+      sequence:
+      - service: light.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: light.wled_hall_segment_2
+    - conditions:
+      - condition: trigger
+        id:
+        - call-on
+      sequence:
+      - service: light.turn_on
+        metadata: {}
+        data:
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_pct: 20
+        target:
+          entity_id: light.wled_hall_segment_1
+    - conditions:
+      - condition: trigger
+        id:
+        - call-off
+      sequence:
+      - service: light.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: light.wled_hall_segment_1
+  mode: single
+- id: '1704064232148'
+  alias: Свет санузел выключаить
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.bath_small_top_light
+    - light.bath_small_shower_backlight
+    to: 'off'
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id:
+      - light.wled_hall
+      device_id: []
+      area_id: []
+    data: {}
+  mode: single
+- id: '1704730838750'
+  alias: Get Oclean Toothbrushes battery level
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '12'
+  condition: []
+  action:
+  - service: pyscript.get_oclean_battery
+    metadata: {}
+    data:
+      entity_id: input_number.oclean_vadim_battery
+      mac: 70:28:45:7C:A4:C2
+  - service: pyscript.get_oclean_battery
+    metadata: {}
+    data:
+      entity_id: input_number.oclean_aliya_battery
+      mac: 70:28:45:71:A2:36
+  mode: single
+- id: '1705951504952'
+  alias: '[Свет] Включение лампы ванны'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.bath_big_left_switch_counter
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != ''unavailable'' and trigger.to_state.state
+      != ''unknown'' and trigger.from_state.state != ''unavailable'' and trigger.from_state.state
+      != ''unknown'' and trigger.from_state.state | int(0) < trigger.to_state.state
+      | int(0) }}'
+  action:
+  - service: light.toggle
+    data: {}
+    enabled: true
+    target:
+      entity_id: light.yeelight_torchere
   mode: single

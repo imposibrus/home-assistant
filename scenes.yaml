@@ -3,42 +3,42 @@
   entities:
     media_player.lg_webos_smart_tv:
       source_list:
-      - AV
-      - Apple TV
-      - Chromecast
-      - HDMI 2
-      - Homebrew Channel
-      - HyperHDR
-      - KION
-      - LG Channels
-      - LG Content Store
-      - Live TV
-      - MEGOGO ТВ и Кино
-      - Netflix
-      - 'Okko: кино, сериалы, спорт, ТВ'
-      - PREMIER
-      - PicCap
-      - Plex
-      - 'START: Фильмы и сериалы 4К'
-      - Shop on TV
-      - Spotify - музыка и подкасты
-      - VK Видео
-      - Wink
-      - XPlay
-      - YouTube
-      - ivi - Full HD, 4K
-      - Веб-браузер
-      - Дом.ru Movix
-      - Кинопоиск
-      - Комп
-      - Компонентный вход
-      - Музыка
-      - Новинки кино
-      - Первый
-      - Российские программы
-      - Фото и видео
-      - Яндекс
-      - Яндекс Станция
+        - AV
+        - Apple TV
+        - Chromecast
+        - HDMI 2
+        - Homebrew Channel
+        - HyperHDR
+        - KION
+        - LG Channels
+        - LG Content Store
+        - Live TV
+        - MEGOGO ТВ и Кино
+        - Netflix
+        - "Okko: кино, сериалы, спорт, ТВ"
+        - PREMIER
+        - PicCap
+        - Plex
+        - "START: Фильмы и сериалы 4К"
+        - Shop on TV
+        - Spotify - музыка и подкасты
+        - VK Видео
+        - Wink
+        - XPlay
+        - YouTube
+        - ivi - Full HD, 4K
+        - Веб-браузер
+        - Дом.ru Movix
+        - Кинопоиск
+        - Комп
+        - Компонентный вход
+        - Музыка
+        - Новинки кино
+        - Первый
+        - Российские программы
+        - Фото и видео
+        - Яндекс
+        - Яндекс Станция
       assumed_state: true
       device_class: tv
       friendly_name: LG webOS Smart TV
@@ -47,72 +47,72 @@
       is_volume_muted: false
       source: Chromecast
       sound_output: tv_speaker
-      state: 'on'
+      state: "on"
     timer.dinner_end:
       duration: 0:50:00
       editable: true
       icon: mdi:food
       friendly_name: Продолжительность обеда
-      finishes_at: '2022-10-31T18:27:32+00:00'
+      finishes_at: "2022-10-31T18:27:32+00:00"
       remaining: 0:50:00
       state: active
   icon: mdi:food-variant
   metadata: {}
-- id: '1623060117764'
+- id: "1623060117764"
   name: Работа
   entities:
     light.liustra_kabineta:
       supported_color_modes:
-      - onoff
+        - onoff
       color_mode: onoff
       friendly_name: Люстра кабинета
       supported_features: 0
-      state: 'on'
+      state: "on"
   icon: mdi:briefcase
-- id: '1646340696420'
+- id: "1646340696420"
   name: Кино
   entities:
     light.podsvetka_kukhni:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 26
       friendly_name: Подсветка кухни
       supported_features: 0
-      state: 'on'
+      state: "on"
     light.island_lamp:
       supported_color_modes:
-      - brightness
+        - brightness
       icon: mdi:island
       friendly_name: Лампа острова
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.livingroom_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Свет гостиной
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.kitchen_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Свет кухни
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.livingroom_dinner_light:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Свет обеденной зоны
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.hall_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 66
       friendly_name: Свет коридора
       supported_features: 0
-      state: 'on'
+      state: "on"
   icon: mdi:movie
   metadata:
     light.livingroom_top_light:
@@ -123,361 +123,422 @@
       entity_only: true
     light.hall_top_light:
       entity_only: true
-- id: '1650196286463'
+- id: "1650196286463"
   name: Все ушли
   entities:
-    light.bath_big_top_light:
-      supported_color_modes:
-      - onoff
-      friendly_name: bath_big_top_light
-      supported_features: 0
-      state: 'off'
     switch.otoplenie:
       friendly_name: Отопление
-      state: 'on'
+      state: "on"
     light.podsvetka_kukhni:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Подсветка кухни
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.podsvetka_prikhozhei_pol:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Подсветка пола коридора
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_cover_backlight:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Подсветка шторы спальни
       supported_features: 0
-      state: 'off'
-    switch.0x00158d00025863b3:
-      consumption: 127.73
-      device_temperature: 34
-      energy: 127.73
-      last_seen: '2023-02-21T17:48:29.791Z'
-      linkquality: 86
-      power: 0
-      power_outage_count: 45
-      power_outage_memory: true
-      temperature: 29
-      update:
-        state: idle
-      update_available:
-      friendly_name: Розетка
-      state: 'off'
-    switch.0x00158d00025863b3_power_outage_memory:
-      consumption: 127.73
-      device_temperature: 34
-      energy: 127.73
-      last_seen: '2023-02-21T17:48:29.791Z'
-      linkquality: 86
-      power: 0
-      power_outage_count: 45
-      power_outage_memory: true
-      temperature: 29
-      update:
-        state: idle
-      update_available:
-      icon: mdi:memory
-      friendly_name: plug_livingroom_power_outage_memory
-      state: 'on'
-    light.svet_garderob:
-      supported_color_modes:
-      - onoff
-      icon: mdi:wardrobe
-      friendly_name: Свет гардероб
-      supported_features: 0
-      state: 'off'
+      state: "off"
     light.island_lamp:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       icon: mdi:island
       friendly_name: Лампа острова
       supported_features: 0
-      state: 'off'
+      state: "off"
     media_player.lg_webos_smart_tv:
       source_list:
-      - AV
-      - Apple TV
-      - Chromecast
-      - HDMI 2
-      - Homebrew Channel
-      - HyperHDR
-      - KION
-      - LG Channels
-      - LG Content Store
-      - Live TV
-      - MEGOGO ТВ и Кино
-      - Netflix
-      - 'Okko: кино, сериалы, спорт, ТВ'
-      - PREMIER
-      - PicCap
-      - Plex
-      - 'START: Фильмы и сериалы 4К'
-      - Shop on TV
-      - Spotify - музыка и подкасты
-      - VK Видео
-      - Wink
-      - XPlay
-      - YouTube
-      - Веб-браузер
-      - Дом.ru Movix
-      - Кинопоиск
-      - Комп
-      - Компонентный вход
-      - Музыка
-      - Новинки кино
-      - Первый
-      - Российские программы
-      - Фото и видео
-      - Яндекс
-      - Яндекс Станция
+        - AV
+        - Apple TV
+        - Chromecast
+        - HDMI 2
+        - Homebrew Channel
+        - Homebrew Channel Updater
+        - HyperHDR
+        - KION
+        - LG Channels
+        - LG Content Store
+        - Live TV
+        - MEGOGO ТВ и Кино
+        - Netflix
+        - "Okko: кино, сериалы, спорт, ТВ"
+        - PREMIER
+        - PicCap
+        - Plex
+        - Shop on TV
+        - Spotify - музыка и подкасты
+        - VK Видео
+        - Wink
+        - XPlay
+        - YouTube
+        - Веб-браузер
+        - Дом.ru Movix
+        - Кинопоиск
+        - Комп
+        - Компонентный вход
+        - Музыка
+        - Новинки кино
+        - Первый
+        - Российские программы
+        - Фото и видео
+        - Яндекс
+        - Яндекс Станция
       assumed_state: true
       device_class: tv
       friendly_name: LG webOS Smart TV
       supported_features: 24509
-      state: 'off'
+      state: "off"
     light.bedroom_bra_aliya:
       supported_color_modes:
-      - onoff
+        - onoff
+      color_mode:
       friendly_name: Бра Алия
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.liustra_kabineta:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Люстра кабинета
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_bra_vadim:
       supported_color_modes:
-      - onoff
+        - onoff
+      color_mode:
       friendly_name: Бра Вадим
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bath_small_shower_backlight:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Подсветка душевой
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.liustra_spalni:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Люстра спальни
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.balcony_top_light:
       supported_color_modes:
-      - onoff
+        - onoff
+      color_mode:
       friendly_name: Свет балкона
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.livingroom_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Свет гостиной
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.svet_kladovka:
       supported_color_modes:
-      - onoff
+        - onoff
+      color_mode:
       icon: mdi:warehouse
-      friendly_name: Свет кладовка
+      friendly_name: light_larder
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.hall_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Свет коридора
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.kitchen_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Свет кухни
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.livingroom_dinner_light:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Свет обеденной зоны
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bath_small_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
+      color_mode:
+      brightness:
       friendly_name: Свет санузла
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.yeelight_torchere:
       effect_list:
-      - Disco
-      - Strobe epilepsy!
-      - Alarm
-      - Police2
-      - WhatsApp
-      - Facebook
-      - Twitter
-      - Home
-      - Candle Flicker
-      - Slow Temp
-      - Stop
-      - Flash
+        - Disco
+        - Strobe epilepsy!
+        - Alarm
+        - Police2
+        - WhatsApp
+        - Facebook
+        - Twitter
+        - Home
+        - Candle Flicker
+        - Tea Time
+        - Slow Temp
+        - Stop
+        - Flash
       supported_color_modes:
-      - brightness
-      flowing: false
-      music_mode: false
+        - brightness
       friendly_name: Торшер
       supported_features: 44
-      state: 'off'
+      state: unavailable
     light.wled:
       effect_list:
-      - Android
-      - Aurora
-      - Blends
-      - Blink
-      - Blink Rainbow
-      - Bouncing Balls
-      - Bpm
-      - Breathe
-      - Candle
-      - Candle Multi
-      - Candy Cane
-      - Chase
-      - Chase 2
-      - Chase 3
-      - Chase Flash
-      - Chase Flash Rnd
-      - Chase Rainbow
-      - Chase Random
-      - Chunchun
-      - Colorful
-      - Colorloop
-      - Colortwinkles
-      - Colorwaves
-      - Dancing Shadows
-      - Dissolve
-      - Dissolve Rnd
-      - Drip
-      - Dynamic
-      - Dynamic Smooth
-      - Fade
-      - Fairy
-      - Fairytwinkle
-      - Fill Noise
-      - Fire 2012
-      - Fire Flicker
-      - Fireworks
-      - Fireworks 1D
-      - Fireworks Starburst
-      - Flow
-      - Glitter
-      - Gradient
-      - Halloween
-      - Halloween Eyes
-      - Heartbeat
-      - ICU
-      - Juggle
-      - Lake
-      - Lighthouse
-      - Lightning
-      - Loading
-      - Meteor
-      - Meteor Smooth
-      - Multi Comet
-      - Noise 1
-      - Noise 2
-      - Noise 3
-      - Noise 4
-      - Noise Pal
-      - Oscillate
-      - Pacifica
-      - Palette
-      - Percent
-      - Phased
-      - Phased Noise
-      - Plasma
-      - Police
-      - Popcorn
-      - Pride 2015
-      - Railway
-      - Rain
-      - Rainbow
-      - Rainbow Runner
-      - Random Colors
-      - Ripple
-      - Ripple Rainbow
-      - Running
-      - Running Dual
-      - Saw
-      - Scan
-      - Scan Dual
-      - Scanner
-      - Scanner Dual
-      - Sine
-      - Sinelon
-      - Sinelon Dual
-      - Sinelon Rainbow
-      - Solid
-      - Solid Glitter
-      - Solid Pattern
-      - Solid Pattern Tri
-      - Sparkle
-      - Sparkle Dark
-      - Sparkle+
-      - Spots
-      - Spots Fade
-      - Stream
-      - Stream 2
-      - Strobe
-      - Strobe Mega
-      - Strobe Rainbow
-      - Sunrise
-      - Sweep
-      - Sweep Random
-      - TV Simulator
-      - Tetrix
-      - Theater
-      - Theater Rainbow
-      - Traffic Light
-      - Tri Fade
-      - Tri Wipe
-      - Twinkle
-      - Twinklecat
-      - Twinklefox
-      - Twinkleup
-      - Two Dots
-      - Washing Machine
-      - Wipe
-      - Wipe Random
+        - Akemi
+        - Android
+        - Aurora
+        - Black Hole
+        - Blends
+        - Blink
+        - Blink Rainbow
+        - Blobs
+        - Blurz
+        - Bouncing Balls
+        - Bpm
+        - Breathe
+        - Candle
+        - Candle Multi
+        - Chase
+        - Chase 2
+        - Chase 3
+        - Chase Flash
+        - Chase Flash Rnd
+        - Chase Rainbow
+        - Chase Random
+        - Chunchun
+        - Colored Bursts
+        - Colorful
+        - Colorloop
+        - Colortwinkles
+        - Colorwaves
+        - Crazy Bees
+        - DJ Light
+        - DNA
+        - DNA Spiral
+        - Dancing Shadows
+        - Dissolve
+        - Dissolve Rnd
+        - Distortion Waves
+        - Drift
+        - Drift Rose
+        - Drip
+        - Dynamic
+        - Dynamic Smooth
+        - Fade
+        - Fairy
+        - Fairytwinkle
+        - Fill Noise
+        - Fire 2012
+        - Fire Flicker
+        - Firenoise
+        - Fireworks
+        - Fireworks 1D
+        - Fireworks Starburst
+        - Flow
+        - Flow Stripe
+        - Freqmap
+        - Freqmatrix
+        - Freqpixels
+        - Freqwave
+        - Frizzles
+        - Funky Plank
+        - GEQ
+        - Game Of Life
+        - Ghost Rider
+        - Glitter
+        - Gradient
+        - Gravcenter
+        - Gravcentric
+        - Gravfreq
+        - Gravimeter
+        - Halloween Eyes
+        - Heartbeat
+        - Hiphotic
+        - ICU
+        - Juggle
+        - Juggles
+        - Julia
+        - Lake
+        - Lighthouse
+        - Lightning
+        - Lissajous
+        - Loading
+        - Matripix
+        - Matrix
+        - Metaballs
+        - Meteor
+        - Meteor Smooth
+        - Midnoise
+        - Multi Comet
+        - Noise 1
+        - Noise 2
+        - Noise 3
+        - Noise 4
+        - Noise Pal
+        - Noise2D
+        - Noisefire
+        - Noisemeter
+        - Noisemove
+        - Octopus
+        - Oscillate
+        - Pacifica
+        - Palette
+        - Percent
+        - Perlin Move
+        - Phased
+        - Phased Noise
+        - Pixels
+        - Pixelwave
+        - Plasma
+        - Plasma Ball
+        - Plasmoid
+        - Polar Lights
+        - Popcorn
+        - Pride 2015
+        - Puddlepeak
+        - Puddles
+        - Pulser
+        - RSVD
+        - RSVD
+        - RSVD
+        - RSVD
+        - RSVD
+        - RSVD
+        - RSVD
+        - RSVD
+        - Railway
+        - Rain
+        - Rainbow
+        - Rainbow Runner
+        - Random Colors
+        - Ripple
+        - Ripple Peak
+        - Ripple Rainbow
+        - Rocktaves
+        - Rolling Balls
+        - Running
+        - Running Dual
+        - Saw
+        - Scan
+        - Scan Dual
+        - Scanner
+        - Scanner Dual
+        - Scrolling Text
+        - Sindots
+        - Sine
+        - Sinelon
+        - Sinelon Dual
+        - Sinelon Rainbow
+        - Soap
+        - Solid
+        - Solid Glitter
+        - Solid Pattern
+        - Solid Pattern Tri
+        - Spaceships
+        - Sparkle
+        - Sparkle Dark
+        - Sparkle+
+        - Spots
+        - Spots Fade
+        - Squared Swirl
+        - Stream
+        - Stream 2
+        - Strobe
+        - Strobe Mega
+        - Strobe Rainbow
+        - Sun Radiation
+        - Sunrise
+        - Sweep
+        - Sweep Random
+        - Swirl
+        - TV Simulator
+        - Tartan
+        - Tetrix
+        - Theater
+        - Theater Rainbow
+        - Traffic Light
+        - Tri Fade
+        - Tri Wipe
+        - Twinkle
+        - Twinklecat
+        - Twinklefox
+        - Twinkleup
+        - Two Dots
+        - Washing Machine
+        - Waterfall
+        - Waverly
+        - Wavesins
+        - Waving Cell
+        - Wipe
+        - Wipe Random
       supported_color_modes:
-      - rgb
+        - rgb
+      color_mode:
+      brightness:
+      hs_color:
+      rgb_color:
+      xy_color:
+      effect:
       icon: mdi:led-strip-variant
       friendly_name: WLED
       supported_features: 36
-      state: 'off'
+      state: "off"
     light.light_bed_wall:
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+        - blink
+        - breathe
+        - okay
+        - channel_change
+        - finish_effect
+        - stop_effect
       supported_color_modes:
-      - brightness
-      last_seen: '2023-02-21T17:48:29.442Z'
-      linkquality: 57
-      update:
-        state: idle
-      update_available:
+        - brightness
       friendly_name: Подсветка стены кровати
       supported_features: 44
-      state: 'off'
+      state: unavailable
+    light.bedroom_bed_backlight:
+      supported_color_modes:
+        - brightness
+      color_mode:
+      brightness:
+      friendly_name: bedroom_bed_backlight
+      supported_features: 0
+      state: "off"
   metadata:
     light.bedroom_bra_aliya:
       entity_only: true
@@ -509,69 +570,80 @@
       entity_only: true
     light.light_bed_wall:
       entity_only: true
-- id: '1657743372431'
+    light.bedroom_bed_backlight:
+      entity_only: true
+- id: "1657743372431"
   name: Спальня засыпаем
   entities:
     light.liustra_spalni:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Люстра спальни
       supported_features: 0
-      state: 'off'
-    light.svet_garderob:
-      supported_color_modes:
-      - onoff
-      icon: mdi:wardrobe
-      friendly_name: Свет гардероб
-      supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_cover_backlight:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Подсветка шторы спальни
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_bra_aliya:
       supported_color_modes:
-      - onoff
+        - onoff
       friendly_name: Бра Алия
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_bra_vadim:
       supported_color_modes:
-      - onoff
+        - onoff
       friendly_name: Бра Вадим
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.bedroom_bed_backlight:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: bedroom_bed_backlight
       supported_features: 0
-      state: 'off'
+      state: "off"
     light.light_bed_wall:
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+        - blink
+        - breathe
+        - okay
+        - channel_change
+        - finish_effect
+        - stop_effect
       supported_color_modes:
-      - brightness
-      last_seen: '2023-02-21T17:48:04.390Z'
-      linkquality: 60
+        - brightness
+      color_mode:
+      brightness:
+      effect:
+      last_seen: "2024-01-22T19:29:50.129Z"
+      linkquality: 21
+      power_on_behavior:
       update:
+        installed_version: -1
+        latest_version: -1
         state: idle
       update_available:
       friendly_name: Подсветка стены кровати
       supported_features: 44
-      state: 'off'
+      state: "off"
+    light.bedroom_mirror_backlight:
+      supported_color_modes:
+        - brightness
+      friendly_name: bedroom_mirror_backlight
+      supported_features: 0
+      state: "off"
+    light.wardrobe_light:
+      supported_color_modes:
+        - onoff
+      friendly_name: wardrobe_light
+      supported_features: 0
+      state: "off"
   icon: mdi:power-sleep
   metadata:
     light.liustra_spalni:
-      entity_only: true
-    light.svet_garderob:
       entity_only: true
     light.bedroom_cover_backlight:
       entity_only: true
@@ -583,34 +655,38 @@
       entity_only: true
     light.light_bed_wall:
       entity_only: true
-- id: '1665863063404'
+    light.bedroom_mirror_backlight:
+      entity_only: true
+    light.wardrobe_light:
+      entity_only: true
+- id: "1665863063404"
   name: Готовка
   entities:
     light.island_lamp:
       supported_color_modes:
-      - brightness
+        - brightness
       icon: mdi:island
       friendly_name: Лампа острова
       supported_features: 0
       color_mode: brightness
       brightness: 207
-      state: 'on'
+      state: "on"
     light.podsvetka_kukhni:
       supported_color_modes:
-      - brightness
+        - brightness
       color_mode: brightness
       brightness: 178
       friendly_name: Подсветка кухни
       supported_features: 0
-      state: 'on'
+      state: "on"
     light.kitchen_top_light:
       supported_color_modes:
-      - brightness
+        - brightness
       friendly_name: Свет кухни
       supported_features: 0
       color_mode: brightness
       brightness: 204
-      state: 'on'
+      state: "on"
   icon: mdi:chef-hat
   metadata:
     light.island_lamp:

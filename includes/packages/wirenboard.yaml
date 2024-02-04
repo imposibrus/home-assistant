@@ -13,282 +13,342 @@ wirenboard:
         name: teplyi_pol_dushevoi
         unique_id: is_teplyi_pol_dushevoi_on
 
+      - state: "{{ 1 if is_state('switch.bath_big_towel', 'on') else 0 }}"
+        name: is_bath_big_towel_on
+        unique_id: is_bath_big_towel_on
+
   mqtt:
     sensor:
-      - name: 'Температура ТП санузла'
+      - name: "Температура ТП санузла"
         state_topic: "/devices/1wireSensors/controls/bath_small_floor"
         device_class: temperature
         icon: mdi:temperature-celsius
-        unique_id: '1wireSensors/bath_small_floor'
-        unit_of_measurement: '°C'
+        unique_id: "1wireSensors/bath_small_floor"
+        unit_of_measurement: "°C"
 
-      - name: 'Температура ТП душевой'
+      - name: "Температура ТП душевой"
         state_topic: "/devices/1wireSensors/controls/bath_small_floor_shower"
         device_class: temperature
         icon: mdi:temperature-celsius
-        unique_id: '1wireSensors/bath_small_floor_shower'
-        unit_of_measurement: '°C'
+        unique_id: "1wireSensors/bath_small_floor_shower"
+        unit_of_measurement: "°C"
 
-      - name: 'Температура полотенцесушителя санузла'
+      - name: "Температура полотенцесушителя санузла"
         state_topic: "/devices/1wireSensors/controls/bath_small_towel"
         device_class: temperature
         icon: mdi:temperature-celsius
-        unique_id: '1wireSensors/bath_small_towel'
-        unit_of_measurement: '°C'
+        unique_id: "1wireSensors/bath_small_towel"
+        unit_of_measurement: "°C"
 
-      - name: 'Счетчик мастер-выключателя'
+      - name: bath_big_towel_temperature
+        state_topic: "/devices/1wireSensors/controls/bath_big_towel"
+        device_class: temperature
+        icon: mdi:temperature-celsius
+        unique_id: "1wireSensors/bath_big_towel"
+        unit_of_measurement: "°C"
+
+      - name: "Счетчик мастер-выключателя"
         state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Input 1 Shortlong Press Counter"
         icon: mdi:counter
-        unique_id: 'master_off_counter'
+        unique_id: "master_off_counter"
 
-      - name: 'Счетчик долгих нажатий Бра Вадим'
+      - name: "Счетчик долгих нажатий Бра Вадим"
         state_topic: "/devices/wb-mr6c_42/controls/input_2 Long Press Counter"
         icon: mdi:counter
-        unique_id: 'vadim_bra_long_counter'
+        unique_id: "vadim_bra_long_counter"
 
-      - name: 'Счетчик коротких нажатий Бра Вадим'
+      - name: "Счетчик коротких нажатий Бра Вадим"
         state_topic: "/devices/wb-mr6c_42/controls/input_2 Single Press Counter"
         icon: mdi:counter
-        unique_id: 'vadim_bra_short_counter'
+        unique_id: "vadim_bra_short_counter"
 
-      - name: 'Счетчик долгих нажатий Бра Алия'
+      - name: "Счетчик долгих нажатий Бра Алия"
         state_topic: "/devices/wb-mr6c_42/controls/input_3 Long Press Counter"
         icon: mdi:counter
-        unique_id: 'aliya_bra_long_counter'
+        unique_id: "aliya_bra_long_counter"
 
-      - name: 'Счетчик коротких нажатий Бра Алия'
+      - name: "Счетчик коротких нажатий Бра Алия"
         state_topic: "/devices/wb-mr6c_42/controls/input_3 Single Press Counter"
         icon: mdi:counter
-        unique_id: 'aliya_bra_short_counter'
+        unique_id: "aliya_bra_short_counter"
 
-      - name: 'Счетчик нажатий подсветка шторы спальни'
+      - name: "Счетчик нажатий подсветка шторы спальни"
         state_topic: "/devices/wb-mdm3_104/controls/Input 1 counter"
         icon: mdi:counter
-        unique_id: 'bedroom_cover_light_counter'
+        unique_id: "bedroom_cover_light_counter"
 
       - name: bedroom_enter_master_switch_counter
-        state_topic: '/devices/wb-led_45/controls/Input 3 Shortlong Press Counter'
+        state_topic: "/devices/wb-led_45/controls/Input 3 Shortlong Press Counter"
         icon: mdi:counter
         unique_id: bedroom_enter_master_switch_counter
 
       - name: office_enter_master_switch_counter
-        state_topic: '/devices/wb-led_45/controls/Input 2 Shortlong Press Counter'
+        state_topic: "/devices/wb-led_45/controls/Input 2 Shortlong Press Counter"
         icon: mdi:counter
         unique_id: office_enter_master_switch_counter
 
+      - name: bath_big_left_switch_counter
+        state_topic: "/devices/wb-mr6c_42/controls/input_1 Counter"
+        icon: mdi:counter
+        unique_id: bath_big_left_switch_counter
+
     binary_sensor:
       - name: bedroom_makeup_table_switch
-        state_topic: '/devices/wb-gpio/controls/EXT1_IN5'
-        payload_on: '1'
-        payload_off: '0'
-        unique_id: 'bedroom_makeup_table_switch'
+        state_topic: "/devices/wb-gpio/controls/EXT1_IN5"
+        payload_on: "1"
+        payload_off: "0"
+        unique_id: "bedroom_makeup_table_switch"
       - name: bath_small_sink_switch
-        state_topic: '/devices/wb-gpio/controls/EXT1_IN9'
-        payload_on: '1'
-        payload_off: '0'
-        unique_id: 'bath_small_sink_switch'
+        state_topic: "/devices/wb-gpio/controls/EXT1_IN9"
+        payload_on: "1"
+        payload_off: "0"
+        unique_id: "bath_small_sink_switch"
       - name: doorbell_button
-        state_topic: '/devices/wb-gpio/controls/EXT1_IN14'
-        payload_on: '1'
-        payload_off: '0'
-        unique_id: 'doorbell_button'
+        state_topic: "/devices/wb-gpio/controls/EXT1_IN14"
+        payload_on: "1"
+        payload_off: "0"
+        unique_id: "doorbell_button"
 
     light:
       - unique_id: kitchen_top_light
-        state_topic: '/devices/wb-led_45/controls/Channel 1'
-        command_topic: '/devices/wb-led_45/controls/Channel 1/on'
-        brightness_state_topic: '/devices/wb-led_45/controls/Channel 1 Brightness'
-        brightness_command_topic: '/devices/wb-led_45/controls/Channel 1 Brightness/on'
+        state_topic: "/devices/wb-led_45/controls/Channel 1"
+        command_topic: "/devices/wb-led_45/controls/Channel 1/on"
+        brightness_state_topic: "/devices/wb-led_45/controls/Channel 1 Brightness"
+        brightness_command_topic: "/devices/wb-led_45/controls/Channel 1 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: kitchen_top_light
-    
-      - unique_id: 'wb-mr6c_42/K5'
-        state_topic: '/devices/wb-led_45/controls/Channel 2'
-        command_topic: '/devices/wb-led_45/controls/Channel 2/on'
-        brightness_state_topic: '/devices/wb-led_45/controls/Channel 2 Brightness'
-        brightness_command_topic: '/devices/wb-led_45/controls/Channel 2 Brightness/on'
+
+      - unique_id: "wb-mr6c_42/K5"
+        state_topic: "/devices/wb-led_45/controls/Channel 2"
+        command_topic: "/devices/wb-led_45/controls/Channel 2/on"
+        brightness_state_topic: "/devices/wb-led_45/controls/Channel 2 Brightness"
+        brightness_command_topic: "/devices/wb-led_45/controls/Channel 2 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
-        name: 'Люстра кабинета'
-    
-      - unique_id: 'wb-mr6c_42/K6'
-        state_topic: '/devices/wb-led_45/controls/Channel 3'
-        command_topic: '/devices/wb-led_45/controls/Channel 3/on'
-        brightness_state_topic: '/devices/wb-led_45/controls/Channel 3 Brightness'
-        brightness_command_topic: '/devices/wb-led_45/controls/Channel 3 Brightness/on'
+        name: "Люстра кабинета"
+
+      - unique_id: "wb-mr6c_42/K6"
+        state_topic: "/devices/wb-led_45/controls/Channel 3"
+        command_topic: "/devices/wb-led_45/controls/Channel 3/on"
+        brightness_state_topic: "/devices/wb-led_45/controls/Channel 3 Brightness"
+        brightness_command_topic: "/devices/wb-led_45/controls/Channel 3 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
-        name: 'Люстра спальни'
-    
+        name: "Люстра спальни"
+
       - unique_id: bath_big_top_light
-        state_topic: '/devices/wb-mr6c_42/controls/K1'
-        command_topic: '/devices/wb-mr6c_42/controls/K1/on'
+        state_topic: "/devices/wb-mr6c_42/controls/K1"
+        command_topic: "/devices/wb-mr6c_42/controls/K1/on"
         payload_on: 1
         payload_off: 0
         name: bath_big_top_light
-    
+
       - unique_id: bedroom_bra_vadim
-        state_topic: '/devices/wb-mr6c_42/controls/K2'
-        command_topic: '/devices/wb-mr6c_42/controls/K2/on'
+        state_topic: "/devices/wb-mr6c_42/controls/K2"
+        command_topic: "/devices/wb-mr6c_42/controls/K2/on"
         payload_on: 1
         payload_off: 0
         name: bedroom_bra_vadim
 
       - unique_id: bedroom_bra_aliya
-        state_topic: '/devices/wb-mr6c_42/controls/K3'
-        command_topic: '/devices/wb-mr6c_42/controls/K3/on'
+        state_topic: "/devices/wb-mr6c_42/controls/K3"
+        command_topic: "/devices/wb-mr6c_42/controls/K3/on"
         payload_on: 1
         payload_off: 0
         name: bedroom_bra_aliya
 
       - unique_id: balcony_top_light
-        state_topic: '/devices/wb-mr6c_42/controls/K4'
-        command_topic: '/devices/wb-mr6c_42/controls/K4/on'
+        state_topic: "/devices/wb-mr6c_42/controls/K4"
+        command_topic: "/devices/wb-mr6c_42/controls/K4/on"
         payload_on: 1
         payload_off: 0
         name: balcony_top_light
 
       - unique_id: livingroom_top_light
-        state_topic: '/devices/wb-led_41/controls/Channel 4'
-        command_topic: '/devices/wb-led_41/controls/Channel 4/on'
-        brightness_state_topic: '/devices/wb-led_41/controls/Channel 4 Brightness'
-        brightness_command_topic: '/devices/wb-led_41/controls/Channel 4 Brightness/on'
+        state_topic: "/devices/wb-led_41/controls/Channel 4"
+        command_topic: "/devices/wb-led_41/controls/Channel 4/on"
+        brightness_state_topic: "/devices/wb-led_41/controls/Channel 4 Brightness"
+        brightness_command_topic: "/devices/wb-led_41/controls/Channel 4 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: livingroom_top_light
 
       - unique_id: livingroom_dinner_light
-        state_topic: '/devices/wb-led_45/controls/Channel 4'
-        command_topic: '/devices/wb-led_45/controls/Channel 4/on'
-        brightness_state_topic: '/devices/wb-led_45/controls/Channel 4 Brightness'
-        brightness_command_topic: '/devices/wb-led_45/controls/Channel 4 Brightness/on'
+        state_topic: "/devices/wb-led_45/controls/Channel 4"
+        command_topic: "/devices/wb-led_45/controls/Channel 4/on"
+        brightness_state_topic: "/devices/wb-led_45/controls/Channel 4 Brightness"
+        brightness_command_topic: "/devices/wb-led_45/controls/Channel 4 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: livingroom_dinner_light
 
-      - unique_id: 'wb-mdm3_104/K1'
-        state_topic: '/devices/wb-mdm3_104/controls/K1'
-        command_topic: '/devices/wb-mdm3_104/controls/K1/on'
-        brightness_state_topic: '/devices/wb-mdm3_104/controls/Channel 1'
-        brightness_command_topic: '/devices/wb-mdm3_104/controls/Channel 1/on'
+      - unique_id: "wb-mdm3_104/K1"
+        state_topic: "/devices/wb-mdm3_104/controls/K1"
+        command_topic: "/devices/wb-mdm3_104/controls/K1/on"
+        brightness_state_topic: "/devices/wb-mdm3_104/controls/Channel 1"
+        brightness_command_topic: "/devices/wb-mdm3_104/controls/Channel 1/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
-        name: 'Подсветка шторы спальни'
-    
-      - unique_id: 'wb-mdm3_104/K2'
-        state_topic: '/devices/wb-mdm3_104/controls/K2'
-        command_topic: '/devices/wb-mdm3_104/controls/K2/on'
-        brightness_state_topic: '/devices/wb-mdm3_104/controls/Channel 2'
-        brightness_command_topic: '/devices/wb-mdm3_104/controls/Channel 2/on'
+        name: "Подсветка шторы спальни"
+
+      - unique_id: "wb-mdm3_104/K2"
+        state_topic: "/devices/wb-mdm3_104/controls/K2"
+        command_topic: "/devices/wb-mdm3_104/controls/K2/on"
+        brightness_state_topic: "/devices/wb-mdm3_104/controls/Channel 2"
+        brightness_command_topic: "/devices/wb-mdm3_104/controls/Channel 2/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: island_lamp
-    
+
       - unique_id: hall_top_light
-        state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)'
-        command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)/on'
-        brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness'
-        brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness/on'
+        state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)"
+        command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B)/on"
+        brightness_state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness"
+        brightness_command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 1 (B) Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: hall_top_light
-    
-      - unique_id: 'wb-mrgbw-d-fw3_153/White 4-G'
-        state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)'
-        command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)/on'
-        brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness'
-        brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness/on'
-        brightness_scale: 100
-        payload_on: 1
-        payload_off: 0
-        name: 'Подсветка кухни'
-  
-      - unique_id: 'wb-mrgbw-d-fw3_153/White 4-R'
-        state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)'
-        command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)/on'
-        brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness'
-        brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness/on'
-        brightness_scale: 100
-        payload_on: 1
-        payload_off: 0
-        name: 'Подсветка прихожей пол'
 
-      - unique_id: 'wb-mrgbw-d-fw3_153/White 4-w'
-        state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)'
-        command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)/on'
-        brightness_state_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness'
-        brightness_command_topic: '/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness/on'
+      - unique_id: hall_enter_mirror_backlight
+        state_topic: "/devices/wb-led_32/controls/Channel 3"
+        command_topic: "/devices/wb-led_32/controls/Channel 3/on"
+        brightness_state_topic: "/devices/wb-led_32/controls/Channel 3 Brightness"
+        brightness_command_topic: "/devices/wb-led_32/controls/Channel 3 Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: hall_enter_mirror_backlight
+
+      - unique_id: "wb-mrgbw-d-fw3_153/White 4-G"
+        state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)"
+        command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G)/on"
+        brightness_state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness"
+        brightness_command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 3 (G) Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: "Подсветка кухни"
+
+      - unique_id: "wb-mrgbw-d-fw3_153/White 4-R"
+        state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)"
+        command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R)/on"
+        brightness_state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness"
+        brightness_command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 2 (R) Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: "Подсветка прихожей пол"
+
+      - unique_id: "wb-mrgbw-d-fw3_153/White 4-w"
+        state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)"
+        command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W)/on"
+        brightness_state_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness"
+        brightness_command_topic: "/devices/wb-mrgbw-d-fw3_153/controls/Channel 4 (W) Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: bath_small_top_light
 
       - unique_id: bath_small_shower_backlight
-        state_topic: '/devices/wb-led_41/controls/Channel 3'
-        command_topic: '/devices/wb-led_41/controls/Channel 3/on'
-        brightness_state_topic: '/devices/wb-led_41/controls/Channel 3 Brightness'
-        brightness_command_topic: '/devices/wb-led_41/controls/Channel 3 Brightness/on'
+        state_topic: "/devices/wb-led_41/controls/Channel 3"
+        command_topic: "/devices/wb-led_41/controls/Channel 3/on"
+        brightness_state_topic: "/devices/wb-led_41/controls/Channel 3 Brightness"
+        brightness_command_topic: "/devices/wb-led_41/controls/Channel 3 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: bath_small_shower_backlight
 
+      - unique_id: bath_big_mirror_backlight
+        state_topic: "/devices/wb-led_41/controls/Channel 1"
+        command_topic: "/devices/wb-led_41/controls/Channel 1/on"
+        brightness_state_topic: "/devices/wb-led_41/controls/Channel 1 Brightness"
+        brightness_command_topic: "/devices/wb-led_41/controls/Channel 1 Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: bath_big_mirror_backlight
+
+      - unique_id: bath_big_closet_backlight
+        state_topic: "/devices/wb-led_32/controls/Channel 2"
+        command_topic: "/devices/wb-led_32/controls/Channel 2/on"
+        brightness_state_topic: "/devices/wb-led_32/controls/Channel 2 Brightness"
+        brightness_command_topic: "/devices/wb-led_32/controls/Channel 2 Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: bath_big_closet_backlight
+
       - unique_id: bedroom_bed_backlight
-        state_topic: '/devices/wb-led_41/controls/Channel 2'
-        command_topic: '/devices/wb-led_41/controls/Channel 2/on'
-        brightness_state_topic: '/devices/wb-led_41/controls/Channel 2 Brightness'
-        brightness_command_topic: '/devices/wb-led_41/controls/Channel 2 Brightness/on'
+        state_topic: "/devices/wb-led_41/controls/Channel 2"
+        command_topic: "/devices/wb-led_41/controls/Channel 2/on"
+        brightness_state_topic: "/devices/wb-led_41/controls/Channel 2 Brightness"
+        brightness_command_topic: "/devices/wb-led_41/controls/Channel 2 Brightness/on"
         brightness_scale: 100
         payload_on: 1
         payload_off: 0
         name: bedroom_bed_backlight
 
+      - unique_id: bedroom_mirror_backlight
+        state_topic: "/devices/wb-led_32/controls/Channel 4"
+        command_topic: "/devices/wb-led_32/controls/Channel 4/on"
+        brightness_state_topic: "/devices/wb-led_32/controls/Channel 4 Brightness"
+        brightness_command_topic: "/devices/wb-led_32/controls/Channel 4 Brightness/on"
+        brightness_scale: 100
+        payload_on: 1
+        payload_off: 0
+        name: bedroom_mirror_backlight
+
     switch:
-      - unique_id: 'wb-mrm2-mini-nc_134/Relay 1'
-        state_topic: '/devices/wb-mrm2-mini_134/controls/K1'
-        command_topic: '/devices/wb-mrm2-mini_134/controls/K1/on'
+      - unique_id: "wb-mrm2-mini-nc_134/Relay 1"
+        state_topic: "/devices/wb-mrm2-mini_134/controls/K1"
+        command_topic: "/devices/wb-mrm2-mini_134/controls/K1/on"
         payload_on: 1
         payload_off: 0
-        name: 'Теплый пол душевой'
-  
-      - unique_id: 'wb-mrm2-mini-nc_134/Relay 2'
-        state_topic: '/devices/wb-mrm2-mini_134/controls/K2'
-        command_topic: '/devices/wb-mrm2-mini_134/controls/K2/on'
+        name: "Теплый пол душевой"
+
+      - unique_id: "wb-mrm2-mini-nc_134/Relay 2"
+        state_topic: "/devices/wb-mrm2-mini_134/controls/K2"
+        command_topic: "/devices/wb-mrm2-mini_134/controls/K2/on"
         payload_on: 1
         payload_off: 0
-        name: 'Полотенцесушитель санузла'
-  
+        name: "Полотенцесушитель санузла"
+
+      - unique_id: bath_big_towel
+        state_topic: "/devices/wb-mrm2-mini_177/controls/K1"
+        command_topic: "/devices/wb-mrm2-mini_177/controls/K1/on"
+        payload_on: 1
+        payload_off: 0
+        name: bath_big_towel
+
       - unique_id: bath_small_warm_floor
-        state_topic: '/devices/wb-mr6cu_28/controls/K4'
-        command_topic: '/devices/wb-mr6cu_28/controls/K4/on'
+        state_topic: "/devices/wb-mr6cu_28/controls/K4"
+        command_topic: "/devices/wb-mr6cu_28/controls/K4/on"
         payload_on: 1
         payload_off: 0
         name: bath_small_warm_floor
-  
-      - unique_id: 'alarm_fridge/enabled'
-        state_topic: '/devices/alarm_fridge/controls/enabled'
-        command_topic: '/devices/alarm_fridge/controls/silenced/on'
+
+      - unique_id: "alarm_fridge/enabled"
+        state_topic: "/devices/alarm_fridge/controls/enabled"
+        command_topic: "/devices/alarm_fridge/controls/silenced/on"
         payload_on: 0
         payload_off: 1
         state_on: 1
         state_off: 0
-        name: 'Сигнализация холодильника'
-  
-      - unique_id: 'heater_control'
-        state_topic: '/devices/heater_control/controls/enabled'
-        command_topic: '/devices/heater_control/controls/enabled/on'
+        name: "Сигнализация холодильника"
+
+      - unique_id: "heater_control"
+        state_topic: "/devices/heater_control/controls/enabled"
+        command_topic: "/devices/heater_control/controls/enabled/on"
         payload_on: 1
         payload_off: 0
-        name: 'Отопление'
-
-
-
+        name: "Отопление"

@@ -1,48 +1,60 @@
 light:
   template:
     - sensor:
-      - name: kitchen_backlight_level
-        state: >-
-          {{ (state_attr('light.podsvetka_kukhni', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: hall_floor_backlight_level
-        state: >-
-          {{ (state_attr('light.podsvetka_prikhozhei_pol', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: living_room_wled_backlight_level
-        state: >-
-          {{ (state_attr('light.wled', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: hall_top_light_level
-        state: >-
-          {{ (state_attr('light.hall_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: hall_wled_backlight_level
-        state: >-
-          {{ (state_attr('light.wled_hall', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: bath_small_top_light_level
-        state: >-
-          {{ (state_attr('light.bath_small_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: bath_small_shower_backlight_level
-        state: >-
-          {{ (state_attr('light.bath_small_shower_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: bedroom_bed_backlight_level
-        state: >-
-          {{ (state_attr('light.bedroom_bed_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
-      - name: bedroom_bed_wall_backlight_level
-        state: >-
-          {{ (state_attr('light.light_bed_wall', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: kitchen_backlight_level
+          state: >-
+            {{ (state_attr('light.podsvetka_kukhni', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: hall_floor_backlight_level
+          state: >-
+            {{ (state_attr('light.podsvetka_prikhozhei_pol', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: living_room_wled_backlight_level
+          state: >-
+            {{ (state_attr('light.wled', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: hall_top_light_level
+          state: >-
+            {{ (state_attr('light.hall_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: hall_wled_backlight_level
+          state: >-
+            {{ (state_attr('light.wled_hall', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: hall_enter_mirror_backlight_level
+          state: >-
+            {{ (state_attr('light.hall_enter_mirror_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bath_small_top_light_level
+          state: >-
+            {{ (state_attr('light.bath_small_top_light', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bath_small_shower_backlight_level
+          state: >-
+            {{ (state_attr('light.bath_small_shower_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bath_big_mirror_backlight_level
+          state: >-
+            {{ (state_attr('light.bath_big_mirror_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bath_big_closet_backlight_level
+          state: >-
+            {{ (state_attr('light.bath_big_closet_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bedroom_bed_backlight_level
+          state: >-
+            {{ (state_attr('light.bedroom_bed_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bedroom_bed_wall_backlight_level
+          state: >-
+            {{ (state_attr('light.light_bed_wall', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
+        - name: bedroom_mirror_backlight_level
+          state: >-
+            {{ (state_attr('light.bedroom_mirror_backlight', 'brightness') | int(default=0) / (255 / 5)) | round(0, "ceil", 0) }}
 
   yeelight:
     custom_effects:
-      - name: 'Flash'
+      - name: "Flash"
         flow_params:
           count: 2
           transitions:
             - TemperatureTransition: [1900, 300, 10]
             - TemperatureTransition: [1900, 300, 80]
-#            - SleepTransition:       [1000]
+  #            - SleepTransition:       [1000]
 
   var:
     last_state_yeelight_torchere:
       unique_id: last_state_yeelight_torchere
-      friendly_name: 'last_state_yeelight_torchere'
+      friendly_name: "last_state_yeelight_torchere"
       initial_value: off
 
   circadian_lighting:
