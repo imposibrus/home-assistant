@@ -1,8 +1,7 @@
-
 # Configure a default setup of Home Assistant (frontend, api, etc)
 #default_config:
 application_credentials:
-backup:
+# backup:
 #cloud:
 config:
 counter:
@@ -61,8 +60,10 @@ lovelace:
 logger:
   default: warning
   logs:
-#    custom_components.xiaomi_miot: debug
+    #    custom_components.xiaomi_miot: debug
     custom_components.ble_monitor: info
+    custom_components.pyscript: info
+    homeassistant.components.telegram_bot.webhooks: debug
 #    homeassistant.components.mikrotik: debug
 #    aiowebostv: debug
 #    yeelight: debug
@@ -93,4 +94,3 @@ panel_iframe:
     title: "Grafana"
     url: "https://grafana.home.imposibrus.space"
     icon: mdi:chart-areaspline
-
