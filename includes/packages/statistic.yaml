@@ -1,0 +1,8 @@
+statistic:
+  sensor:
+    - platform: statistics
+      name: plug_wash_machine_power_mean_1h
+      entity_id: sensor.plug_wash_machine_power
+      state_characteristic: mean
+      max_age:
+        hours: 1
