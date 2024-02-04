@@ -1,0 +1,15 @@
+reports:
+  template:
+    - trigger:
+        - platform: webhook
+          webhook_id: !secret webhook-report-vpn-wg-vdsina-amster-status
+          local_only: false
+          allowed_methods:
+            - GET
+            - POST
+      binary_sensor:
+        - name: report-vpn-wg-vdsina-amster-up
+          unique_id: report-vpn-wg-vdsina-amster-up
+          state: '{{ trigger.query.state == "up" }}'
+          device_class: connectivity
+
